@@ -32,7 +32,7 @@
         <module>aggregator</module>
     </modules>
 
-    <version>0.2.2</version>
+    <version>0.2.2-SNAPSHOT</version>
     <name>sample_xgboost_apps</name>
 
     <properties>
