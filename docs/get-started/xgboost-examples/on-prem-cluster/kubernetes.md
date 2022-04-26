@@ -11,7 +11,7 @@ Prerequisites
   * Multi-node clusters with homogenous GPU configuration
 * Software Requirements
   * Ubuntu 18.04, 20.04/CentOS7, CentOS8
-  * CUDA v11.0 (XGBoost v1.3.0-0.1.0 only supports CUDA 11.0 with cuDF v21.06.1)
+  * CUDA 11.0-11.4
   * NVIDIA driver compatible with your CUDA
   * NCCL 2.7.8
 * [Kubernetes 1.6+ cluster with NVIDIA GPUs](https://docs.nvidia.com/datacenter/kubernetes/index.html)
@@ -26,7 +26,7 @@ Build a GPU Docker image with Spark resources in it, this Docker image must be a
 
 1. Locate your Spark installations. If you don't have one, you can [download](https://spark.apache.org/downloads.html) from Apache and unzip it.
 2. `export SPARK_HOME=<path to spark>`
-3. [Download the Dockerfile](/dockerfile/Dockerfile) into `${SPARK_HOME}` (Here CUDA 10.2 is used as an example in the Dockerfile, you may need to update it for other CUDA versions.)
+
 4. __(OPTIONAL)__ install any additional library jars into the `${SPARK_HOME}/jars` directory
     * Most public cloud file systems are not natively supported -- pulling data and jar files from S3, GCS, etc. require installing additional libraries
 5. Build and push the docker image
@@ -37,7 +37,7 @@ export SPARK_DOCKER_IMAGE=<gpu spark docker image repo and name>
 export SPARK_DOCKER_TAG=<spark docker image tag>
 
 pushd ${SPARK_HOME}
-wget https://github.com/NVIDIA/spark-rapids-examples/raw/branch-21.06/dockerfile/Dockerfile
+
 
 # Optionally install additional jars into ${SPARK_HOME}/jars/
 
