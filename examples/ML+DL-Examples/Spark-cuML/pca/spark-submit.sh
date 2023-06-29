@@ -15,7 +15,8 @@
 # limitations under the License.
 #
 
-ML_JAR=/root/.m2/repository/com/nvidia/rapids-4-spark-ml_2.12/23.06.0-SNAPSHOT/rapids-4-spark-ml_2.12-23.06.0-SNAPSHOT.jar
+# Use fixed version 23.04.0-SNAPSHOT of rapids-ml, it will not upgrade any more
+ML_JAR=/root/.m2/repository/com/nvidia/rapids-4-spark-ml_2.12/23.04.0-SNAPSHOT/rapids-4-spark-ml_2.12-23.04.0-SNAPSHOT.jar
 PLUGIN_JAR=/root/.m2/repository/com/nvidia/rapids-4-spark_2.12/23.06.0-SNAPSHOT/rapids-4-spark_2.12-23.06.0-SNAPSHOT.jar
 
 $SPARK_HOME/bin/spark-submit \
