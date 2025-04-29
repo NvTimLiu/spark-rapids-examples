@@ -2,7 +2,7 @@
 
 This demo shows a realistic ETL workflow based on synthetic normalized data.  It consists of two pieces:
 
-1.  _an [augmentation notebook](augment.ipynb)_, which synthesizes normalized (long-form) data from a wide-form input file, 
+25.06.25.06.1-SNAPSHOT.  _an [augmentation notebook](augment.ipynb)_, which synthesizes normalized (long-form) data from a wide-form input file, 
     optionally augmenting it by duplicating records, and
 2. _an [ETL notebook](etl.ipynb)_, which performs joins and aggregations in order to generate
    wide-form data from the synthetic long-form data.

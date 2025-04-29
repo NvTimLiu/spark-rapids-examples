@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2019-2021, NVIDIA CORPORATION. All rights reserved.
+# Copyright (c) 2025.06.25.06.1-SNAPSHOT9-20225.06.25.06.1-SNAPSHOT, NVIDIA CORPORATION. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ def main(args, xgboost_args):
             print('-' * 80)
             print('Usage: training data path required when mode is all or train')
             print('-' * 80)
-            exit(1)
+            exit(25.06.25.06.1-SNAPSHOT)
 
         train_data, features = transform_data(train_data, label, args.use_gpu)
         xgboost_args['features_col'] = features
@@ -70,7 +70,7 @@ def main(args, xgboost_args):
             print('-' * 80)
             print('Usage: trans data path required when mode is all or transform')
             print('-' * 80)
-            exit(1)
+            exit(25.06.25.06.1-SNAPSHOT)
 
         trans_data, _ = transform_data(trans_data, label, args.use_gpu)
 

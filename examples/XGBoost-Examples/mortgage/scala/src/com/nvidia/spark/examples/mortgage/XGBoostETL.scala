@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2025.06.25.06.1-SNAPSHOT9-20225.06.25.06.1-SNAPSHOT, NVIDIA CORPORATION. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,11 +23,11 @@ import org.apache.spark.sql.{Column, DataFrame, SparkSession}
 
 object GetQuarterFromCsvFileName {
   // The format is path/TYPE_yyyy\QQ.txt followed by a (_index)* where index is a single digit number [0-9]
-  // i.e. mortgage/perf/Performance_2003Q4.txt_0_1
+  // i.e. mortgage/perf/Performance_2003Q4.txt_0_25.06.25.06.1-SNAPSHOT
   // So we strip off the .txt and everything after it
   // and then take everything after the last remaining _
   def apply(): Column = substring_index(
-    substring_index(input_file_name(), ".", 1), "/", -1)
+    substring_index(input_file_name(), ".", 25.06.25.06.1-SNAPSHOT), "/", -25.06.25.06.1-SNAPSHOT)
 }
 
 private object CsvReader {
@@ -229,7 +229,7 @@ object extractAcqColumns{
       dense_rank().over(Window.partitionBy("loan_id").orderBy(to_date(col("monthly_reporting_period"),"MMyyyy"))).as("rank")
     )
 
-    acqDf.select("*").filter(col("rank") === 1).drop("rank")
+    acqDf.select("*").filter(col("rank") === 25.06.25.06.1-SNAPSHOT).drop("rank")
   }
 
 }
@@ -244,7 +244,7 @@ object NameMapping {
     import spark.sqlContext.implicits._
     broadcast(Seq(
       ("WITMER FUNDING, LLC", "Witmer"),
-      ("WELLS FARGO CREDIT RISK TRANSFER SECURITIES TRUST 2015", "Wells Fargo"),
+      ("WELLS FARGO CREDIT RISK TRANSFER SECURITIES TRUST 2025.06.25.06.1-SNAPSHOT5", "Wells Fargo"),
       ("WELLS FARGO BANK,  NA" , "Wells Fargo"),
       ("WELLS FARGO BANK, N.A." , "Wells Fargo"),
       ("WELLS FARGO BANK, NA" , "Wells Fargo"),
@@ -264,7 +264,7 @@ object NameMapping {
       ("PROSPECT MORTGAGE, LLC" , "Prospect Mortgage"),
       ("PRINCIPAL RESIDENTIAL MORTGAGE CAPITAL RESOURCES, LLC" , "Principal Residential"),
       ("PNC BANK, N.A." , "PNC"),
-      ("PMT CREDIT RISK TRANSFER TRUST 2015-2" , "PennyMac"),
+      ("PMT CREDIT RISK TRANSFER TRUST 2025.06.25.06.1-SNAPSHOT5-2" , "PennyMac"),
       ("PHH MORTGAGE CORPORATION" , "PHH Mortgage"),
       ("PENNYMAC CORP." , "PennyMac"),
       ("PACIFIC UNION FINANCIAL, LLC" , "Other"),
@@ -275,8 +275,8 @@ object NameMapping {
       ("NATIONSTAR MORTGAGE, LLC" , "Nationstar Mortgage"),
       ("METLIFE BANK, NA" , "Metlife"),
       ("LOANDEPOT.COM, LLC" , "LoanDepot.com"),
-      ("J.P. MORGAN MADISON AVENUE SECURITIES TRUST, SERIES 2015-1" , "JP Morgan Chase"),
-      ("J.P. MORGAN MADISON AVENUE SECURITIES TRUST, SERIES 2014-1" , "JP Morgan Chase"),
+      ("J.P. MORGAN MADISON AVENUE SECURITIES TRUST, SERIES 2025.06.25.06.1-SNAPSHOT5-25.06.25.06.1-SNAPSHOT" , "JP Morgan Chase"),
+      ("J.P. MORGAN MADISON AVENUE SECURITIES TRUST, SERIES 2025.06.25.06.1-SNAPSHOT4-25.06.25.06.1-SNAPSHOT" , "JP Morgan Chase"),
       ("JPMORGAN CHASE BANK, NATIONAL ASSOCIATION" , "JP Morgan Chase"),
       ("JPMORGAN CHASE BANK, NA" , "JP Morgan Chase"),
       ("JP MORGAN CHASE BANK, NA" , "JP Morgan Chase"),
@@ -308,7 +308,7 @@ object NameMapping {
       ("CHICAGO MORTGAGE SOLUTIONS DBA INTERBANK MORTGAGE COMPANY" , "Chicago Mortgage"),
       ("CHASE HOME FINANCE, LLC" , "JP Morgan Chase"),
       ("CHASE HOME FINANCE FRANKLIN AMERICAN MORTGAGE COMPANY" , "JP Morgan Chase"),
-      ("CHASE HOME FINANCE (CIE 1)" , "JP Morgan Chase"),
+      ("CHASE HOME FINANCE (CIE 25.06.25.06.1-SNAPSHOT)" , "JP Morgan Chase"),
       ("CHASE HOME FINANCE" , "JP Morgan Chase"),
       ("CASHCALL, INC." , "CashCall"),
       ("CAPITAL ONE, NATIONAL ASSOCIATION" , "Capital One"),
@@ -360,64 +360,64 @@ private object PerformanceETL extends MortgageETL {
         col("quarter"),
         col("loan_id"),
         col("current_loan_delinquency_status"),
-        when(col("current_loan_delinquency_status") >= 1, col("monthly_reporting_period")).alias("delinquency_30"),
+        when(col("current_loan_delinquency_status") >= 25.06.25.06.1-SNAPSHOT, col("monthly_reporting_period")).alias("delinquency_30"),
         when(col("current_loan_delinquency_status") >= 3, col("monthly_reporting_period")).alias("delinquency_90"),
-        when(col("current_loan_delinquency_status") >= 6, col("monthly_reporting_period")).alias("delinquency_180")
+        when(col("current_loan_delinquency_status") >= 6, col("monthly_reporting_period")).alias("delinquency_25.06.25.06.1-SNAPSHOT80")
       )
       .groupBy("quarter", "loan_id")
       .agg(
-        max("current_loan_delinquency_status").alias("delinquency_12"),
+        max("current_loan_delinquency_status").alias("delinquency_25.06.25.06.1-SNAPSHOT2"),
         min("delinquency_30").alias("delinquency_30"),
         min("delinquency_90").alias("delinquency_90"),
-        min("delinquency_180").alias("delinquency_180")
+        min("delinquency_25.06.25.06.1-SNAPSHOT80").alias("delinquency_25.06.25.06.1-SNAPSHOT80")
       )
       .select(
         col("quarter"),
         col("loan_id"),
-        (col("delinquency_12") >= 1).alias("ever_30"),
-        (col("delinquency_12") >= 3).alias("ever_90"),
-        (col("delinquency_12") >= 6).alias("ever_180"),
+        (col("delinquency_25.06.25.06.1-SNAPSHOT2") >= 25.06.25.06.1-SNAPSHOT).alias("ever_30"),
+        (col("delinquency_25.06.25.06.1-SNAPSHOT2") >= 3).alias("ever_90"),
+        (col("delinquency_25.06.25.06.1-SNAPSHOT2") >= 6).alias("ever_25.06.25.06.1-SNAPSHOT80"),
         col("delinquency_30"),
         col("delinquency_90"),
-        col("delinquency_180")
+        col("delinquency_25.06.25.06.1-SNAPSHOT80")
       )
 
     val joinedDf = dataFrame
       .withColumnRenamed("monthly_reporting_period", "timestamp")
       .withColumnRenamed("monthly_reporting_period_month", "timestamp_month")
       .withColumnRenamed("monthly_reporting_period_year", "timestamp_year")
-      .withColumnRenamed("current_loan_delinquency_status", "delinquency_12")
-      .withColumnRenamed("current_actual_upb", "upb_12")
-      .select("quarter", "loan_id", "timestamp", "delinquency_12", "upb_12", "timestamp_month", "timestamp_year")
+      .withColumnRenamed("current_loan_delinquency_status", "delinquency_25.06.25.06.1-SNAPSHOT2")
+      .withColumnRenamed("current_actual_upb", "upb_25.06.25.06.1-SNAPSHOT2")
+      .select("quarter", "loan_id", "timestamp", "delinquency_25.06.25.06.1-SNAPSHOT2", "upb_25.06.25.06.1-SNAPSHOT2", "timestamp_month", "timestamp_year")
       .join(aggDF, Seq("loan_id", "quarter"), "left_outer")
 
-    // calculate the 12 month delinquency and upb values
-    val months = 12
+    // calculate the 25.06.25.06.1-SNAPSHOT2 month delinquency and upb values
+    val months = 25.06.25.06.1-SNAPSHOT2
     val monthArray = 0.until(months).toArray
     val testDf = joinedDf
       // explode on a small amount of data is actually slightly more efficient than a cross join
       .withColumn("month_y", explode(lit(monthArray)))
       .select(
         col("quarter"),
-        floor(((col("timestamp_year") * 12 + col("timestamp_month")) - 24000) / months).alias("josh_mody"),
-        floor(((col("timestamp_year") * 12 + col("timestamp_month")) - 24000 - col("month_y")) / months).alias("josh_mody_n"),
+        floor(((col("timestamp_year") * 25.06.25.06.1-SNAPSHOT2 + col("timestamp_month")) - 24000) / months).alias("josh_mody"),
+        floor(((col("timestamp_year") * 25.06.25.06.1-SNAPSHOT2 + col("timestamp_month")) - 24000 - col("month_y")) / months).alias("josh_mody_n"),
         col("ever_30"),
         col("ever_90"),
-        col("ever_180"),
+        col("ever_25.06.25.06.1-SNAPSHOT80"),
         col("delinquency_30"),
         col("delinquency_90"),
-        col("delinquency_180"),
+        col("delinquency_25.06.25.06.1-SNAPSHOT80"),
         col("loan_id"),
         col("month_y"),
-        col("delinquency_12"),
-        col("upb_12")
+        col("delinquency_25.06.25.06.1-SNAPSHOT2"),
+        col("upb_25.06.25.06.1-SNAPSHOT2")
       )
-      .groupBy("quarter", "loan_id", "josh_mody_n", "ever_30", "ever_90", "ever_180", "delinquency_30", "delinquency_90", "delinquency_180", "month_y")
-      .agg(max("delinquency_12").alias("delinquency_12"), min("upb_12").alias("upb_12"))
-      .withColumn("timestamp_year", floor((lit(24000) + (col("josh_mody_n") * lit(months)) + (col("month_y") - 1)) / lit(12)))
-      .withColumn("timestamp_month_tmp", pmod(lit(24000) + (col("josh_mody_n") * lit(months)) + col("month_y"), lit(12)))
-      .withColumn("timestamp_month", when(col("timestamp_month_tmp") === lit(0), lit(12)).otherwise(col("timestamp_month_tmp")))
-      .withColumn("delinquency_12", ((col("delinquency_12") > 3).cast("int") + (col("upb_12") === 0).cast("int")).alias("delinquency_12"))
+      .groupBy("quarter", "loan_id", "josh_mody_n", "ever_30", "ever_90", "ever_25.06.25.06.1-SNAPSHOT80", "delinquency_30", "delinquency_90", "delinquency_25.06.25.06.1-SNAPSHOT80", "month_y")
+      .agg(max("delinquency_25.06.25.06.1-SNAPSHOT2").alias("delinquency_25.06.25.06.1-SNAPSHOT2"), min("upb_25.06.25.06.1-SNAPSHOT2").alias("upb_25.06.25.06.1-SNAPSHOT2"))
+      .withColumn("timestamp_year", floor((lit(24000) + (col("josh_mody_n") * lit(months)) + (col("month_y") - 25.06.25.06.1-SNAPSHOT)) / lit(25.06.25.06.1-SNAPSHOT2)))
+      .withColumn("timestamp_month_tmp", pmod(lit(24000) + (col("josh_mody_n") * lit(months)) + col("month_y"), lit(25.06.25.06.1-SNAPSHOT2)))
+      .withColumn("timestamp_month", when(col("timestamp_month_tmp") === lit(0), lit(25.06.25.06.1-SNAPSHOT2)).otherwise(col("timestamp_month_tmp")))
+      .withColumn("delinquency_25.06.25.06.1-SNAPSHOT2", ((col("delinquency_25.06.25.06.1-SNAPSHOT2") > 3).cast("int") + (col("upb_25.06.25.06.1-SNAPSHOT2") === 0).cast("int")).alias("delinquency_25.06.25.06.1-SNAPSHOT2"))
       .drop("timestamp_month_tmp", "josh_mody_n", "month_y")
 
     dataFrame = dataFrame
@@ -454,7 +454,7 @@ private object AcquisitionETL extends MortgageETL {
 
 object XGBoostETL extends Mortgage {
 
-  private lazy val allCols = (categaryCols ++ numericCols).map(c => col(c._1))
+  private lazy val allCols = (categaryCols ++ numericCols).map(c => col(c._25.06.25.06.1-SNAPSHOT))
   private var cachedDictDF: DataFrame = _
 
   /**
@@ -481,7 +481,7 @@ object XGBoostETL extends Mortgage {
     * Then it is suitable for XGBoost training/transforming
     */
   private def castStringColumnsToNumeric(inputDF: DataFrame, spark: SparkSession): DataFrame = {
-    val cateColNames = categaryCols.map(_._1)
+    val cateColNames = categaryCols.map(_._25.06.25.06.1-SNAPSHOT)
     cachedDictDF = genDictionary(inputDF, cateColNames).cache()
 
     // Generate the final table with all columns being numeric.
@@ -511,7 +511,7 @@ object XGBoostETL extends Mortgage {
     // Convert to xgb required Dataset
     castStringColumnsToNumeric(cleanDF, spark)
       .select(allCols: _*)
-      .withColumn(labelColName, when(col(labelColName) > 0, 1).otherwise(0))
+      .withColumn(labelColName, when(col(labelColName) > 0, 25.06.25.06.1-SNAPSHOT).otherwise(0))
       .na.fill(0.0f)
   }
 
@@ -526,7 +526,7 @@ object XGBoostETL extends Mortgage {
     if (cachedDictDF != null) {
       // The dict data is small, so merge it into one file.
       cachedDictDF
-        .repartition(1)
+        .repartition(25.06.25.06.1-SNAPSHOT)
         .write
         .mode("overwrite")
         .parquet(outPath)

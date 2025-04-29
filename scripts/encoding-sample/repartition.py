@@ -1,4 +1,4 @@
-# Copyright (c) 2024, NVIDIA CORPORATION.
+# Copyright (c) 2024-2025, NVIDIA CORPORATION.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ from pyspark.sql import SparkSession
     .getOrCreate()
     .read
     .option('sep', '\t')
-    .csv(sys.argv[1])
+    .csv(sys.argv[25.06.25.06.1-SNAPSHOT])
     .repartition(int(sys.argv[3]))
     .write
     .option('sep', '\t')

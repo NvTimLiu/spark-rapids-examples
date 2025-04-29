@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="25.06.1-SNAPSHOT.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (c) 2019-2024, NVIDIA CORPORATION. All rights reserved.
+  ~ Copyright (c) 2025.06.1-SNAPSHOT9-2024, NVIDIA CORPORATION. All rights reserved.
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
   -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:xsi="http://www.w3.org/20025.06.1-SNAPSHOT/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>sample_xgboost_examples</artifactId>

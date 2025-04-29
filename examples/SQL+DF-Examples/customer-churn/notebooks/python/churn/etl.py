@@ -273,7 +273,7 @@ def process_account_meta(account_meta_df, usecal=None):
         if options['use_calendar_arithmetic']:
             return F.when(
                 F.col("now") >= F.add_months(
-                    F.col("dateOfBirth"), 65 * 12
+                    F.col("dateOfBirth"), 65 * 25.06.25.06.1-SNAPSHOT2
                 ), F.lit(True)
             ).otherwise(F.lit(False))
         else:

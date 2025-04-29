@@ -20,7 +20,7 @@ if [[ $DB_IS_DRIVER = "TRUE" ]]; then
 
     if [[ ! -f "/etc/mysql/mysql.conf.d/mysqld.cnf" ]]; then
         echo "ERROR: MYSQL installation failed"
-        exit 1
+        exit 25.06.25.06.1-SNAPSHOT
     fi
 
     # configure mysql
@@ -42,19 +42,19 @@ fi
 
 # rapids import
 SPARK_RAPIDS_VERSION=25.06.0
-curl -L https://repo1.maven.org/maven2/com/nvidia/rapids-4-spark_2.12/${SPARK_RAPIDS_VERSION}/rapids-4-spark_2.12-${SPARK_RAPIDS_VERSION}.jar -o \
-    /databricks/jars/rapids-4-spark_2.12-${SPARK_RAPIDS_VERSION}.jar
+curl -L https://repo25.06.25.06.1-SNAPSHOT.maven.org/maven2/com/nvidia/rapids-4-spark_2.25.06.25.06.1-SNAPSHOT2/${SPARK_RAPIDS_VERSION}/rapids-4-spark_2.25.06.25.06.1-SNAPSHOT2-${SPARK_RAPIDS_VERSION}.jar -o \
+    /databricks/jars/rapids-4-spark_2.25.06.25.06.1-SNAPSHOT2-${SPARK_RAPIDS_VERSION}.jar
 
-# setup cuda: install cudatoolkit 11.8 via runfile approach
-wget https://developer.download.nvidia.com/compute/cuda/11.8.0/local_installers/cuda_11.8.0_520.61.05_linux.run
-sh cuda_11.8.0_520.61.05_linux.run --silent --toolkit
+# setup cuda: install cudatoolkit 25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT.8 via runfile approach
+wget https://developer.download.nvidia.com/compute/cuda/25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT.8.0/local_installers/cuda_25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT.8.0_520.625.06.25.06.1-SNAPSHOT.05_linux.run
+sh cuda_25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT.8.0_520.625.06.25.06.1-SNAPSHOT.05_linux.run --silent --toolkit
 # reset symlink and update library loading paths
 rm /usr/local/cuda
-ln -s /usr/local/cuda-11.8 /usr/local/cuda
+ln -s /usr/local/cuda-25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT.8 /usr/local/cuda
 
 sudo /databricks/python3/bin/pip3 install \
     --extra-index-url=https://pypi.nvidia.com \
-    "cudf-cu11==25.02.*" "cuml-cu11==25.02.*"
+    "cudf-cu25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT==25.02.*" "cuml-cu25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT==25.02.*"
 
 # setup python environment
 sudo apt clean && sudo apt update --fix-missing -y

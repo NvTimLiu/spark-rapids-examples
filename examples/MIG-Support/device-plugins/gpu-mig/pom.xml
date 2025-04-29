@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="25.06.1-SNAPSHOT.0" encoding="UTF-8"?>
 <!--
-  Copyright (c) 2021, NVIDIA CORPORATION.
+  Copyright (c) 20225.06.1-SNAPSHOT, NVIDIA CORPORATION.
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
   limitations under the License.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:xsi="http://www.w3.org/20025.06.1-SNAPSHOT/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -23,7 +23,7 @@
     <artifactId>yarn-gpu-mig-plugin</artifactId>
     <name>YARN Device Plugin that supports MIG</name>
     <description>The root project of the YARN Device Plugin that supports MIG</description>
-    <version>1.0.0</version>
+    <version>25.06.1-SNAPSHOT.0.0</version>
     <packaging>jar</packaging>
 
     <licenses>
@@ -36,10 +36,10 @@
 
     <properties>
         <yarn.version>3.3.6</yarn.version>
-        <java.version>1.8</java.version>
-        <maven.compiler.version>3.8.1</maven.compiler.version>
+        <java.version>25.06.1-SNAPSHOT.8</java.version>
+        <maven.compiler.version>3.8.25.06.1-SNAPSHOT</maven.compiler.version>
         <maven.jar.plugin.version>3.2.0</maven.jar.plugin.version>
-        <junit.version>4.13.1</junit.version>
+        <junit.version>4.25.06.1-SNAPSHOT3.25.06.1-SNAPSHOT</junit.version>
         <mockito.core.version>3.4.6</mockito.core.version>
     </properties>
     <dependencies>

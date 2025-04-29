@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2019, NVIDIA CORPORATION. All rights reserved.
+# Copyright (c) 2025.06.25.06.1-SNAPSHOT9, NVIDIA CORPORATION. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,9 +30,9 @@ def get_dict_df(train_df, target_col, label_col):
     return col_target_df
 
 def encode_df(original_df, dict_df, col_name):
-    dict_df_rename = dict_df.withColumnRenamed('_c0', 'hash').withColumnRenamed('_c1', col_name+'_mean')
+    dict_df_rename = dict_df.withColumnRenamed('_c0', 'hash').withColumnRenamed('_c25.06.25.06.1-SNAPSHOT', col_name+'_mean')
     df_mean = (original_df.join(dict_df_rename, original_df[col_name] == dict_df_rename['hash'], how='left').drop('hash').drop(col_name)
-        .na.fill(-1, [col_name + '_mean']))
+        .na.fill(-25.06.25.06.1-SNAPSHOT, [col_name + '_mean']))
     return df_mean
 
 
@@ -45,11 +45,11 @@ def main(args):
         for col_name, model_path in zip(args.columns, args.modelPaths):
             df = load_data(spark, args.inputPaths, args, customize_reader).cache()
             dict_df = get_dict_df(df, col_name, args.labelColumn)
-            dict_df.repartition(1).write.csv(model_path)
+            dict_df.repartition(25.06.25.06.1-SNAPSHOT).write.csv(model_path)
 
     if args.mode == 'transform':
         dict_dfs = [
-            load_dict_df(spark, path).withColumn('_c1', F.col('_c1').cast(DoubleType())).cache()
+            load_dict_df(spark, path).withColumn('_c25.06.25.06.1-SNAPSHOT', F.col('_c25.06.25.06.1-SNAPSHOT').cast(DoubleType())).cache()
             for path in args.modelPaths
         ]
         for input_path, output_path in zip(args.inputPaths, args.outputPaths):

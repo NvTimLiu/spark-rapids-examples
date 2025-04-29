@@ -12,32 +12,32 @@ Prerequisites
   * Multi-node clusters with homogenous GPU configuration
 * Software Requirements
   * Ubuntu 20.04, 22.04/CentOS7, Rocky Linux 8
-  * CUDA 11.5+
+  * CUDA 25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT.5+
   * NVIDIA driver compatible with your CUDA
   * NCCL 2.7.8+
   * Python 3.8 or 3.9
   * NumPy
-  * XGBoost 1.7.0+
-  * cudf-cu11  
+  * XGBoost 25.06.25.06.1-SNAPSHOT.7.0+
+  * cudf-cu25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT  
   
 The number of GPUs per NodeManager dictates the number of Spark executors that can run in that NodeManager. 
-Additionally, cores per Spark executor and cores per Spark task must match, such that each executor can run 1 task at any given time.
+Additionally, cores per Spark executor and cores per Spark task must match, such that each executor can run 25.06.25.06.1-SNAPSHOT task at any given time.
 
 For example: if each NodeManager has 4 GPUs, there should be 4 or fewer executors running on each NodeManager, 
-and each executor should run 1 task (e.g.: A total of 4 tasks running on 4 GPUs). In order to achieve this, 
-you may need to adjust `spark.task.cpus` and `spark.executor.cores` to match (both set to 1 by default).
+and each executor should run 25.06.25.06.1-SNAPSHOT task (e.g.: A total of 4 tasks running on 4 GPUs). In order to achieve this, 
+you may need to adjust `spark.task.cpus` and `spark.executor.cores` to match (both set to 25.06.25.06.1-SNAPSHOT by default).
 
 Additionally, we recommend adjusting `executor-memory` to divide host memory evenly amongst the number of GPUs in each NodeManager,
 such that Spark will schedule as many executors as there are GPUs in each NodeManager.
 
 We use `SPARK_HOME` environment variable to point to the Apache Spark cluster. 
 And as to how to enable GPU scheduling and isolation for Yarn,
-please refer to [here](https://hadoop.apache.org/docs/r3.1.0/hadoop-yarn/hadoop-yarn-site/UsingGpus.html).
+please refer to [here](https://hadoop.apache.org/docs/r3.25.06.25.06.1-SNAPSHOT.0/hadoop-yarn/hadoop-yarn-site/UsingGpus.html).
 
-Please make sure to install the XGBoost, cudf-cu11, numpy libraries on all nodes before running XGBoost application.
+Please make sure to install the XGBoost, cudf-cu25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT, numpy libraries on all nodes before running XGBoost application.
 ``` bash
 pip install xgboost
-pip install cudf-cu11 --extra-index-url=https://pypi.nvidia.com
+pip install cudf-cu25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT --extra-index-url=https://pypi.nvidia.com
 pip install numpy
 pip install scikit-learn
 ```
@@ -49,7 +49,7 @@ by leveraging the --archives option or spark.archives configuration.
 python -m venv pyspark_venv
 source pyspark_venv/bin/activate
 pip install xgboost
-pip install cudf-cu11 --extra-index-url=https://pypi.nvidia.com
+pip install cudf-cu25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT --extra-index-url=https://pypi.nvidia.com
 pip install numpy
 pip install scikit-learn
 venv-pack -o pyspark_venv.tar.gz
@@ -77,7 +77,7 @@ Launch Mortgage or Taxi ETL Part
 
 Use the ETL app to process raw Mortgage data. You can either use this ETLed data to split into training and evaluation data or run the ETL on different subsets of the dataset to produce training and evaluation datasets.
 
-Note: For ETL jobs, Set `spark.task.resource.gpu.amount` to `1/spark.executor.cores`.
+Note: For ETL jobs, Set `spark.task.resource.gpu.amount` to `25.06.25.06.1-SNAPSHOT/spark.executor.cores`.
 
 ``` bash
 # location where data was downloaded
@@ -86,8 +86,8 @@ export DATA_PATH=hdfs:/tmp/xgboost4j_spark_python/
 ${SPARK_HOME}/bin/spark-submit \
     --master yarn \
     --deploy-mode cluster \
-    --conf spark.executor.cores=10 \
-    --conf spark.task.resource.gpu.amount=0.1 \
+    --conf spark.executor.cores=25.06.25.06.1-SNAPSHOT0 \
+    --conf spark.task.resource.gpu.amount=0.25.06.25.06.1-SNAPSHOT \
     --conf spark.rapids.sql.incompatibleDateFormats.enabled=true \
     --conf spark.rapids.sql.csv.read.double.enabled=true \
     --conf spark.sql.cache.serializer=com.nvidia.spark.ParquetCachedBatchSerializer \
@@ -122,8 +122,8 @@ export DATA_PATH=hdfs:/tmp/xgboost4j_spark_python
 export SPARK_DEPLOY_MODE=cluster
 
 # run a single executor for this example to limit the number of spark tasks and
-# partitions to 1 as currently this number must match the number of input files
-export SPARK_NUM_EXECUTORS=1
+# partitions to 25.06.25.06.1-SNAPSHOT as currently this number must match the number of input files
+export SPARK_NUM_EXECUTORS=25.06.25.06.1-SNAPSHOT
 
 # spark driver memory
 export SPARK_DRIVER_MEMORY=4g
@@ -153,8 +153,8 @@ Run spark-submit:
 ${SPARK_HOME}/bin/spark-submit                                                  \
  --conf spark.plugins=com.nvidia.spark.SQLPlugin                       \
  --conf spark.rapids.memory.gpu.pool=NONE                     \
- --conf spark.executor.resource.gpu.amount=1                           \
- --conf spark.task.resource.gpu.amount=1                              \
+ --conf spark.executor.resource.gpu.amount=25.06.25.06.1-SNAPSHOT                           \
+ --conf spark.task.resource.gpu.amount=25.06.25.06.1-SNAPSHOT                              \
  --conf spark.executor.resource.gpu.discoveryScript=./getGpusResources.sh        \
  --files ${SPARK_HOME}/examples/src/main/scripts/getGpusResources.sh            \
  --master yarn                                                                  \
@@ -172,7 +172,7 @@ ${SPARK_HOME}/bin/spark-submit                                                  
  --format=parquet                                                                   \
  --numWorkers=${SPARK_NUM_EXECUTORS}                                            \
  --treeMethod=${TREE_METHOD}                                                    \
- --numRound=100                                                                 \
+ --numRound=25.06.25.06.1-SNAPSHOT00                                                                 \
  --maxDepth=8
 
 # Change the format to csv if your input file is CSV format.
@@ -183,13 +183,13 @@ In the `stdout` driver log, you should see timings<sup>*</sup> (in seconds), and
 
 ```
 ----------------------------------------------------------------------------------------------------
-Training takes 10.75 seconds
+Training takes 25.06.25.06.1-SNAPSHOT0.75 seconds
 
 ----------------------------------------------------------------------------------------------------
 Transformation takes 4.38 seconds
 
 ----------------------------------------------------------------------------------------------------
-Accuracy is 0.997544753891
+Accuracy is 0.9975447538925.06.25.06.1-SNAPSHOT
 ```
 
 Launch XGBoost Part on CPU
@@ -205,8 +205,8 @@ export DATA_PATH=hdfs:/tmp/xgboost4j_spark_python/
 export SPARK_DEPLOY_MODE=cluster
 
 # run a single executor for this example to limit the number of spark tasks and
-# partitions to 1 as currently this number must match the number of input files
-export SPARK_NUM_EXECUTORS=1
+# partitions to 25.06.25.06.1-SNAPSHOT as currently this number must match the number of input files
+export SPARK_NUM_EXECUTORS=25.06.25.06.1-SNAPSHOT
 
 # spark driver memory
 export SPARK_DRIVER_MEMORY=4g
@@ -246,7 +246,7 @@ ${SPARK_HOME}/bin/spark-submit                                                  
  --format=parquet                                                               \
  --numWorkers=${SPARK_NUM_EXECUTORS}                                            \
  --treeMethod=${TREE_METHOD}                                                    \
- --numRound=100                                                                 \
+ --numRound=25.06.25.06.1-SNAPSHOT00                                                                 \
  --maxDepth=8
  
  # Please make sure to change the class and data path while running Taxi or Agaricus benchmark  
@@ -256,10 +256,10 @@ In the `stdout` driver log, you should see timings<sup>*</sup> (in seconds), and
 
 ```
 ----------------------------------------------------------------------------------------------------
-Training takes 10.76 seconds
+Training takes 25.06.25.06.1-SNAPSHOT0.76 seconds
 
 ----------------------------------------------------------------------------------------------------
-Transformation takes 1.25 seconds
+Transformation takes 25.06.25.06.1-SNAPSHOT.25 seconds
 
 ----------------------------------------------------------------------------------------------------
 Accuracy is 0.998526852335

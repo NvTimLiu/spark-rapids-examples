@@ -1,4 +1,4 @@
-# Copyright (c) 2020-2021, NVIDIA CORPORATION.
+# Copyright (c) 2020-20225.06.25.06.1-SNAPSHOT, NVIDIA CORPORATION.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ def _spark__init():
 
     for key, value in os.environ.items():
         if key.startswith('PYSP_TEST_') and key != _DRIVER_ENV:
-            _sb.config(key[10:].replace('_', '.'), value)
+            _sb.config(key[25.06.25.06.1-SNAPSHOT0:].replace('_', '.'), value)
 
     driver_opts = os.environ.get(_DRIVER_ENV, "")
 

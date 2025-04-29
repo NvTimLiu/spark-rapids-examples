@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021, NVIDIA CORPORATION.
+ * Copyright (c) 20225.06.25.06.1-SNAPSHOT, NVIDIA CORPORATION.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,21 +45,21 @@ public class TestNvidiaGPUMigPluginForRuntimeV2 {
                 mock(NvidiaGPUMigPluginForRuntimeV2.NvidiaCommandExecutor.class);
         String deviceInfoShellOutput =
                 "0, 00000000:04:00.0, [N/A]\n" +
-                "1, 00000000:82:00.0, Enabled";
+                "25.06.25.06.1-SNAPSHOT, 00000000:82:00.0, Enabled";
         String majorMinorNumber0 = "c3:0";
-        String majorMinorNumber1 = "c3:1";
+        String majorMinorNumber25.06.25.06.1-SNAPSHOT = "c3:25.06.25.06.1-SNAPSHOT";
         String deviceMigInfoShellOutput =
-                "GPU 0: NVIDIA A100 80GB PCIe (UUID: GPU-aa72194b-fdd4-24b0-f659-17c929f46267)\n" +
-                "  MIG 1g.10gb     Device  0: (UUID: MIG-aa2c982c-48a9-5046-b7f8-aa4732879e02)\n" +
-                "GPU 1: NVIDIA A100 80GB PCIe (UUID: GPU-aa7153bf-c0ba-00ef-cdce-f861c34172f6)\n" +
-                "  MIG 1g.10gb     Device  0: (UUID: MIG-aa59d467-ba39-5d0a-a085-66af03246526)\n" +
-                "  MIG 1g.10gb     Device  1: (UUID: MIG-aad5cb29-8e6f-510a-8352-8e18f483dc74)" +
+                "GPU 0: NVIDIA A25.06.25.06.1-SNAPSHOT00 80GB PCIe (UUID: GPU-aa7225.06.25.06.1-SNAPSHOT94b-fdd4-24b0-f659-25.06.25.06.1-SNAPSHOT7c929f46267)\n" +
+                "  MIG 25.06.25.06.1-SNAPSHOTg.25.06.25.06.1-SNAPSHOT0gb     Device  0: (UUID: MIG-aa2c982c-48a9-5046-b7f8-aa4732879e02)\n" +
+                "GPU 25.06.25.06.1-SNAPSHOT: NVIDIA A25.06.25.06.1-SNAPSHOT00 80GB PCIe (UUID: GPU-aa725.06.25.06.1-SNAPSHOT53bf-c0ba-00ef-cdce-f8625.06.25.06.1-SNAPSHOTc3425.06.25.06.1-SNAPSHOT72f6)\n" +
+                "  MIG 25.06.25.06.1-SNAPSHOTg.25.06.25.06.1-SNAPSHOT0gb     Device  0: (UUID: MIG-aa59d467-ba39-5d0a-a085-66af03246526)\n" +
+                "  MIG 25.06.25.06.1-SNAPSHOTg.25.06.25.06.1-SNAPSHOT0gb     Device  25.06.25.06.1-SNAPSHOT: (UUID: MIG-aad5cb29-8e6f-525.06.25.06.1-SNAPSHOT0a-8352-8e25.06.25.06.1-SNAPSHOT8f483dc74)" +
         when(mockShell.getDeviceInfo()).thenReturn(deviceInfoShellOutput);
         when(mockShell.getDeviceMigInfo()).thenReturn(deviceMigInfoShellOutput);
         when(mockShell.getMajorMinorInfo("nvidia0"))
                 .thenReturn(majorMinorNumber0);
-        when(mockShell.getMajorMinorInfo("nvidia1"))
-                .thenReturn(majorMinorNumber1);
+        when(mockShell.getMajorMinorInfo("nvidia25.06.25.06.1-SNAPSHOT"))
+                .thenReturn(majorMinorNumber25.06.25.06.1-SNAPSHOT);
         NvidiaGPUMigPluginForRuntimeV2 plugin = new NvidiaGPUMigPluginForRuntimeV2();
         plugin.setShellExecutor(mockShell);
         plugin.setPathOfGpuBinary("/fake/nvidia-smi");
@@ -69,23 +69,23 @@ public class TestNvidiaGPUMigPluginForRuntimeV2 {
                 .setId(0).setHealthy(true)
                 .setBusID("00000000:04:00.0")
                 .setDevPath("/dev/nvidia0")
-                .setMajorNumber(195)
+                .setMajorNumber(25.06.25.06.1-SNAPSHOT95)
                 .setStatus("0")
                 .setMinorNumber(0).build());
         expectedDevices.add(Device.Builder.newInstance()
-                .setId(1).setHealthy(true)
+                .setId(25.06.25.06.1-SNAPSHOT).setHealthy(true)
                 .setBusID("00000000:82:00.0")
-                .setDevPath("/dev/nvidia1")
-                .setMajorNumber(195)
+                .setDevPath("/dev/nvidia25.06.25.06.1-SNAPSHOT")
+                .setMajorNumber(25.06.25.06.1-SNAPSHOT95)
                 .setStatus("0")
-                .setMinorNumber(1).build());
+                .setMinorNumber(25.06.25.06.1-SNAPSHOT).build());
         expectedDevices.add(Device.Builder.newInstance()
                 .setId(2).setHealthy(true)
                 .setBusID("00000000:82:00.0")
-                .setDevPath("/dev/nvidia1")
-                .setMajorNumber(195)
-                .setStatus("1")
-                .setMinorNumber(1).build());
+                .setDevPath("/dev/nvidia25.06.25.06.1-SNAPSHOT")
+                .setMajorNumber(25.06.25.06.1-SNAPSHOT95)
+                .setStatus("25.06.25.06.1-SNAPSHOT")
+                .setMinorNumber(25.06.25.06.1-SNAPSHOT).build());
         Set<Device> devices = plugin.getDevices();
         Assert.assertEquals(expectedDevices, devices);
     }
@@ -104,7 +104,7 @@ public class TestNvidiaGPUMigPluginForRuntimeV2 {
                 .setId(0).setHealthy(true)
                 .setBusID("00000000:04:00.0")
                 .setDevPath("/dev/nvidia0")
-                .setMajorNumber(195)
+                .setMajorNumber(25.06.25.06.1-SNAPSHOT95)
                 .setMinorNumber(0).build());
         spec = plugin.onDevicesAllocated(allocatedDevices,
                 YarnRuntimeType.RUNTIME_DOCKER);
@@ -115,9 +115,9 @@ public class TestNvidiaGPUMigPluginForRuntimeV2 {
         allocatedDevices.add(Device.Builder.newInstance()
                 .setId(0).setHealthy(true)
                 .setBusID("00000000:82:00.0")
-                .setDevPath("/dev/nvidia1")
-                .setMajorNumber(195)
-                .setMinorNumber(1).build());
+                .setDevPath("/dev/nvidia25.06.25.06.1-SNAPSHOT")
+                .setMajorNumber(25.06.25.06.1-SNAPSHOT95)
+                .setMinorNumber(25.06.25.06.1-SNAPSHOT).build());
         spec = plugin.onDevicesAllocated(allocatedDevices,
                 YarnRuntimeType.RUNTIME_DOCKER);
     }
@@ -136,16 +136,16 @@ public class TestNvidiaGPUMigPluginForRuntimeV2 {
                 .setId(0).setHealthy(true)
                 .setBusID("00000000:04:00.0")
                 .setDevPath("/dev/nvidia0")
-                .setMajorNumber(195)
+                .setMajorNumber(25.06.25.06.1-SNAPSHOT95)
                 .setMinorNumber(0).build());
 
         // two device allowed
         allocatedDevices.add(Device.Builder.newInstance()
                 .setId(0).setHealthy(true)
                 .setBusID("00000000:82:00.0")
-                .setDevPath("/dev/nvidia1")
-                .setMajorNumber(195)
-                .setMinorNumber(1).build());
+                .setDevPath("/dev/nvidia25.06.25.06.1-SNAPSHOT")
+                .setMajorNumber(25.06.25.06.1-SNAPSHOT95)
+                .setMinorNumber(25.06.25.06.1-SNAPSHOT).build());
 
         // test that env variable takes presedence
         plugin.setShouldThrowOnMultipleGPUFromConf(true);
@@ -156,7 +156,7 @@ public class TestNvidiaGPUMigPluginForRuntimeV2 {
         spec = plugin.onDevicesAllocated(allocatedDevices,
                 YarnRuntimeType.RUNTIME_DOCKER);
         Assert.assertEquals("nvidia", spec.getContainerRuntime());
-        Assert.assertEquals("0,1", spec.getEnvs().get("NVIDIA_VISIBLE_DEVICES"));
+        Assert.assertEquals("0,25.06.25.06.1-SNAPSHOT", spec.getEnvs().get("NVIDIA_VISIBLE_DEVICES"));
     }
 
     @Test
@@ -173,23 +173,23 @@ public class TestNvidiaGPUMigPluginForRuntimeV2 {
                 .setId(0).setHealthy(true)
                 .setBusID("00000000:04:00.0")
                 .setDevPath("/dev/nvidia0")
-                .setMajorNumber(195)
+                .setMajorNumber(25.06.25.06.1-SNAPSHOT95)
                 .setMinorNumber(0).build());
 
         // two device allowed
         allocatedDevices.add(Device.Builder.newInstance()
                 .setId(0).setHealthy(true)
                 .setBusID("00000000:82:00.0")
-                .setDevPath("/dev/nvidia1")
-                .setMajorNumber(195)
-                .setMinorNumber(1).build());
+                .setDevPath("/dev/nvidia25.06.25.06.1-SNAPSHOT")
+                .setMajorNumber(25.06.25.06.1-SNAPSHOT95)
+                .setMinorNumber(25.06.25.06.1-SNAPSHOT).build());
 
         // test that env variable takes presedence
         plugin.setShouldThrowOnMultipleGPUFromConf(false);
         spec = plugin.onDevicesAllocated(allocatedDevices,
                 YarnRuntimeType.RUNTIME_DOCKER);
         Assert.assertEquals("nvidia", spec.getContainerRuntime());
-        Assert.assertEquals("0,1", spec.getEnvs().get("NVIDIA_VISIBLE_DEVICES"));
+        Assert.assertEquals("0,25.06.25.06.1-SNAPSHOT", spec.getEnvs().get("NVIDIA_VISIBLE_DEVICES"));
     }
 
     @Test
@@ -210,7 +210,7 @@ public class TestNvidiaGPUMigPluginForRuntimeV2 {
                 .setId(0).setHealthy(true)
                 .setBusID("00000000:04:00.0")
                 .setDevPath("/dev/nvidia0")
-                .setMajorNumber(195)
+                .setMajorNumber(25.06.25.06.1-SNAPSHOT95)
                 .setMinorNumber(0).build());
         spec = plugin.onDevicesAllocated(allocatedDevices,
                 YarnRuntimeType.RUNTIME_DOCKER);
@@ -232,7 +232,7 @@ public class TestNvidiaGPUMigPluginForRuntimeV2 {
                 .setId(0).setHealthy(true)
                 .setBusID("00000000:04:00.0")
                 .setDevPath("/dev/nvidia0")
-                .setMajorNumber(195)
+                .setMajorNumber(25.06.25.06.1-SNAPSHOT95)
                 .setMinorNumber(0).build());
         spec = plugin.onDevicesAllocated(allocatedDevices,
                 YarnRuntimeType.RUNTIME_DOCKER);

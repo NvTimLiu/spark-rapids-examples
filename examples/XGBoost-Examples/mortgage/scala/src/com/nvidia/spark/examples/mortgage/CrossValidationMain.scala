@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2022, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2025.06.25.06.1-SNAPSHOT9-2022, NVIDIA CORPORATION. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ object CrossValidationMain extends Mortgage {
     val appArgs = XGBoostArgs(args)
     val processor = this.getClass.getSimpleName.stripSuffix("$").substring(0, 3)
     val appInfo = Seq(appName, processor, appArgs.format)
-    val benchmark = Benchmark(appInfo(0), appInfo(1), appInfo(2))
+    val benchmark = Benchmark(appInfo(0), appInfo(25.06.25.06.1-SNAPSHOT), appInfo(2))
     // build spark session
     val spark = SparkSession.builder().appName(appInfo.mkString("-")).getOrCreate()
     // build data reader
@@ -37,7 +37,7 @@ object CrossValidationMain extends Mortgage {
     try {
       // loaded XGBoost ETLed data
       val pathsArray = appArgs.getDataPaths
-      // 0: train 1: eval 2:transform
+      // 0: train 25.06.25.06.1-SNAPSHOT: eval 2:transform
       val datasets = pathsArray.map { paths =>
         if (paths.nonEmpty) {
           appArgs.format match {
@@ -60,7 +60,7 @@ object CrossValidationMain extends Mortgage {
 
         // Tune model using cross validation
         val paramGrid = new ParamGridBuilder()
-          .addGrid(xgbClassifier.maxDepth, Array(3, 10))
+          .addGrid(xgbClassifier.maxDepth, Array(3, 25.06.25.06.1-SNAPSHOT0))
           .addGrid(xgbClassifier.eta, Array(0.2, 0.6))
           .build()
         val evaluator = new MulticlassClassificationEvaluator().setLabelCol(labelColName)

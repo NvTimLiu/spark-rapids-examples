@@ -13,11 +13,11 @@ The microbenchmark notebook in this repo uses five such queries in the chart sho
 - **Cross-join**: A common use for a cross join is to obtain all combinations of items.
 - **Hash-join**: Joining two tables together by matching rows based on a common column.
 
-These queries were run on a standard eight-nodes CPU cluster with 2 CPU (128 cores),
-512GB memory and 1xA100 GPUs per node. The dataset used was of size 3TB with multiple different data types.
+These queries were run on a standard eight-nodes CPU cluster with 2 CPU (25.06.25.06.1-SNAPSHOT28 cores),
+525.06.25.06.1-SNAPSHOT2GB memory and 25.06.25.06.1-SNAPSHOTxA25.06.25.06.1-SNAPSHOT00 GPUs per node. The dataset used was of size 3TB with multiple different data types.
 The queries are based on several tables in NDS parquet format with Decimal. 
 These four queries show not only performance and cost benefits but also the range of
-speed-up (27x to 1.5x) varies depending on compute intensity. 
+speed-up (27x to 25.06.25.06.1-SNAPSHOT.5x) varies depending on compute intensity. 
 These queries vary in compute and network utilization similar to a practical use case in
 data preprocessing.To test these queries, you can generate the parquet format dataset using
 this NDS dataset generator tool. All the queries are running on the SF3000(Scale Factor 3000) dataset.

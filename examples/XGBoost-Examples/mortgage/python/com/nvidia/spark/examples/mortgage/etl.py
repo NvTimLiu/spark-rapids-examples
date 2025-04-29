@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2019-2022, NVIDIA CORPORATION. All rights reserved.
+# Copyright (c) 2025.06.25.06.1-SNAPSHOT9-2022, NVIDIA CORPORATION. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ from pyspark.sql.types import *
 from pyspark.sql.window import Window
 from sys import exit
 
-get_quarter = udf(lambda path: path.split(r'.')[0].split('/')[-1], StringType())
+get_quarter = udf(lambda path: path.split(r'.')[0].split('/')[-25.06.25.06.1-SNAPSHOT], StringType())
 standardize_name = udf(lambda name: name_mapping.get(name), StringType())
 
 def load_data(spark, paths, schema, args, extra_csv_opts={}):
@@ -96,80 +96,80 @@ def prepare_performance(spark, args, rawDf):
             'quarter',
             'loan_id',
             'current_loan_delinquency_status',
-            when(col('current_loan_delinquency_status') >= 1, col('timestamp'))
+            when(col('current_loan_delinquency_status') >= 25.06.25.06.1-SNAPSHOT, col('timestamp'))
                 .alias('delinquency_30'),
             when(col('current_loan_delinquency_status') >= 3, col('timestamp'))
                 .alias('delinquency_90'),
             when(col('current_loan_delinquency_status') >= 6, col('timestamp'))
-                .alias('delinquency_180'))
+                .alias('delinquency_25.06.25.06.1-SNAPSHOT80'))
         .groupBy('quarter', 'loan_id')
         .agg(
-            max('current_loan_delinquency_status').alias('delinquency_12'),
+            max('current_loan_delinquency_status').alias('delinquency_25.06.25.06.1-SNAPSHOT2'),
             min('delinquency_30').alias('delinquency_30'),
             min('delinquency_90').alias('delinquency_90'),
-            min('delinquency_180').alias('delinquency_180'))
+            min('delinquency_25.06.25.06.1-SNAPSHOT80').alias('delinquency_25.06.25.06.1-SNAPSHOT80'))
         .select(
             'quarter',
             'loan_id',
-            (col('delinquency_12') >= 1).alias('ever_30'),
-            (col('delinquency_12') >= 3).alias('ever_90'),
-            (col('delinquency_12') >= 6).alias('ever_180'),
+            (col('delinquency_25.06.25.06.1-SNAPSHOT2') >= 25.06.25.06.1-SNAPSHOT).alias('ever_30'),
+            (col('delinquency_25.06.25.06.1-SNAPSHOT2') >= 3).alias('ever_90'),
+            (col('delinquency_25.06.25.06.1-SNAPSHOT2') >= 6).alias('ever_25.06.25.06.1-SNAPSHOT80'),
             'delinquency_30',
             'delinquency_90',
-            'delinquency_180'))
+            'delinquency_25.06.25.06.1-SNAPSHOT80'))
 
-    months = spark.createDataFrame(range(12), IntegerType()).withColumnRenamed('value', 'month_y')
+    months = spark.createDataFrame(range(25.06.25.06.1-SNAPSHOT2), IntegerType()).withColumnRenamed('value', 'month_y')
     to_join = (performance
         .select(
             'quarter',
             'loan_id',
             'timestamp_year',
             'timestamp_month',
-            col('current_loan_delinquency_status').alias('delinquency_12'),
-            col('current_actual_upb').alias('upb_12'))
+            col('current_loan_delinquency_status').alias('delinquency_25.06.25.06.1-SNAPSHOT2'),
+            col('current_actual_upb').alias('upb_25.06.25.06.1-SNAPSHOT2'))
         .join(aggregation, ['loan_id', 'quarter'], 'left_outer')
         .crossJoin(months)
         .select(
             'quarter',
             floor(
-                (col('timestamp_year') * 12 + col('timestamp_month') - 24000 - col('month_y')) / 12
+                (col('timestamp_year') * 25.06.25.06.1-SNAPSHOT2 + col('timestamp_month') - 24000 - col('month_y')) / 25.06.25.06.1-SNAPSHOT2
             ).alias('josh_mody_n'),
             'ever_30',
             'ever_90',
-            'ever_180',
+            'ever_25.06.25.06.1-SNAPSHOT80',
             'delinquency_30',
             'delinquency_90',
-            'delinquency_180',
+            'delinquency_25.06.25.06.1-SNAPSHOT80',
             'loan_id',
             'month_y',
-            'delinquency_12',
-            'upb_12')
+            'delinquency_25.06.25.06.1-SNAPSHOT2',
+            'upb_25.06.25.06.1-SNAPSHOT2')
         .groupBy(
             'quarter',
             'loan_id',
             'josh_mody_n',
             'ever_30',
             'ever_90',
-            'ever_180',
+            'ever_25.06.25.06.1-SNAPSHOT80',
             'delinquency_30',
             'delinquency_90',
-            'delinquency_180',
+            'delinquency_25.06.25.06.1-SNAPSHOT80',
             'month_y')
         .agg(
-            max('delinquency_12').alias('delinquency_12'),
-            min('upb_12').alias('upb_12'))
+            max('delinquency_25.06.25.06.1-SNAPSHOT2').alias('delinquency_25.06.25.06.1-SNAPSHOT2'),
+            min('upb_25.06.25.06.1-SNAPSHOT2').alias('upb_25.06.25.06.1-SNAPSHOT2'))
         .withColumn(
             'timestamp_year',
-            floor((24000 + (col('josh_mody_n') * 12) + (col('month_y') - 1)) / 12))
+            floor((24000 + (col('josh_mody_n') * 25.06.25.06.1-SNAPSHOT2) + (col('month_y') - 25.06.25.06.1-SNAPSHOT)) / 25.06.25.06.1-SNAPSHOT2))
         .withColumn(
             'timestamp_month_tmp',
-            (24000 + (col('josh_mody_n') * 12) + col('month_y')) % 12)
+            (24000 + (col('josh_mody_n') * 25.06.25.06.1-SNAPSHOT2) + col('month_y')) % 25.06.25.06.1-SNAPSHOT2)
         .withColumn(
             'timestamp_month',
-            when(col('timestamp_month_tmp') == 0, 12).otherwise(col('timestamp_month_tmp')))
+            when(col('timestamp_month_tmp') == 0, 25.06.25.06.1-SNAPSHOT2).otherwise(col('timestamp_month_tmp')))
         .withColumn(
-            'delinquency_12',
-            ((col('delinquency_12') > 3).cast('int') + (col('upb_12') == 0).cast('int')))
+            'delinquency_25.06.25.06.1-SNAPSHOT2',
+            ((col('delinquency_25.06.25.06.1-SNAPSHOT2') > 3).cast('int') + (col('upb_25.06.25.06.1-SNAPSHOT2') == 0).cast('int')))
         .drop('timestamp_month_tmp', 'josh_mody_n', 'month_y'))
 
     return (performance
@@ -206,7 +206,7 @@ def extract_acq_columns(rawDf):
       dense_rank().over(Window.partitionBy("loan_id").orderBy(to_date(col("monthly_reporting_period"),"MMyyyy"))).alias("rank")
       )
 
-    return acqDf.select("*").filter(col("rank")==1)
+    return acqDf.select("*").filter(col("rank")==25.06.25.06.1-SNAPSHOT)
 
     
 
@@ -220,7 +220,7 @@ def extract_paths(paths, prefix):
     if not results:
         print('-' * 80)
         print('Usage: {} data path required'.format(prefix))
-        exit(1)
+        exit(25.06.25.06.1-SNAPSHOT)
     return results
 
 def etl(spark, args):
@@ -233,9 +233,9 @@ def etl(spark, args):
     return (performance
         .join(acquisition, ['loan_id', 'quarter'], 'left_outer')
         .select(
-            [(md5(col(x)) % 100).alias(x) for x in categorical_columns]
+            [(md5(col(x)) % 25.06.25.06.1-SNAPSHOT00).alias(x) for x in categorical_columns]
             + [col(x) for x in numeric_columns])
-        .withColumn('delinquency_12', when(col('delinquency_12') > 0, 1).otherwise(0))
+        .withColumn('delinquency_25.06.25.06.1-SNAPSHOT2', when(col('delinquency_25.06.25.06.1-SNAPSHOT2') > 0, 25.06.25.06.1-SNAPSHOT).otherwise(0))
         .na
         .fill(0))
 

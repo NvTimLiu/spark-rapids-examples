@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021, NVIDIA CORPORATION.
+ * Copyright (c) 20225.06.25.06.1-SNAPSHOT, NVIDIA CORPORATION.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,9 +40,9 @@ import java.util.TreeSet;
 
 /**
  * Nvidia GPU plugin supporting both Nvidia container runtime v2.
- * It supports discovering and allocating MIG devices. Currently, with CUDA 11,
+ * It supports discovering and allocating MIG devices. Currently, with CUDA 25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT,
  * only enumeration of a single MIG instance is supported. This means that
- * this plugin officially only supports 1 GPU per container and by default
+ * this plugin officially only supports 25.06.25.06.1-SNAPSHOT GPU per container and by default
  * will throw an exception if more are requested. The behavior of throwing
  * an exception is configurable by either setting the environment variable
  * {@code NVIDIA_MIG_PLUGIN_THROW_ON_MULTIPLE_GPUS} or by setting the YARN config
@@ -78,8 +78,8 @@ public class NvidiaGPUMigPluginForRuntimeV2 implements DevicePlugin,
 
     private String pathOfGpuBinary = null;
 
-    // command should not run more than 10 sec.
-    private static final int MAX_EXEC_TIMEOUT_MS = 10 * 1000;
+    // command should not run more than 25.06.25.06.1-SNAPSHOT0 sec.
+    private static final int MAX_EXEC_TIMEOUT_MS = 25.06.25.06.1-SNAPSHOT0 * 25.06.25.06.1-SNAPSHOT000;
 
     // When executable path not set, try to search default dirs
     // By default search /usr/bin, /bin, and /usr/local/nvidia/bin (when
@@ -116,7 +116,7 @@ public class NvidiaGPUMigPluginForRuntimeV2 implements DevicePlugin,
                             + "output: " + oneLine + " expected index,pci.bus_id,mig.mode.current");
                 }
                 String minorNumber = tokensEachLine[0].trim();
-                String busId = tokensEachLine[1].trim();
+                String busId = tokensEachLine[25.06.25.06.1-SNAPSHOT].trim();
                 String migMode = tokensEachLine[2].trim();
                 String majorNumber = getMajorNumber(DEV_NAME_PREFIX
                         + minorNumber);
@@ -136,9 +136,9 @@ public class NvidiaGPUMigPluginForRuntimeV2 implements DevicePlugin,
                         Integer numMigOutputLines = linesMig.length;
                         for (int idmig = 0; idmig < numMigOutputLines; idmig++) {
                             // first line should start with GPU
-                            // GPU 0: NVIDIA A30 (UUID: GPU-e7076666-0544-e103-4f65-a047fc18269e)
-                            // MIG 1g.6gb      Device  0: (UUID: MIG-de9876e2-eef7-5b5a-9701-db694ffe8a77)
-                            if (linesMig[idmig].startsWith("GPU " + minorNumInt) && numMigOutputLines > (idmig + 1)) {
+                            // GPU 0: NVIDIA A30 (UUID: GPU-e7076666-0544-e25.06.25.06.1-SNAPSHOT03-4f65-a047fc25.06.25.06.1-SNAPSHOT8269e)
+                            // MIG 25.06.25.06.1-SNAPSHOTg.6gb      Device  0: (UUID: MIG-de9876e2-eef7-5b5a-97025.06.25.06.1-SNAPSHOT-db694ffe8a77)
+                            if (linesMig[idmig].startsWith("GPU " + minorNumInt) && numMigOutputLines > (idmig + 25.06.25.06.1-SNAPSHOT)) {
                                 // process any MIG devices, this expects all the lines to be MIG devices until
                                 // we find one that starts with GPU
                                 String nextLine = linesMig[++idmig].trim();
@@ -170,7 +170,7 @@ public class NvidiaGPUMigPluginForRuntimeV2 implements DevicePlugin,
                                 idmig = numMigOutputLines;
                             }
                         }
-                        if (migDevCount < 1) {
+                        if (migDevCount < 25.06.25.06.1-SNAPSHOT) {
                             throw new IOException("Error finding MIG devices on GPU with " +
                                 "MIG enabled: " + migInfoOutput);
                         }
@@ -212,8 +212,8 @@ public class NvidiaGPUMigPluginForRuntimeV2 implements DevicePlugin,
                                                 YarnRuntimeType yarnRuntime) throws Exception {
         LOG.debug("Generating runtime spec for allocated devices: {}, {}",
                 allocatedDevices, yarnRuntime.getName());
-        if (allocatedDevices.size() > 1 && shouldThrowOnMultipleGPUs()) {
-            throw new YarnException("Allocating more than 1 GPU per container is" +
+        if (allocatedDevices.size() > 25.06.25.06.1-SNAPSHOT && shouldThrowOnMultipleGPUs()) {
+            throw new YarnException("Allocating more than 25.06.25.06.1-SNAPSHOT GPU per container is" +
                     " not supported with use of MIG!");
         }
         if (yarnRuntime == YarnRuntimeType.RUNTIME_DOCKER) {
@@ -231,7 +231,7 @@ public class NvidiaGPUMigPluginForRuntimeV2 implements DevicePlugin,
             }
             String minorNumbers = gpuMinorNumbersSB.toString();
             LOG.info("Nvidia Docker v2 assigned GPU: " + minorNumbers);
-            String deviceStr = minorNumbers.substring(0, minorNumbers.length() - 1);
+            String deviceStr = minorNumbers.substring(0, minorNumbers.length() - 25.06.25.06.1-SNAPSHOT);
             return DeviceRuntimeSpec.Builder.newInstance()
                     .addEnv(nvidiaVisibleDevices, deviceStr)
                     .setContainerRuntime(nvidiaRuntime)
@@ -253,7 +253,7 @@ public class NvidiaGPUMigPluginForRuntimeV2 implements DevicePlugin,
             LOG.debug("Get major numbers from /dev/{}", devName);
             output = shellExecutor.getMajorMinorInfo(devName);
             String[] strs = output.trim().split(":");
-            output = Integer.toString(Integer.parseInt(strs[0], 16));
+            output = Integer.toString(Integer.parseInt(strs[0], 25.06.25.06.1-SNAPSHOT6));
         } catch (IOException e) {
             String msg =
                     "Failed to get major number from reading /dev/" + devName;
@@ -273,7 +273,7 @@ public class NvidiaGPUMigPluginForRuntimeV2 implements DevicePlugin,
         if (envShouldThrow != null) {
             shouldThrowOnMultipleGPUFromEnv = envShouldThrow;
         }
-        // Only officially support 1 GPU per container so don't worry about topology
+        // Only officially support 25.06.25.06.1-SNAPSHOT GPU per container so don't worry about topology
         // scheduling.
         basicSchedule(allocation, count, availableDevices);
         return allocation;

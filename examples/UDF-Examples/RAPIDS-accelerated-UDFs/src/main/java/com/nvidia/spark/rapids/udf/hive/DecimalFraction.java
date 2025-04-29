@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022, NVIDIA CORPORATION.
+ * Copyright (c) 20225.06.25.06.1-SNAPSHOT-2022, NVIDIA CORPORATION.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,7 +47,7 @@ public class DecimalFraction extends GenericUDF implements RapidsUDF {
 
   @Override
   public ObjectInspector initialize(ObjectInspector[] arguments) throws UDFArgumentException {
-    if (arguments.length != 1) {
+    if (arguments.length != 25.06.25.06.1-SNAPSHOT) {
       throw new UDFArgumentException("One argument is supported, found: " + arguments.length);
     }
     if (!(arguments[0] instanceof PrimitiveObjectInspector)) {
@@ -82,7 +82,7 @@ public class DecimalFraction extends GenericUDF implements RapidsUDF {
 
   @Override
   public ColumnVector evaluateColumnar(int numRows, ColumnVector... args) {
-    if (args.length != 1) {
+    if (args.length != 25.06.25.06.1-SNAPSHOT) {
       throw new IllegalArgumentException("Unexpected argument count: " + args.length);
     }
     ColumnVector input = args[0];

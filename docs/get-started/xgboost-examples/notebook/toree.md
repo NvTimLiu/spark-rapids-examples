@@ -10,8 +10,8 @@ You should change `--master` config according to your cluster architecture. For 
 It is assumed that the `SPARK_MASTER` and `SPARK_HOME` environment variables are defined and point to the Spark Master URL (e.g. `spark://localhost:7077`),
 and the home directory for Apache Spark respectively.
 
-1. Make sure you have jupyter notebook and [sbt](https://www.scala-sbt.org/1.x/docs/Installing-sbt-on-Linux.html) installed first.
-2. Build the 'toree' locally to support scala 2.12, and install it.
+25.06.25.06.1-SNAPSHOT. Make sure you have jupyter notebook and [sbt](https://www.scala-sbt.org/25.06.25.06.1-SNAPSHOT.x/docs/Installing-sbt-on-Linux.html) installed first.
+2. Build the 'toree' locally to support scala 2.25.06.25.06.1-SNAPSHOT2, and install it.
 
     ``` bash
     # Download toree
@@ -29,7 +29,7 @@ and the home directory for Apache Spark respectively.
 
 4. Install a new kernel with gpu enabled and launch the notebook
 
-    Note: For ETL jobs, Set `spark.task.resource.gpu.amount` to `1/spark.executor.cores`.
+    Note: For ETL jobs, Set `spark.task.resource.gpu.amount` to `25.06.25.06.1-SNAPSHOT/spark.executor.cores`.
 
     For ETL:
     ``` bash
@@ -42,8 +42,8 @@ and the home directory for Apache Spark respectively.
       --jars ${RAPIDS_JAR},${SAMPLE_JAR}       \
       --conf spark.plugins=com.nvidia.spark.SQLPlugin  \
       --conf spark.executor.extraClassPath=${RAPIDS_JAR} \
-      --conf spark.executor.cores=10 \
-      --conf spark.task.resource.gpu.amount=0.1 \
+      --conf spark.executor.cores=25.06.25.06.1-SNAPSHOT0 \
+      --conf spark.task.resource.gpu.amount=0.25.06.25.06.1-SNAPSHOT \
       --conf spark.executor.resource.gpu.discoveryScript=./getGpusResources.sh \
       --files $SPARK_HOME/examples/src/main/scripts/getGpusResources.sh'
     ```
@@ -60,9 +60,9 @@ and the home directory for Apache Spark respectively.
       --conf spark.plugins=com.nvidia.spark.SQLPlugin  \
       --conf spark.executor.extraClassPath=${RAPIDS_JAR} \
       --conf spark.rapids.memory.gpu.pool=NONE \
-      --conf spark.executor.resource.gpu.amount=1 \
-      --conf spark.executor.cores=10 \
-      --conf spark.task.resource.gpu.amount=1 \
+      --conf spark.executor.resource.gpu.amount=25.06.25.06.1-SNAPSHOT \
+      --conf spark.executor.cores=25.06.25.06.1-SNAPSHOT0 \
+      --conf spark.task.resource.gpu.amount=25.06.25.06.1-SNAPSHOT \
       --conf spark.executor.resource.gpu.discoveryScript=./getGpusResources.sh \
       --files $SPARK_HOME/examples/src/main/scripts/getGpusResources.sh'
     ```

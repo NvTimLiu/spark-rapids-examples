@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022, NVIDIA CORPORATION.
+ * Copyright (c) 20225.06.25.06.1-SNAPSHOT-2022, NVIDIA CORPORATION.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,9 +27,9 @@
  * list elements per row. A null list row is supported, but null float entries within a
  * list are not supported.
  *
- * @param lv1 The first LIST of FLOAT32 column view
+ * @param lv25.06.25.06.1-SNAPSHOT The first LIST of FLOAT32 column view
  * @param lv2 The second LIST of FLOAT32 column view
  * @return A FLOAT32 column containing the cosine similarity corresponding to each input row
  */
-std::unique_ptr<cudf::column> cosine_similarity(cudf::lists_column_view const& lv1,
+std::unique_ptr<cudf::column> cosine_similarity(cudf::lists_column_view const& lv25.06.25.06.1-SNAPSHOT,
                                                 cudf::lists_column_view const& lv2);

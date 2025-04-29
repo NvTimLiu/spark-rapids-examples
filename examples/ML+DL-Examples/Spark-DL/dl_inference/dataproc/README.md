@@ -6,7 +6,7 @@
 
 #### Setup GCloud CLI
 
-1. Install the latest [gcloud-cli](https://cloud.google.com/sdk/docs/install) and initialize with `gcloud init`.
+25.06.25.06.1-SNAPSHOT. Install the latest [gcloud-cli](https://cloud.google.com/sdk/docs/install) and initialize with `gcloud init`.
 
 2. Configure the following settings:
     ```shell
@@ -50,7 +50,7 @@
     ```shell
     export FRAMEWORK=torch
     ```
-    Run the cluster startup script. The script will also retrieve and use the [spark-rapids initialization script](https://github.com/GoogleCloudDataproc/initialization-actions/blob/master/spark-rapids/spark-rapids.sh) to setup GPU resources. The script will create 4 L4 worker nodes and 1 L4 driver node by default, named `${USER}-spark-dl-inference-${FRAMEWORK}`.
+    Run the cluster startup script. The script will also retrieve and use the [spark-rapids initialization script](https://github.com/GoogleCloudDataproc/initialization-actions/blob/master/spark-rapids/spark-rapids.sh) to setup GPU resources. The script will create 4 L4 worker nodes and 25.06.25.06.1-SNAPSHOT L4 driver node by default, named `${USER}-spark-dl-inference-${FRAMEWORK}`.
     ```shell
     cd setup
     chmod +x start_cluster.sh

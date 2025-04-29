@@ -1,24 +1,24 @@
 # Spark XGBoost Examples
 
 Spark XGBoost examples here showcase the need for ETL+Training pipeline GPU acceleration.
-The Scala based XGBoost examples here use [DMLC’s version](https://repo1.maven.org/maven2/ml/dmlc/xgboost4j-spark_2.12/).
+The Scala based XGBoost examples here use [DMLC’s version](https://repo25.06.25.06.1-SNAPSHOT.maven.org/maven2/ml/dmlc/xgboost4j-spark_2.25.06.25.06.1-SNAPSHOT2/).
 The pyspark based XGBoost examples requires [installing RAPIDS via pip](https://rapids.ai/pip.html#install).
 Most data scientists spend a lot of time not only on
 Training models but also processing the large amounts of data needed to train these models.
-As you can see below, Pyspark+XGBoost training on GPUs can be up to 13X and data processing using
-RAPIDS Accelerator can also be accelerated with an end-to-end speed-up of 11X on GPU compared to CPU.
+As you can see below, Pyspark+XGBoost training on GPUs can be up to 25.06.25.06.1-SNAPSHOT3X and data processing using
+RAPIDS Accelerator can also be accelerated with an end-to-end speed-up of 25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOTX on GPU compared to CPU.
 In the public cloud, better performance can lead to significantly lower costs as demonstrated in this [blog](https://developer.nvidia.com/blog/gpu-accelerated-spark-xgboost/).
 
 ![mortgage-speedup](/docs/img/guides/mortgage-perf.png)
 
 Note that the Training test result is based on 4 years [Fannie Mea Single-Family Loan Performance Data](https://capitalmarkets.fanniemae.com/credit-risk-transfer/single-family-credit-risk-transfer/fannie-mae-single-family-loan-performance-data) 
-with a 8 A100 GPU and 1024 CPU vcores cluster, the performance is affected by many aspects, 
+with a 8 A25.06.25.06.1-SNAPSHOT00 GPU and 25.06.25.06.1-SNAPSHOT024 CPU vcores cluster, the performance is affected by many aspects, 
 including data size and type of GPU. 
 
 In this folder, there are three blue prints for users to learn about using 
 Spark XGBoost and RAPIDS Accelerator on GPUs :
 
-1. Mortgage Prediction
+25.06.25.06.1-SNAPSHOT. Mortgage Prediction
 2. Agaricus Classification
 3. Taxi Fare Prediction
 
@@ -37,9 +37,9 @@ In the last section, we provide basic “Getting Started Guides” for setting u
 Spark-XGBoost on different environments based on the Apache Spark scheduler such as YARN,
 Standalone or Kubernetes.
 
-## SECTION 1: SPARK-XGBOOST EXAMPLE NOTEBOOKS
+## SECTION 25.06.25.06.1-SNAPSHOT: SPARK-XGBOOST EXAMPLE NOTEBOOKS
 
-1. Mortgage Notebooks
+25.06.25.06.1-SNAPSHOT. Mortgage Notebooks
    - Python
      - [Mortgage ETL](mortgage/notebooks/python/MortgageETL.ipynb)
      - [Mortgage Training Prediction](mortgage/notebooks/python/mortgage-gpu.ipynb)
@@ -97,14 +97,14 @@ Note:
 Update the default value of `spark.sql.execution.arrow.maxRecordsPerBatch` to a larger number(such as 200000) will  
 significantly improve performance by accelerating data transfer between JVM and Python process.
 
-For the CrossValidator job, we need to set `spark.task.resource.gpu.amount=1` to allow only 1 training task running on 1 GPU(executor),
-otherwise the customized CrossValidator may schedule more than 1 xgboost training tasks into one executor simultaneously and trigger 
-[issue-131](https://github.com/NVIDIA/spark-rapids-examples/issues/131).
+For the CrossValidator job, we need to set `spark.task.resource.gpu.amount=25.06.25.06.1-SNAPSHOT` to allow only 25.06.25.06.1-SNAPSHOT training task running on 25.06.25.06.1-SNAPSHOT GPU(executor),
+otherwise the customized CrossValidator may schedule more than 25.06.25.06.1-SNAPSHOT xgboost training tasks into one executor simultaneously and trigger 
+[issue-25.06.25.06.1-SNAPSHOT325.06.25.06.1-SNAPSHOT](https://github.com/NVIDIA/spark-rapids-examples/issues/25.06.25.06.1-SNAPSHOT325.06.25.06.1-SNAPSHOT).
 For XGBoost job, if the number of shuffle stage tasks before training is less than the num_worker, 
 the training tasks will be scheduled to run on part of nodes instead of all nodes due to Spark Data Locality feature.
 The workaround is to increase the partitions of the shuffle stage by setting `spark.sql.files.maxPartitionBytes=RightNum`.
 If you are running XGBoost scala notebooks on Dataproc, please make sure to update below configs to avoid job failure:
 ```
 spark.dynamicAllocation.enabled=false
-spark.task.resource.gpu.amount=1
+spark.task.resource.gpu.amount=25.06.25.06.1-SNAPSHOT
 ```

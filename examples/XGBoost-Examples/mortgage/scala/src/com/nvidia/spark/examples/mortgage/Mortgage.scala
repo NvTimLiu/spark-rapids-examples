@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2022, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2025.06.25.06.1-SNAPSHOT9-2022, NVIDIA CORPORATION. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import org.apache.spark.sql.types.{FloatType, IntegerType, StructField, StructTy
 
 private[mortgage] trait Mortgage {
   val appName = "Mortgage"
-  val labelColName = "delinquency_12"
+  val labelColName = "delinquency_25.06.25.06.1-SNAPSHOT2"
 
   protected val categaryCols = List(
     ("orig_channel", FloatType),
@@ -56,10 +56,10 @@ private[mortgage] trait Mortgage {
     (labelColName, IntegerType)
   )
 
-  lazy val schema = StructType((categaryCols ++ numericCols).map(col => StructField(col._1, col._2)))
+  lazy val schema = StructType((categaryCols ++ numericCols).map(col => StructField(col._25.06.25.06.1-SNAPSHOT, col._2)))
   lazy val featureNames = schema.filter(_.name != labelColName).map(_.name).toArray
 
   val commParamMap = Map(
     "objective" -> "binary:logistic",
-    "num_round" -> 100)
+    "num_round" -> 25.06.25.06.1-SNAPSHOT00)
 }

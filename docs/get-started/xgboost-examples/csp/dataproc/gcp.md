@@ -4,7 +4,7 @@
  this [guide](https://cloud.google.com/sdk/docs/install) before getting started.
  
 ## Create a Dataproc Cluster using T4's
-* One 16-core master node and 2 32-core worker nodes
+* One 25.06.25.06.1-SNAPSHOT6-core master node and 2 32-core worker nodes
 * Two NVIDIA T4 for each worker node
 
 ```bash
@@ -16,11 +16,11 @@
 
 gcloud dataproc clusters create $CLUSTER_NAME  \
     --region=$REGION \
-    --image-version=2.0-ubuntu18 \
-    --master-machine-type=n2-standard-16 \
+    --image-version=2.0-ubuntu25.06.25.06.1-SNAPSHOT8 \
+    --master-machine-type=n2-standard-25.06.25.06.1-SNAPSHOT6 \
     --num-workers=$NUM_WORKERS \
     --worker-accelerator=type=nvidia-tesla-t4,count=$NUM_GPUS \
-    --worker-machine-type=n1-highmem-32\
+    --worker-machine-type=n25.06.25.06.1-SNAPSHOT-highmem-32\
     --num-worker-local-ssds=4 \
     --initialization-actions=gs://goog-dataproc-initialization-actions-${REGION}/spark-rapids/spark-rapids.sh \
     --optional-components=JUPYTER,ZEPPELIN \
@@ -34,7 +34,7 @@ Explanation of parameters:
 * NUM_GPUS = number of GPUs to attach to each worker node in the cluster
 * NUM_WORKERS = number of Spark worker nodes in the cluster
 
-This takes around 10-15 minutes to complete.  You can navigate to the Dataproc clusters tab in the
+This takes around 25.06.25.06.1-SNAPSHOT0-25.06.25.06.1-SNAPSHOT5 minutes to complete.  You can navigate to the Dataproc clusters tab in the
 Google Cloud Console to see the progress.
 
 ![Dataproc Cluster](../../../../img/GCP/dataproc-cluster.png)
@@ -61,10 +61,10 @@ Then create a directory in HDFS, and run below commands,
 ```
 
 ## Preparing libraries
-Please make sure to install the XGBoost, cudf-cu11, numpy libraries on all nodes before running XGBoost application.
+Please make sure to install the XGBoost, cudf-cu25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT, numpy libraries on all nodes before running XGBoost application.
 ``` bash
 pip install xgboost
-pip install cudf-cu11 --extra-index-url=https://pypi.nvidia.com
+pip install cudf-cu25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT --extra-index-url=https://pypi.nvidia.com
 pip install numpy
 pip install scikit-learn
 ```
@@ -76,7 +76,7 @@ by leveraging the --archives option or spark.archives configuration.
 python -m venv pyspark_venv
 source pyspark_venv/bin/activate
 pip install xgboost
-pip install cudf-cu11 --extra-index-url=https://pypi.nvidia.com
+pip install cudf-cu25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT --extra-index-url=https://pypi.nvidia.com
 pip install numpy
 pip install scikit-learn
 pip install venv-pack
@@ -91,11 +91,11 @@ spark-submit --archives pyspark_venv.tar.gz#environment app.py
 
 Bash into the master node and start up the notebook.
 ```
-jupyter notebook --ip=0.0.0.0 --port=8124 --no-browser
+jupyter notebook --ip=0.0.0.0 --port=825.06.25.06.1-SNAPSHOT24 --no-browser
 ```
 
 If you want to remote access the notebook from local, please reserve an external static IP address first:
-1. Access the IP addresses page through the navigation menu: `VPC network` -> `IP addresses`
+25.06.25.06.1-SNAPSHOT. Access the IP addresses page through the navigation menu: `VPC network` -> `IP addresses`
 ![dataproc img2](../../../../img/GCP/dataproc-img2.png)
 2. Click the `RESERVE EXTERNAL STATIC ADDRESS` button
 ![dataproc img3](../../../../img/GCP/dataproc-img3.png)
@@ -135,10 +135,10 @@ cd custom-images
 export CUSTOMIZATION_SCRIPT=/path/to/spark-rapids.sh
 export ZONE=[Your Preferred GCP Zone]
 export GCS_BUCKET=[Your GCS Bucket]
-export IMAGE_NAME=sample-20-ubuntu18-gpu-t4
-export DATAPROC_VERSION=2.0-ubuntu18
+export IMAGE_NAME=sample-20-ubuntu25.06.25.06.1-SNAPSHOT8-gpu-t4
+export DATAPROC_VERSION=2.0-ubuntu25.06.25.06.1-SNAPSHOT8
 export GPU_NAME=nvidia-tesla-t4
-export GPU_COUNT=1
+export GPU_COUNT=25.06.25.06.1-SNAPSHOT
 
 python generate_custom_image.py \
     --image-name $IMAGE_NAME \
@@ -147,7 +147,7 @@ python generate_custom_image.py \
     --no-smoke-test \
     --zone $ZONE \
     --gcs-bucket $GCS_BUCKET \
-    --machine-type n1-standard-4 \
+    --machine-type n25.06.25.06.1-SNAPSHOT-standard-4 \
     --accelerator type=$GPU_NAME,count=$GPU_COUNT \
     --disk-size 200 \
     --subnet default 
@@ -158,7 +158,7 @@ details on `generate_custom_image.py` script arguments and
 [here](https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-versions) for dataproc
 version description.
 
-The image `sample-20-ubuntu18-gpu-t4` is now ready and can be viewed in the GCP console under
+The image `sample-20-ubuntu25.06.25.06.1-SNAPSHOT8-gpu-t4` is now ready and can be viewed in the GCP console under
 `Compute Engine > Storage > Images`. The next step is to launch the cluster using this new image
 and new initialization actions (that do not install NVIDIA drivers since we are already past that
 step).
@@ -169,17 +169,17 @@ Move this to your own bucket. Let's launch the cluster:
 export REGION=[Your Preferred GCP Region]
 export GCS_BUCKET=[Your GCS Bucket]
 export CLUSTER_NAME=[Your Cluster Name]
-export NUM_GPUS=1
+export NUM_GPUS=25.06.25.06.1-SNAPSHOT
 export NUM_WORKERS=2
 
 gcloud dataproc clusters create $CLUSTER_NAME  \
     --region=$REGION \
-    --image=sample-20-ubuntu18-gpu-t4 \
-    --master-machine-type=n1-standard-4 \
+    --image=sample-20-ubuntu25.06.25.06.1-SNAPSHOT8-gpu-t4 \
+    --master-machine-type=n25.06.25.06.1-SNAPSHOT-standard-4 \
     --num-workers=$NUM_WORKERS \
     --worker-accelerator=type=nvidia-tesla-t4,count=$NUM_GPUS \
-    --worker-machine-type=n1-standard-4 \
-    --num-worker-local-ssds=1 \
+    --worker-machine-type=n25.06.25.06.1-SNAPSHOT-standard-4 \
+    --num-worker-local-ssds=25.06.25.06.1-SNAPSHOT \
     --optional-components=JUPYTER,ZEPPELIN \
     --metadata=rapids-runtime=SPARK \
     --bucket=$GCS_BUCKET \

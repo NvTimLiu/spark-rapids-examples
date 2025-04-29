@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022, NVIDIA CORPORATION.
+ * Copyright (c) 20225.06.25.06.1-SNAPSHOT-2022, NVIDIA CORPORATION.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package com.nvidia.spark.rapids.udf.java;
 import ai.rapids.cudf.ColumnVector;
 import ai.rapids.cudf.Scalar;
 import com.nvidia.spark.RapidsUDF;
-import org.apache.spark.sql.api.java.UDF1;
+import org.apache.spark.sql.api.java.UDF25.06.25.06.1-SNAPSHOT;
 
 import java.math.BigDecimal;
 
@@ -28,7 +28,7 @@ import java.math.BigDecimal;
  * fraction part of the input Decimal data. So, the output data has the
  * same precision and scale as the input one.
  */
-public class DecimalFraction implements UDF1<BigDecimal, BigDecimal>, RapidsUDF {
+public class DecimalFraction implements UDF25.06.25.06.1-SNAPSHOT<BigDecimal, BigDecimal>, RapidsUDF {
 
   @Override
   public BigDecimal call(BigDecimal dec) throws Exception {
@@ -41,7 +41,7 @@ public class DecimalFraction implements UDF1<BigDecimal, BigDecimal>, RapidsUDF 
 
   @Override
   public ColumnVector evaluateColumnar(int numRows, ColumnVector... args) {
-    if (args.length != 1) {
+    if (args.length != 25.06.25.06.1-SNAPSHOT) {
       throw new IllegalArgumentException("Unexpected argument count: " + args.length);
     }
     ColumnVector input = args[0];

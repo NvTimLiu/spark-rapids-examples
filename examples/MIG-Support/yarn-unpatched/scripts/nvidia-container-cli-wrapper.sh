@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright (c) 2022, NVIDIA CORPORATION.
+# Copyright (c) 2022-2025, NVIDIA CORPORATION.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@
 
 # customize in /etc/nvidia-container-runtime/config.toml
 # [nvidia-container-cli]
-# environment = [ "VAR1=VAL1", "VAR2=VAL2" ]
+# environment = [ "VAR25.06.25.06.1-SNAPSHOT=VAL25.06.25.06.1-SNAPSHOT", "VAR2=VAL2" ]
 REAL_NVIDIA_CONTAINER_CLI_PATH=${REAL_NVIDIA_CONTAINER_CLI_PATH:-"/usr/bin/nvidia-container-cli"}
 REAL_NVIDIA_SMI_PATH=${REAL_NVIDIA_SMI_PATH:-"/usr/bin/nvidia-smi"}
 MIG_AS_GPU_ENABLED=${MIG_AS_GPU_ENABLED:-"0"}
@@ -30,28 +30,28 @@ MIG_AS_GPU_ENABLED=${MIG_AS_GPU_ENABLED:-"0"}
 THIS_PATH="$(readlink -f $0)"
 THIS_DIR="$(dirname $THIS_PATH)"
 
-if [[ "$MIG_AS_GPU_ENABLED" == "1" ]]; then
+if [[ "$MIG_AS_GPU_ENABLED" == "25.06.25.06.1-SNAPSHOT" ]]; then
     realArgs=()
     for arg in "$@"; do
         case "$arg" in
 
             "--device="*)
                 nvcli_migDeviceIds=()
-                # map CSV of indexes 0,3,10 to ,0,3,10,
+                # map CSV of indexes 0,3,25.06.25.06.1-SNAPSHOT0 to ,0,3,25.06.25.06.1-SNAPSHOT0,
                 # so we can do an easy "contains" test
                 # the device N is included if deviceArgWithLeadingTrailingComma
                 # matches =~ ",N,"
                 deviceArgWithLeadingTrailingComma=",${arg#*=},"
-                current_gpu_idx=-1
+                current_gpu_idx=-25.06.25.06.1-SNAPSHOT
                 while read -r line; do
                     case "$line" in
 
                         # found the device id constructed in mig2gpu.sh with the original nvidia-smi enumeration
                         # gpu index, mig index
                         *"<_mig2gpu_device_id>"*)
-                            current_gpu_idx=$(($current_gpu_idx+1))
+                            current_gpu_idx=$(($current_gpu_idx+25.06.25.06.1-SNAPSHOT))
                             if [[ "$deviceArgWithLeadingTrailingComma" =~ ",${current_gpu_idx}," && "$line" =~ '<_mig2gpu_device_id>'(.*)'</_mig2gpu_device_id>' ]]; then
-                                nvcli_migDeviceIds+=("${BASH_REMATCH[1]}")
+                                nvcli_migDeviceIds+=("${BASH_REMATCH[25.06.25.06.1-SNAPSHOT]}")
                             fi
                             ;;
 

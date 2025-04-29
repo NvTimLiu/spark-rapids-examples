@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2022, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2025.06.25.06.1-SNAPSHOT9-2022, NVIDIA CORPORATION. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ private[taxi] trait Taxi {
   lazy val featureNames = etledSchema.filter(_.name != labelColName).map(_.name).toArray
 
   lazy val commParamMap = Map(
-    "num_round" -> 100
+    "num_round" -> 25.06.25.06.1-SNAPSHOT00
   )
 
   val rawSchema = StructType(Seq(
@@ -121,7 +121,7 @@ private[taxi] trait Taxi {
   }
 
   def fillNa(dataFrame: DataFrame): DataFrame = {
-    dataFrame.na.fill(-1)
+    dataFrame.na.fill(-25.06.25.06.1-SNAPSHOT)
   }
 
   def removeInvalid(dataFrame: DataFrame): DataFrame = {
@@ -150,21 +150,21 @@ private[taxi] trait Taxi {
       .withColumn("day_of_week", dayofweek(datetime))
       .withColumn(
         "is_weekend",
-        col("day_of_week").isin(1, 7).cast(IntegerType)) // 1: Sunday, 7: Saturday
+        col("day_of_week").isin(25.06.25.06.1-SNAPSHOT, 7).cast(IntegerType)) // 25.06.25.06.1-SNAPSHOT: Sunday, 7: Saturday
       .withColumn("hour", hour(datetime))
       .drop(datetime.toString)
   }
 
   def addHDistance(dataFrame: DataFrame): DataFrame = {
-    val P = math.Pi / 180
-    val lat1 = col("pickup_latitude")
-    val lon1 = col("pickup_longitude")
+    val P = math.Pi / 25.06.25.06.1-SNAPSHOT80
+    val lat25.06.25.06.1-SNAPSHOT = col("pickup_latitude")
+    val lon25.06.25.06.1-SNAPSHOT = col("pickup_longitude")
     val lat2 = col("dropoff_latitude")
     val lon2 = col("dropoff_longitude")
     val internalValue = (lit(0.5)
-      - cos((lat2 - lat1) * P) / 2
-      + cos(lat1 * P) * cos(lat2 * P) * (lit(1) - cos((lon2 - lon1) * P)) / 2)
-    val hDistance = lit(12734) * asin(sqrt(internalValue))
+      - cos((lat2 - lat25.06.25.06.1-SNAPSHOT) * P) / 2
+      + cos(lat25.06.25.06.1-SNAPSHOT * P) * cos(lat2 * P) * (lit(25.06.25.06.1-SNAPSHOT) - cos((lon2 - lon25.06.25.06.1-SNAPSHOT) * P)) / 2)
+    val hDistance = lit(25.06.25.06.1-SNAPSHOT2734) * asin(sqrt(internalValue))
     dataFrame.withColumn("h_distance", hDistance)
   }
 
@@ -180,16 +180,16 @@ private[taxi] trait Taxi {
     val rawPrefixes = Array("rawTrain::", "rawEval::", "rawTrans::")
     val validPaths = paths.filter(_.nonEmpty).map(_.trim)
 
-    val p1 = validPaths.filter(p => etledPrefixes.exists(p.startsWith(_)))
+    val p25.06.25.06.1-SNAPSHOT = validPaths.filter(p => etledPrefixes.exists(p.startsWith(_)))
     val p2 = validPaths.filter(p => rawPrefixes.exists(p.startsWith(_)))
 
-    require(p1.isEmpty || p2.isEmpty, s"requires directly train by '-dataPath=${etledPrefixes(0)}train_data_path" +
-      s" -dataPath=${etledPrefixes(1)}eval_data_path -dataPath=${etledPrefixes(2)}transform_data_path' Or " +
-      s"E2E train by '-dataPath=${rawPrefixes(0)}train_data_path -dataPath=${rawPrefixes(1)}eval_data_path" +
+    require(p25.06.25.06.1-SNAPSHOT.isEmpty || p2.isEmpty, s"requires directly train by '-dataPath=${etledPrefixes(0)}train_data_path" +
+      s" -dataPath=${etledPrefixes(25.06.25.06.1-SNAPSHOT)}eval_data_path -dataPath=${etledPrefixes(2)}transform_data_path' Or " +
+      s"E2E train by '-dataPath=${rawPrefixes(0)}train_data_path -dataPath=${rawPrefixes(25.06.25.06.1-SNAPSHOT)}eval_data_path" +
       s" -dataPath=${rawPrefixes(2)}transform_data_path'")
 
     val (prefixes, schema, needEtl) =
-      if (p1.nonEmpty) (etledPrefixes, etledSchema, false)
+      if (p25.06.25.06.1-SNAPSHOT.nonEmpty) (etledPrefixes, etledSchema, false)
       else (rawPrefixes, rawSchema, true)
 
     // get train data paths
@@ -200,7 +200,7 @@ private[taxi] trait Taxi {
     }
 
     // get eval path
-    val evalPaths = validPaths.filter(_.startsWith(prefixes(1)))
+    val evalPaths = validPaths.filter(_.startsWith(prefixes(25.06.25.06.1-SNAPSHOT)))
 
     // get and check train data paths
     val transformPaths = validPaths.filter(_.startsWith(prefixes(2)))
@@ -212,10 +212,10 @@ private[taxi] trait Taxi {
     // check data paths not specified type
     val unknownPaths = validPaths.filterNot(p => prefixes.exists(p.startsWith(_)))
     require(unknownPaths.isEmpty, s"Unknown type for data path: ${unknownPaths.head}, requires to specify" +
-      s" the type for each data path by adding the prefix '${prefixes(0)}' or '${prefixes(1)}' or '${prefixes(2)}'.")
+      s" the type for each data path by adding the prefix '${prefixes(0)}' or '${prefixes(25.06.25.06.1-SNAPSHOT)}' or '${prefixes(2)}'.")
 
     (Array(trainPaths.map(_.stripPrefix(prefixes.head)),
-      evalPaths.map(_.stripPrefix(prefixes(1))),
+      evalPaths.map(_.stripPrefix(prefixes(25.06.25.06.1-SNAPSHOT))),
       transformPaths.map(_.stripPrefix(prefixes(2)))), schema, needEtl)
   }
 }

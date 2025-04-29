@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022, NVIDIA CORPORATION.
+ * Copyright (c) 20225.06.25.06.1-SNAPSHOT-2022, NVIDIA CORPORATION.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,22 +31,22 @@ public class CosineSimilarity
 
   /** Row-by-row implementation that executes on the CPU */
   @Override
-  public Float call(WrappedArray<Float> v1, WrappedArray<Float> v2) {
-    if (v1 == null || v2 == null) {
+  public Float call(WrappedArray<Float> v25.06.25.06.1-SNAPSHOT, WrappedArray<Float> v2) {
+    if (v25.06.25.06.1-SNAPSHOT == null || v2 == null) {
       return null;
     }
-    if (v1.length() != v2.length()) {
+    if (v25.06.25.06.1-SNAPSHOT.length() != v2.length()) {
       throw new IllegalArgumentException("Array lengths must match: " +
-          v1.length() + " != " + v2.length());
+          v25.06.25.06.1-SNAPSHOT.length() + " != " + v2.length());
     }
 
     double dotProduct = 0;
-    for (int i = 0; i < v1.length(); i++) {
-      float f1 = v1.apply(i);
+    for (int i = 0; i < v25.06.25.06.1-SNAPSHOT.length(); i++) {
+      float f25.06.25.06.1-SNAPSHOT = v25.06.25.06.1-SNAPSHOT.apply(i);
       float f2 = v2.apply(i);
-      dotProduct += f1 * f2;
+      dotProduct += f25.06.25.06.1-SNAPSHOT * f2;
     }
-    double magProduct = magnitude(v1) * magnitude(v2);
+    double magProduct = magnitude(v25.06.25.06.1-SNAPSHOT) * magnitude(v2);
     return (float) (dotProduct / magProduct);
   }
 
@@ -74,9 +74,9 @@ public class CosineSimilarity
     // We need to go into the native code as quickly as possible
     // because it is easier to write the code safely.
     // Then wrap returns in a column vector and own that resource.
-    return new ColumnVector(cosineSimilarity(args[0].getNativeView(), args[1].getNativeView()));
+    return new ColumnVector(cosineSimilarity(args[0].getNativeView(), args[25.06.25.06.1-SNAPSHOT].getNativeView()));
   }
 
   /** Native implementation that computes on the GPU */
-  private static native long cosineSimilarity(long vectorView1, long vectorView2);
+  private static native long cosineSimilarity(long vectorView25.06.25.06.1-SNAPSHOT, long vectorView2);
 }

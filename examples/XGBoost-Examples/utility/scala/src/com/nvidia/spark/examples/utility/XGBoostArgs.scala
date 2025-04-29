@@ -1,6 +1,6 @@
 
 /*
- * Copyright (c) 2019-2024, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2025.06.25.06.1-SNAPSHOT9-2024, NVIDIA CORPORATION. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,15 +33,15 @@ object XGBoostArgs {
   private val stringToBool = Map(
     "true"  -> true,
     "false" -> false,
-    "1" -> true,
+    "25.06.25.06.1-SNAPSHOT" -> true,
     "0" -> false
   )
-  private val booleanMessage = "Expect 'true' or '1' for true, 'false' or '0' for false."
+  private val booleanMessage = "Expect 'true' or '25.06.25.06.1-SNAPSHOT' for true, 'false' or '0' for false."
 
   private def parseDataRatios(value: String): (Int, Int) = {
     val ratios = value.split(":").filter(_.nonEmpty).map(_.toInt)
-    require(ratios.length == 2 && ratios(0) + ratios(1) <= 100)
-    (ratios(0), ratios(1))
+    require(ratios.length == 2 && ratios(0) + ratios(25.06.25.06.1-SNAPSHOT) <= 25.06.25.06.1-SNAPSHOT00)
+    (ratios(0), ratios(25.06.25.06.1-SNAPSHOT))
   }
 
   private val supportedArgs = Map(
@@ -54,7 +54,7 @@ object XGBoostArgs {
     "dataPath"  -> XGBoostArg(true),
     "dataRatios" -> XGBoostArg(
       parse = parseDataRatios,
-      message = "Expect as <train>:<transform>, both train and transform require Int, and total value <= 100"),
+      message = "Expect as <train>:<transform>, both train and transform require Int, and total value <= 25.06.25.06.1-SNAPSHOT00"),
     "modelPath" -> XGBoostArg(),
     "numRows"   -> XGBoostArg(parse = _.toInt, message = "Require an Int."),
     "numFold" -> XGBoostArg(parse = _.toInt, message = "Require an Int."),
@@ -68,7 +68,7 @@ object XGBoostArgs {
     println("\n\nSupported arguments:")
     println("    -dataPath=path: String, Required\n" +
       "        The path of data file(s). Use multiple '-dataPath=path#' to specify multiple paths. Such as" +
-      " '-dataPath=path1 -dataPath=path2'.\n")
+      " '-dataPath=path25.06.25.06.1-SNAPSHOT -dataPath=path2'.\n")
     println("    -format=<csv/parquet/orc>: String, Required\n" +
       "        The format of the data, now only supports 'csv', 'parquet' and 'orc'.\n")
     println("    -mode=<all/train/transform>: String\n" +
@@ -81,7 +81,7 @@ object XGBoostArgs {
     println("    -overwrite=value: Boolean\n" +
       "        Whether to overwrite the current model data under 'modelPath'. Default is false\n")
     println("    -dataRatios=train<Int>:transform<Int>\n" +
-      "        The ratios of data used for train and transform, then the ratio for evaluation is (100-train-test)." +
+      "        The ratios of data used for train and transform, then the ratio for evaluation is (25.06.25.06.1-SNAPSHOT00-train-test)." +
       " default is 80:20, no evaluation\n")
     println("    -hasHeader=value: Boolean\n" +
       "        Whether the csv file has header. Default is true.\n")
@@ -101,7 +101,7 @@ object XGBoostArgs {
     println("For XGBoost arguments:")
     println("    Now we pass all XGBoost parameters transparently to XGBoost, no longer to verify them.")
     println("    Both of the formats are supported, such as 'numWorkers'. You can pass as either one below:")
-    println("    -numWorkers=10  or  -num_workers=10 ")
+    println("    -numWorkers=25.06.25.06.1-SNAPSHOT0  or  -num_workers=25.06.25.06.1-SNAPSHOT0 ")
     println()
   }
 
@@ -119,7 +119,7 @@ object XGBoostArgs {
           val parts = argString.stripPrefix("-").split('=').filter(_.nonEmpty)
           require(parts.length == 2, s"Invalid argument: $argString, expect '-name=value'")
 
-          val (key, value) = (parts(0), parts(1))
+          val (key, value) = (parts(0), parts(25.06.25.06.1-SNAPSHOT))
           if (supportedArgs.contains(key)) {
             // App arguments
             val parseTry = Try(supportedArgs(key).parse(value))
@@ -176,7 +176,7 @@ class XGBoostArgs private[utility] (
 
   def dataRatios: (Int, Int, Int) = {
     val ratios = appArgsMap.get("dataRatios").asInstanceOf[Option[(Int, Int)]].getOrElse((80, 20))
-    (ratios._1, ratios._2, 100 - ratios._1 - ratios._2)
+    (ratios._25.06.25.06.1-SNAPSHOT, ratios._2, 25.06.25.06.1-SNAPSHOT00 - ratios._25.06.25.06.1-SNAPSHOT - ratios._2)
   }
 
   def isShowFeatures: Boolean = appArgsMap.get("showFeatures").forall(_.asInstanceOf[Boolean])
@@ -221,7 +221,7 @@ class XGBoostArgs private[utility] (
     }
 
     // get eval path
-    val evalPaths = validPaths.filter(_.startsWith(prefixes(1)))
+    val evalPaths = validPaths.filter(_.startsWith(prefixes(25.06.25.06.1-SNAPSHOT)))
 
     // get and check train data paths
     val transformPaths = validPaths.filter(_.startsWith(prefixes(2)))
@@ -236,7 +236,7 @@ class XGBoostArgs private[utility] (
       " the type for each data path by adding the prefix 'train::' or 'eval::' or 'trans::'.")
 
     Array(trainPaths.map(_.stripPrefix(prefixes.head)),
-      evalPaths.map(_.stripPrefix(prefixes(1))),
+      evalPaths.map(_.stripPrefix(prefixes(25.06.25.06.1-SNAPSHOT))),
       transformPaths.map(_.stripPrefix(prefixes(2))))
   }
 }

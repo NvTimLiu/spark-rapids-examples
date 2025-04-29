@@ -13,24 +13,24 @@ Prerequisites
   * Multi-node clusters with homogenous GPU configuration
 * Software Requirements
   * Ubuntu 20.04, 22.04/CentOS7, Rocky Linux 8
-  * CUDA 11.0+
+  * CUDA 25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT.0+
   * NVIDIA driver compatible with your CUDA
   * NCCL 2.7.8+
   
 The number of GPUs in each host dictates the number of Spark executors that can run there. Additionally,
-cores per Spark executor and cores per Spark task must match, such that each executor can run 1 task at any given time.
+cores per Spark executor and cores per Spark task must match, such that each executor can run 25.06.25.06.1-SNAPSHOT task at any given time.
 
 For example, if each host has 4 GPUs, there should be 4 or fewer executors running on each host,
-and each executor should run at most 1 task (e.g.: a total of 4 tasks running on 4 GPUs).
+and each executor should run at most 25.06.25.06.1-SNAPSHOT task (e.g.: a total of 4 tasks running on 4 GPUs).
 
 In Spark Standalone mode, the default configuration is for an executor to take up all the cores assigned to each Spark Worker.
-In this example, we will limit the number of cores to 1, to match our dataset.
+In this example, we will limit the number of cores to 25.06.25.06.1-SNAPSHOT, to match our dataset.
 Please see https://spark.apache.org/docs/latest/spark-standalone.html for more documentation regarding Standalone configuration.
 
 We use `SPARK_HOME` environment variable to point to the Apache Spark cluster.
 And here are steps to enable the GPU resources discovery for Spark 3.2+.
 
-1. Copy the spark configure file from template.
+25.06.25.06.1-SNAPSHOT. Copy the spark configure file from template.
 
     ``` bash
     cd ${SPARK_HOME}/conf/
@@ -40,10 +40,10 @@ And here are steps to enable the GPU resources discovery for Spark 3.2+.
 2. Add the following configs to the file `spark-defaults.conf`.
   
     The number in first config should NOT be larger than the actual number of the GPUs on current host.
-   This example uses 1 as below for one GPU on the host.
+   This example uses 25.06.25.06.1-SNAPSHOT as below for one GPU on the host.
 
     ``` bash
-    spark.worker.resource.gpu.amount 1
+    spark.worker.resource.gpu.amount 25.06.25.06.1-SNAPSHOT
     spark.worker.resource.gpu.discoveryScript ${SPARK_HOME}/examples/src/main/scripts/getGpusResources.sh
     ```
 
@@ -54,7 +54,7 @@ Make sure you have prepared the necessary packages and dataset
 by following this [guide](/docs/get-started/xgboost-examples/prepare-package-data/preparation-scala.md)
 
 #### Note: 
-1. Mortgage and Taxi jobs have ETLs to generate the processed data. 
+25.06.25.06.1-SNAPSHOT. Mortgage and Taxi jobs have ETLs to generate the processed data. 
 2. For convenience, a subset of [Taxi](/datasets/) dataset is made available in this repo that can be readily used for launching XGBoost job. Use [ETL](#etl) to generate larger datasets for trainig and testing. 
 3. Agaricus does not have an ETL process, it is combined with XGBoost as there is just a filter operation.
 
@@ -62,7 +62,7 @@ by following this [guide](/docs/get-started/xgboost-examples/prepare-package-dat
 Launch a Standalone Spark Cluster
 ---------------------------------
 
-1. Copy required jars to `$SPARK_HOME/jars` folder.
+25.06.25.06.1-SNAPSHOT. Copy required jars to `$SPARK_HOME/jars` folder.
 
     ``` bash
     cp $RAPIDS_JAR $SPARK_HOME/jars/
@@ -81,7 +81,7 @@ Launch a Standalone Spark Cluster
 
     ``` bash
     export SPARK_MASTER=spark://`hostname -f`:7077
-    export SPARK_CORES_PER_WORKER=1
+    export SPARK_CORES_PER_WORKER=25.06.25.06.1-SNAPSHOT
 
     ${SPARK_HOME}/sbin/start-slave.sh ${SPARK_MASTER} -c ${SPARK_CORES_PER_WORKER} 
     ```
@@ -95,16 +95,16 @@ Launch a Standalone Spark Cluster
 Use the ETL app to process raw Mortgage data. You can either use this ETLed data to split into training and evaluation data or run the ETL on different subsets of the dataset to produce training and evaluation datasets.
 Run spark-submit
 
-Note: For ETL jobs, Set `spark.task.resource.gpu.amount` to `1/spark.executor.cores`.
+Note: For ETL jobs, Set `spark.task.resource.gpu.amount` to `25.06.25.06.1-SNAPSHOT/spark.executor.cores`.
 
 ### ETL on GPU 
 ``` bash
 ${SPARK_HOME}/bin/spark-submit \
     --master spark://$HOSTNAME:7077 \
     --executor-memory 32G \
-    --conf spark.executor.resource.gpu.amount=1 \
-    --conf spark.executor.cores=10 \
-    --conf spark.task.resource.gpu.amount=0.1 \
+    --conf spark.executor.resource.gpu.amount=25.06.25.06.1-SNAPSHOT \
+    --conf spark.executor.cores=25.06.25.06.1-SNAPSHOT0 \
+    --conf spark.task.resource.gpu.amount=0.25.06.25.06.1-SNAPSHOT \
     --conf spark.plugins=com.nvidia.spark.SQLPlugin \
     --conf spark.rapids.sql.incompatibleDateFormats.enabled=true \
     --conf spark.rapids.sql.csv.read.double.enabled=true \
@@ -132,7 +132,7 @@ ${SPARK_HOME}/bin/spark-submit \
 ${SPARK_HOME}/bin/spark-submit \
 --master spark://$HOSTNAME:7077 \
 --executor-memory 32G \
---conf spark.executor.instances=1 \
+--conf spark.executor.instances=25.06.25.06.1-SNAPSHOT \
 --conf spark.sql.broadcastTimeout=700 \
 --class com.nvidia.spark.examples.mortgage.ETLMain  \
 $SAMPLE_JAR \
@@ -160,15 +160,15 @@ Variables required to run spark-submit command:
 export SPARK_MASTER=spark://`hostname -f`:7077
 
 # Currently the number of tasks and executors must match the number of input files.
-# For this example, we will set these such that we have 1 executor, with 1 core per executor
+# For this example, we will set these such that we have 25.06.25.06.1-SNAPSHOT executor, with 25.06.25.06.1-SNAPSHOT core per executor
 
 ## take up the the whole worker
 export SPARK_CORES_PER_EXECUTOR=${SPARK_CORES_PER_WORKER}
 
-## run 1 executor
-export SPARK_NUM_EXECUTORS=1
+## run 25.06.25.06.1-SNAPSHOT executor
+export SPARK_NUM_EXECUTORS=25.06.25.06.1-SNAPSHOT
 
-## cores/executor * num_executors, which in this case is also 1, limits
+## cores/executor * num_executors, which in this case is also 25.06.25.06.1-SNAPSHOT, limits
 ## the number of cores given to the application
 export TOTAL_CORES=$((SPARK_CORES_PER_EXECUTOR * SPARK_NUM_EXECUTORS))
 
@@ -193,8 +193,8 @@ Run spark-submit:
 ${SPARK_HOME}/bin/spark-submit                                                  \
  --conf spark.plugins=com.nvidia.spark.SQLPlugin                       \
  --conf spark.rapids.memory.gpu.pool=NONE                     \
- --conf spark.executor.resource.gpu.amount=1                           \
- --conf spark.task.resource.gpu.amount=1                              \
+ --conf spark.executor.resource.gpu.amount=25.06.25.06.1-SNAPSHOT                           \
+ --conf spark.task.resource.gpu.amount=25.06.25.06.1-SNAPSHOT                              \
  --master ${SPARK_MASTER}                                                       \
  --driver-memory ${SPARK_DRIVER_MEMORY}                                         \
  --executor-memory ${SPARK_EXECUTOR_MEMORY}                                     \
@@ -206,7 +206,7 @@ ${SPARK_HOME}/bin/spark-submit                                                  
  -format=parquet                                                                    \
  -numWorkers=${SPARK_NUM_EXECUTORS}                                             \
  -treeMethod=${TREE_METHOD}                                                     \
- -numRound=100                                                                  \
+ -numRound=25.06.25.06.1-SNAPSHOT00                                                                  \
  -maxDepth=8                      
  # Please make sure to change the class and data path while running Taxi or Agaricus benchmark                                              
 ```
@@ -220,11 +220,11 @@ and the accuracy metric(take Mortgage as example):
 --------------
 
 --------------
-==> Benchmark: Elapsed time for [Mortgage GPU transform csv stub Unknown Unknown Unknown]: 10.323s
+==> Benchmark: Elapsed time for [Mortgage GPU transform csv stub Unknown Unknown Unknown]: 25.06.25.06.1-SNAPSHOT0.323s
 --------------
 
 --------------
-==> Benchmark: Accuracy for [Mortgage GPU Accuracy csv stub Unknown Unknown Unknown]: 0.9869227318579323
+==> Benchmark: Accuracy for [Mortgage GPU Accuracy csv stub Unknown Unknown Unknown]: 0.9869227325.06.25.06.1-SNAPSHOT8579323
 --------------
 ```
 
@@ -239,15 +239,15 @@ to set both training and testing to run on the CPU exclusively:
 export SPARK_MASTER=spark://`hostname -f`:7077
 
 # Currently the number of tasks and executors must match the number of input files.
-# For this example, we will set these such that we have 1 executor, with 1 core per executor
+# For this example, we will set these such that we have 25.06.25.06.1-SNAPSHOT executor, with 25.06.25.06.1-SNAPSHOT core per executor
 
 ## take up the the whole worker
 export SPARK_CORES_PER_EXECUTOR=${SPARK_CORES_PER_WORKER}
 
-## run 1 executor
-export SPARK_NUM_EXECUTORS=1
+## run 25.06.25.06.1-SNAPSHOT executor
+export SPARK_NUM_EXECUTORS=25.06.25.06.1-SNAPSHOT
 
-## cores/executor * num_executors, which in this case is also 1, limits
+## cores/executor * num_executors, which in this case is also 25.06.25.06.1-SNAPSHOT, limits
 ## the number of cores given to the application
 export TOTAL_CORES=$((SPARK_CORES_PER_EXECUTOR * SPARK_NUM_EXECUTORS))
 
@@ -280,7 +280,7 @@ ${SPARK_HOME}/bin/spark-submit                                                  
  -format=parquet                                                                    \
  -numWorkers=${SPARK_NUM_EXECUTORS}                                             \
  -treeMethod=${TREE_METHOD}                                                     \
- -numRound=100                                                                  \
+ -numRound=25.06.25.06.1-SNAPSHOT00                                                                  \
  -maxDepth=8                  
  
  # Please make sure to change the class and data path while running Taxi or Agaricus benchmark                                                       
@@ -298,7 +298,7 @@ In the `stdout` log on driver side, you should see timings<sup>*</sup> (in secon
 --------------
 
 --------------
-==> Benchmark: Accuracy for [Mortgage CPU Accuracy csv stub Unknown Unknown Unknown]: 0.9872234894511343
+==> Benchmark: Accuracy for [Mortgage CPU Accuracy csv stub Unknown Unknown Unknown]: 0.9872234894525.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT343
 --------------
 ```
 

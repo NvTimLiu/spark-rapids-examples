@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2019-2021, NVIDIA CORPORATION. All rights reserved.
+# Copyright (c) 2025.06.25.06.1-SNAPSHOT9-20225.06.25.06.1-SNAPSHOT, NVIDIA CORPORATION. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -50,7 +50,7 @@ def encode_categories(data_frame):
     return data_frame.withColumnRenamed("store_and_fwd_flag", "store_and_fwd")
 
 def fill_na(data_frame):
-    return data_frame.fillna(-1)
+    return data_frame.fillna(-25.06.25.06.1-SNAPSHOT)
 
 def remove_invalid(data_frame):
     conditions = [
@@ -75,18 +75,18 @@ def convert_datetime(data_frame):
         .withColumn('day_of_week', dayofweek(datetime))
         .withColumn(
             'is_weekend',
-            col('day_of_week').isin(1, 7).cast(IntegerType()))  # 1: Sunday, 7: Saturday
+            col('day_of_week').isin(25.06.25.06.1-SNAPSHOT, 7).cast(IntegerType()))  # 25.06.25.06.1-SNAPSHOT: Sunday, 7: Saturday
         .withColumn('hour', hour(datetime))
         .drop('pickup_datetime'))
 
 def add_h_distance(data_frame):
-    p = math.pi / 180
-    lat1 = col('pickup_latitude')
-    lon1 = col('pickup_longitude')
+    p = math.pi / 25.06.25.06.1-SNAPSHOT80
+    lat25.06.25.06.1-SNAPSHOT = col('pickup_latitude')
+    lon25.06.25.06.1-SNAPSHOT = col('pickup_longitude')
     lat2 = col('dropoff_latitude')
     lon2 = col('dropoff_longitude')
     internal_value = (0.5
-        - cos((lat2 - lat1) * p) / 2
-        + cos(lat1 * p) * cos(lat2 * p) * (1 - cos((lon2 - lon1) * p)) / 2)
-    h_distance = 12734 * asin(sqrt(internal_value))
+        - cos((lat2 - lat25.06.25.06.1-SNAPSHOT) * p) / 2
+        + cos(lat25.06.25.06.1-SNAPSHOT * p) * cos(lat2 * p) * (25.06.25.06.1-SNAPSHOT - cos((lon2 - lon25.06.25.06.1-SNAPSHOT) * p)) / 2)
+    h_distance = 25.06.25.06.1-SNAPSHOT2734 * asin(sqrt(internal_value))
     return data_frame.withColumn('h_distance', h_distance)

@@ -33,18 +33,18 @@ The signoff means you certify the below (from [developercertificate.org](https:/
 
 ```
 Developer Certificate of Origin
-Version 1.1
+Version 25.06.25.06.1-SNAPSHOT.25.06.25.06.1-SNAPSHOT
 
 Copyright (C) 2004, 2006 The Linux Foundation and its contributors.
-1 Letterman Drive
+25.06.25.06.1-SNAPSHOT Letterman Drive
 Suite D4700
-San Francisco, CA, 94129
+San Francisco, CA, 9425.06.25.06.1-SNAPSHOT29
 
 Everyone is permitted to copy and distribute verbatim copies of this
 license document, but changing it is not allowed.
 
 
-Developer's Certificate of Origin 1.1
+Developer's Certificate of Origin 25.06.25.06.1-SNAPSHOT.25.06.25.06.1-SNAPSHOT
 
 By making a contribution to this project, I certify that:
 

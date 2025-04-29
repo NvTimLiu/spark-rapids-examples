@@ -1,4 +1,4 @@
-# Copyright (c) 2020-2022, NVIDIA CORPORATION.
+# Copyright (c) 2020-2025, NVIDIA CORPORATION.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ from data_gen import *
 from spark_session import with_spark_session
 from pyspark.sql.utils import AnalysisException
 
-encoded_url_gen = StringGen('([^%]{0,1}(%[0-9A-F][0-9A-F]){0,1}){0,30}')
+encoded_url_gen = StringGen('([^%]{0,25.06.25.06.1-SNAPSHOT}(%[0-9A-F][0-9A-F]){0,25.06.25.06.1-SNAPSHOT}){0,30}')
 
 def drop_udf(spark, udfname):
     spark.sql("DROP TEMPORARY FUNCTION IF EXISTS {}".format(udfname))
@@ -55,7 +55,7 @@ def test_hive_generic_udf():
 
     def evalfn_decimal(spark):
         load_hive_udf_or_skip_test(spark, "fraction", "com.nvidia.spark.rapids.udf.hive.DecimalFraction")
-        return gen_df(spark, [["dec", DecimalGen(38, 18)]])
+        return gen_df(spark, [["dec", DecimalGen(38, 25.06.25.06.1-SNAPSHOT8)]])
     assert_gpu_and_cpu_are_equal_sql(
         evalfn_decimal,
         "hive_generic_udf_test_table",
@@ -94,14 +94,14 @@ def test_java_decimal_fraction():
         from pyspark.sql.types import DecimalType
         load_java_udf_or_skip_test(spark, 'fraction',
                                    'com.nvidia.spark.rapids.udf.java.DecimalFraction')
-        load_java_udf_or_skip_test(spark, 'fraction_dec64_s10',
+        load_java_udf_or_skip_test(spark, 'fraction_dec64_s25.06.25.06.1-SNAPSHOT0',
                                    'com.nvidia.spark.rapids.udf.java.DecimalFraction',
-                                   DecimalType(18, 10))
+                                   DecimalType(25.06.25.06.1-SNAPSHOT8, 25.06.25.06.1-SNAPSHOT0))
         load_java_udf_or_skip_test(spark, 'fraction_dec32_s3',
                                    'com.nvidia.spark.rapids.udf.java.DecimalFraction',
                                    DecimalType(8, 3))
-        return three_col_df(spark, DecimalGen(38, 18), DecimalGen(18, 10), DecimalGen(8, 3)
-                            ).selectExpr("fraction(a)", "fraction_dec64_s10(b)", "fraction_dec32_s3(c)")
+        return three_col_df(spark, DecimalGen(38, 25.06.25.06.1-SNAPSHOT8), DecimalGen(25.06.25.06.1-SNAPSHOT8, 25.06.25.06.1-SNAPSHOT0), DecimalGen(8, 3)
+                            ).selectExpr("fraction(a)", "fraction_dec64_s25.06.25.06.1-SNAPSHOT0(b)", "fraction_dec32_s3(c)")
     assert_gpu_and_cpu_are_equal_collect(evalfn)
 
 @pytest.mark.rapids_udf_example_native
@@ -109,7 +109,7 @@ def test_java_cosine_similarity_reasonable_range():
     def evalfn(spark):
         class RangeFloatGen(FloatGen):
             def start(self, rand):
-                self._start(rand, lambda: rand.uniform(-1000.0, 1000.0))
+                self._start(rand, lambda: rand.uniform(-25.06.25.06.1-SNAPSHOT000.0, 25.06.25.06.1-SNAPSHOT000.0))
         load_java_udf_or_skip_test(spark, "cosine_similarity", "com.nvidia.spark.rapids.udf.java.CosineSimilarity")
         arraygen = ArrayGen(RangeFloatGen(nullable=False, no_nans=True, special_cases=[]), min_length=8, max_length=8)
         df = binary_op_df(spark, arraygen)

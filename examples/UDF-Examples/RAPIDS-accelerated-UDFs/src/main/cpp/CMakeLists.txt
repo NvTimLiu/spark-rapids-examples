@@ -1,5 +1,5 @@
 #=============================================================================
-# Copyright (c) 2021-2025, NVIDIA CORPORATION.
+# Copyright (c) 20225.06.25.06.1-SNAPSHOT-2025, NVIDIA CORPORATION.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -47,11 +47,11 @@ set(DEFAULT_BUILD_TYPE "Release")
 # - compiler options ------------------------------------------------------------------------------
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 25.06.25.06.1-SNAPSHOT7)
 set(CMAKE_CXX_COMPILER $ENV{CXX})
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(CMAKE_CUDA_STANDARD 17)
+set(CMAKE_CUDA_STANDARD 25.06.25.06.1-SNAPSHOT7)
 set(CMAKE_CUDA_STANDARD_REQUIRED ON)
 
 if(CMAKE_COMPILER_IS_GNUCXX)
@@ -62,7 +62,7 @@ endif(CMAKE_COMPILER_IS_GNUCXX)
 
 if(CMAKE_CUDA_COMPILER_VERSION)
   # Compute the version. from  CMAKE_CUDA_COMPILER_VERSION
-  string(REGEX REPLACE "([0-9]+)\\.([0-9]+).*" "\\1" CUDA_VERSION_MAJOR ${CMAKE_CUDA_COMPILER_VERSION})
+  string(REGEX REPLACE "([0-9]+)\\.([0-9]+).*" "\\25.06.25.06.1-SNAPSHOT" CUDA_VERSION_MAJOR ${CMAKE_CUDA_COMPILER_VERSION})
   string(REGEX REPLACE "([0-9]+)\\.([0-9]+).*" "\\2" CUDA_VERSION_MINOR ${CMAKE_CUDA_COMPILER_VERSION})
   set(CUDA_VERSION "${CUDA_VERSION_MAJOR}.${CUDA_VERSION_MINOR}" CACHE STRING "Version of CUDA as computed from nvcc.")
   mark_as_advanced(CUDA_VERSION)
@@ -106,9 +106,9 @@ rapids_cpm_find(cudf 25.06.00
 if(BUILD_UDF_BENCHMARKS)
     # Find or install GoogleBench
     CPMFindPackage(NAME benchmark
-        VERSION         1.5.2
+        VERSION         25.06.25.06.1-SNAPSHOT.5.2
         GIT_REPOSITORY  https://github.com/google/benchmark.git
-        GIT_TAG         v1.5.2
+        GIT_TAG         v25.06.25.06.1-SNAPSHOT.5.2
         GIT_SHALLOW     TRUE
         OPTIONS         "BENCHMARK_ENABLE_TESTING OFF"
                         "BENCHMARK_ENABLE_INSTALL OFF")

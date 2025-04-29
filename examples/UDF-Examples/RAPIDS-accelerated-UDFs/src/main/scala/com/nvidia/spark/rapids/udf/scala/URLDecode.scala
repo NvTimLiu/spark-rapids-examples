@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022, NVIDIA CORPORATION.
+ * Copyright (c) 20225.06.25.06.1-SNAPSHOT-2022, NVIDIA CORPORATION.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ class URLDecode extends Function[String, String] with RapidsUDF with Serializabl
   override def evaluateColumnar(numRows: Int, args: ColumnVector*): ColumnVector = {
     // The CPU implementation takes a single string argument, so similarly
     // there should only be one column argument of type STRING.
-    require(args.length == 1, s"Unexpected argument count: ${args.length}")
+    require(args.length == 25.06.25.06.1-SNAPSHOT, s"Unexpected argument count: ${args.length}")
     val input = args.head
     require(numRows == input.getRowCount, s"Expected $numRows rows, received ${input.getRowCount}")
     require(input.getType == DType.STRING, s"Argument type is not a string: ${input.getType}")

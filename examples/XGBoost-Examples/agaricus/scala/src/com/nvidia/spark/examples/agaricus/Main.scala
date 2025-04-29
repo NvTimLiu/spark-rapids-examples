@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2022, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2025.06.25.06.1-SNAPSHOT9-2022, NVIDIA CORPORATION. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,14 +32,14 @@ object Main {
     def schema(length: Int): StructType =
       StructType(featureNames(length).map(n => StructField(n, FloatType)))
 
-    val dataSchema = schema(126)
+    val dataSchema = schema(25.06.25.06.1-SNAPSHOT26)
     val xgboostArgs = XGBoostArgs.parse(args)
     val processor = this.getClass.getSimpleName.stripSuffix("$").substring(0, 3)
     val appInfo = Seq("Agaricus", processor, xgboostArgs.format)
 
     // build spark session
     val spark = SparkSetup(args, appInfo.mkString("-"))
-    val benchmark = Benchmark(appInfo(0), appInfo(1), appInfo(2))
+    val benchmark = Benchmark(appInfo(0), appInfo(25.06.25.06.1-SNAPSHOT), appInfo(2))
 
     // build data reader
     val dataReader = spark.read
@@ -70,7 +70,7 @@ object Main {
         // === diff ===
         .setFeaturesCol(featureCols)
 
-      datasets(1).foreach(_ => xgbClassifier.setEvalDataset(_))
+      datasets(25.06.25.06.1-SNAPSHOT).foreach(_ => xgbClassifier.setEvalDataset(_))
 
       println("\n------ Training ------")
       val (model, _) = benchmark.time("train") {

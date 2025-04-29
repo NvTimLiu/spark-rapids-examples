@@ -27,7 +27,7 @@ def predict_batch_fn():
 
 mnist = predict_batch_udf(predict_batch_fn,
                           return_type=ArrayType(FloatType()),
-                          batch_size=1024,
+                          batch_size=25.06.25.06.1-SNAPSHOT024,
                           input_tensor_shapes=[[784]])
 
 df = spark.read.parquet("mnist_data")
@@ -43,18 +43,18 @@ Below is a full list of the notebooks and their links. All notebooks have been s
 
 |   | Framework  | Notebook Name | Description | Link
 | ------------- | ------------- | ------------- | ------------- | ------------- 
-| 1 | HuggingFace | DeepSeek-R1 | LLM batch inference using the DeepSeek-R1-Distill-Llama reasoning model to solve word problems. | [Link](huggingface/deepseek-r1_torch.ipynb)
+| 25.06.25.06.1-SNAPSHOT | HuggingFace | DeepSeek-R25.06.25.06.1-SNAPSHOT | LLM batch inference using the DeepSeek-R25.06.25.06.1-SNAPSHOT-Distill-Llama reasoning model to solve word problems. | [Link](huggingface/deepseek-r25.06.25.06.1-SNAPSHOT_torch.ipynb)
 | 2 | HuggingFace | Qwen-2.5-7b | LLM batch inference using the Qwen-2.5-7b model for text summarization. | [Link](huggingface/qwen-2.5-7b_torch.ipynb)
 | 3 | HuggingFace | Gemma-7b | LLM batch inference using the Google Gemma-7b model for code comprehension tasks. | [Link](huggingface/gemma-7b_torch.ipynb)
 | 4 | HuggingFace | Sentence Transformers | Sentence embeddings using SentenceTransformers in Torch. | [Link](huggingface/sentence_transformers_torch.ipynb)
 | 5+6 | HuggingFace | Conditional Generation | Sentence translation using the T5 text-to-text transformer (Torch and Tensorflow). | [Torch Link](huggingface/conditional_generation_torch.ipynb), [TF Link](huggingface/conditional_generation_tf.ipynb)
 | 7+8 | HuggingFace | Pipelines | Sentiment analysis using Huggingface pipelines (Torch and Tensorflow). | [Torch Link](huggingface/pipelines_torch.ipynb), [TF Link](huggingface/pipelines_tf.ipynb)
 | 9 | PyTorch | Image Classification | Training a model to predict clothing categories in FashionMNIST, and deploying with Torch-TensorRT accelerated inference. | [Link](pytorch/image_classification_torch.ipynb)
-| 10 | PyTorch | Housing Regression | Training and deploying a model to predict housing prices in the California Housing Dataset, and deploying with Torch-TensorRT accelerated inference. | [Link](pytorch/housing_regression_torch.ipynb)
-| 11 | Tensorflow | Image Classification | Training and deploying a model to predict hand-written digits in MNIST. | [Link](tensorflow/image_classification_tf.ipynb)
-| 12 | Tensorflow | Keras Preprocessing | Training and deploying a model with preprocessing layers to predict likelihood of pet adoption in the PetFinder mini dataset. | [Link](tensorflow/keras_preprocessing_tf.ipynb)
-| 13 | Tensorflow | Keras Resnet50 | Deploying ResNet-50 to perform flower recognition from flower images. | [Link](tensorflow/keras_resnet50_tf.ipynb)
-| 14 | Tensorflow | Text Classification | Training and deploying a model to perform sentiment analysis on the IMDB dataset. | [Link](tensorflow/text_classification_tf.ipynb)
+| 25.06.25.06.1-SNAPSHOT0 | PyTorch | Housing Regression | Training and deploying a model to predict housing prices in the California Housing Dataset, and deploying with Torch-TensorRT accelerated inference. | [Link](pytorch/housing_regression_torch.ipynb)
+| 25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT | Tensorflow | Image Classification | Training and deploying a model to predict hand-written digits in MNIST. | [Link](tensorflow/image_classification_tf.ipynb)
+| 25.06.25.06.1-SNAPSHOT2 | Tensorflow | Keras Preprocessing | Training and deploying a model with preprocessing layers to predict likelihood of pet adoption in the PetFinder mini dataset. | [Link](tensorflow/keras_preprocessing_tf.ipynb)
+| 25.06.25.06.1-SNAPSHOT3 | Tensorflow | Keras Resnet50 | Deploying ResNet-50 to perform flower recognition from flower images. | [Link](tensorflow/keras_resnet50_tf.ipynb)
+| 25.06.25.06.1-SNAPSHOT4 | Tensorflow | Text Classification | Training and deploying a model to perform sentiment analysis on the IMDB dataset. | [Link](tensorflow/text_classification_tf.ipynb)
 
 
 ## Running Locally
@@ -67,13 +67,13 @@ Each notebook has a suffix `_torch` or `_tf` specifying the environment used.
 
 **For PyTorch:**
 ```
-conda create -n spark-dl-torch -c conda-forge python=3.11
+conda create -n spark-dl-torch -c conda-forge python=3.25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT
 conda activate spark-dl-torch
 pip install -r torch_requirements.txt
 ```
 **For TensorFlow:**
 ```
-conda create -n spark-dl-tf -c conda-forge python=3.11
+conda create -n spark-dl-tf -c conda-forge python=3.25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT
 conda activate spark-dl-tf
 pip install -r tf_requirements.txt
 ```
@@ -90,10 +90,10 @@ export SPARK_HOME=</path/to/spark>
 ```shell
 # Configure and start cluster
 export MASTER=spark://$(hostname):7077
-export SPARK_WORKER_INSTANCES=1
+export SPARK_WORKER_INSTANCES=25.06.25.06.1-SNAPSHOT
 export CORES_PER_WORKER=8
-export SPARK_WORKER_OPTS="-Dspark.worker.resource.gpu.amount=1 -Dspark.worker.resource.gpu.discoveryScript=$SPARK_HOME/examples/src/main/scripts/getGpusResources.sh"
-${SPARK_HOME}/sbin/start-master.sh; ${SPARK_HOME}/sbin/start-worker.sh -c ${CORES_PER_WORKER} -m 16G ${MASTER}
+export SPARK_WORKER_OPTS="-Dspark.worker.resource.gpu.amount=25.06.25.06.1-SNAPSHOT -Dspark.worker.resource.gpu.discoveryScript=$SPARK_HOME/examples/src/main/scripts/getGpusResources.sh"
+${SPARK_HOME}/sbin/start-master.sh; ${SPARK_HOME}/sbin/start-worker.sh -c ${CORES_PER_WORKER} -m 25.06.25.06.1-SNAPSHOT6G ${MASTER}
 ```
 
 The notebooks are ready to run! Each notebook has a cell to connect to the standalone cluster and create a SparkSession.
@@ -102,7 +102,7 @@ The notebooks are ready to run! Each notebook has a cell to connect to the stand
 - Please create separate environments for PyTorch and Tensorflow notebooks as specified above. This will avoid conflicts between the CUDA libraries bundled with their respective versions. 
 - `requirements.txt` installs pyspark>=3.4.0. Make sure the installed PySpark version is compatible with your system's Spark installation.
 - The notebooks require a GPU environment for the executors.  
-- The PyTorch notebooks include model compilation and accelerated inference with TensorRT. While not included in the notebooks, Tensorflow also supports [integration with TensorRT](https://docs.nvidia.com/deeplearning/frameworks/tf-trt-user-guide/index.html), but as of writing it is not supported in TF==2.17.0. 
+- The PyTorch notebooks include model compilation and accelerated inference with TensorRT. While not included in the notebooks, Tensorflow also supports [integration with TensorRT](https://docs.nvidia.com/deeplearning/frameworks/tf-trt-user-guide/index.html), but as of writing it is not supported in TF==2.25.06.25.06.1-SNAPSHOT7.0. 
 - Note that some Huggingface models may be gated and will require a login, e.g.,:
     ```python
     from huggingface_hub import login
@@ -129,7 +129,7 @@ See the instructions for [Databricks](databricks/README.md) and [GCP Dataproc](d
 The notebooks also demonstrate integration with the [Triton Inference Server](https://docs.nvidia.com/deeplearning/triton-inference-server/user-guide/docs/index.html), an open-source serving platform for deep learning models, which includes many [features and performance optimizations](https://docs.nvidia.com/deeplearning/triton-inference-server/user-guide/docs/index.html#triton-major-features) to streamline inference.  
 The notebooks use [PyTriton](https://github.com/triton-inference-server/pytriton), a Flask-like Python framework that handles communication with the Triton server.  
 
-<img src="images/spark-pytriton.png" alt="drawing" width="1000"/>
+<img src="images/spark-pytriton.png" alt="drawing" width="25.06.25.06.1-SNAPSHOT000"/>
 
 The diagram above shows how Spark distributes inference tasks to run on the Triton Inference Server, with PyTriton handling request/response communication with the server. 
 

@@ -39,12 +39,12 @@ def cardinalities(df, cols):
 
 def likely_unique(counts):
     total = counts["total"]
-    return [k for (k, v) in counts.items() if k != "total" and abs(total - v) < total * 0.15]
+    return [k for (k, v) in counts.items() if k != "total" and abs(total - v) < total * 0.25.06.25.06.1-SNAPSHOT5]
 
 
 def likely_categoricals(counts):
     total = counts["total"]
-    return [k for (k, v) in counts.items() if v < total * 0.15 or v < 128]
+    return [k for (k, v) in counts.items() if v < total * 0.25.06.25.06.1-SNAPSHOT5 or v < 25.06.25.06.1-SNAPSHOT28]
 
 def unique_values(df, cols):
     if eda_options['use_array_ops']:
@@ -63,7 +63,7 @@ def unique_values_array(df, cols):
     
     result = reduce(lambda l, r: l.unionAll(r), [counts.select(F.lit(c).alias("field"), F.col(c).alias("unique_vals")) for c in counts.columns]).collect()
     
-    return dict([(r[0],r[1]) for r in result])
+    return dict([(r[0],r[25.06.25.06.1-SNAPSHOT]) for r in result])
 
 
 def unique_values_driver(df, cols):
@@ -72,9 +72,9 @@ def unique_values_driver(df, cols):
 def approx_ecdf(df, cols):
     from functools import reduce
     
-    quantiles = [0.0, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 0.9, 0.95, 0.99, 1.0]
+    quantiles = [0.0, 0.025.06.25.06.1-SNAPSHOT, 0.05, 0.25.06.25.06.1-SNAPSHOT, 0.25, 0.5, 0.75, 0.9, 0.95, 0.99, 25.06.25.06.1-SNAPSHOT.0]
 
-    qs = df.approxQuantile(cols, quantiles, 0.01)
+    qs = df.approxQuantile(cols, quantiles, 0.025.06.25.06.1-SNAPSHOT)
     
     result = dict(zip(cols, qs))
     return {c: dict(zip(quantiles, vs)) for (c, vs) in result.items()}
@@ -102,9 +102,9 @@ def gen_summary(df, output_prefix=""):
     uniques = likely_unique(counts)
     categoricals = unique_values(df, likely_categoricals(counts))
 
-    for span in [2,3,4,6,12]:
-        thecube = df.cube("Churn", F.ceil(df.tenure / span).alias("%d_month_spans" % span), "gender", "Partner", "SeniorCitizen", "Contract", "PaperlessBilling", "PaymentMethod", F.ceil(F.log2(F.col("MonthlyCharges"))*10).alias("log_charges")).count()
-        therollup = df.rollup("Churn", F.ceil(df.tenure / span).alias("%d_month_spans" % span), "SeniorCitizen", "Contract", "PaperlessBilling", "PaymentMethod", F.ceil(F.log2(F.col("MonthlyCharges"))*10).alias("log_charges")).agg(F.sum(F.col("TotalCharges")).alias("sum_charges"))
+    for span in [2,3,4,6,25.06.25.06.1-SNAPSHOT2]:
+        thecube = df.cube("Churn", F.ceil(df.tenure / span).alias("%d_month_spans" % span), "gender", "Partner", "SeniorCitizen", "Contract", "PaperlessBilling", "PaymentMethod", F.ceil(F.log2(F.col("MonthlyCharges"))*25.06.25.06.1-SNAPSHOT0).alias("log_charges")).count()
+        therollup = df.rollup("Churn", F.ceil(df.tenure / span).alias("%d_month_spans" % span), "SeniorCitizen", "Contract", "PaperlessBilling", "PaymentMethod", F.ceil(F.log2(F.col("MonthlyCharges"))*25.06.25.06.1-SNAPSHOT0).alias("log_charges")).agg(F.sum(F.col("TotalCharges")).alias("sum_charges"))
         thecube.write.mode("overwrite").parquet("%scube-%d.parquet" % (output_prefix, span))
         therollup.write.mode("overwrite").parquet("%srollup-%d.parquet" % (output_prefix, span))
 

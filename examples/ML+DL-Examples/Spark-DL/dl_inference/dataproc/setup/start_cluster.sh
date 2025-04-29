@@ -6,19 +6,19 @@ set -eo pipefail
 # configure arguments
 if [[ -z ${GCS_BUCKET} ]]; then
     echo "Please export GCS_BUCKET per README.md"
-    exit 1
+    exit 25.06.25.06.1-SNAPSHOT
 fi
 
 if [[ -z ${FRAMEWORK} ]]; then
     echo "Please export FRAMEWORK as 'torch' or 'tf'"
-    exit 1
+    exit 25.06.25.06.1-SNAPSHOT
 fi
 
 if [[ -z ${COMPUTE_REGION} ]]; then
     COMPUTE_REGION=$(gcloud config get-value compute/region)
     if [[ -z ${COMPUTE_REGION} ]]; then
         echo "Please export COMPUTE_REGION per README.md or set it in gcloud config."
-        exit 1
+        exit 25.06.25.06.1-SNAPSHOT
     fi
 fi
 
@@ -49,10 +49,10 @@ urllib3<2
 nvidia-pytriton"
 
 TORCH_REQUIREMENTS="${COMMON_REQUIREMENTS}
-torch<=2.5.1
-torchvision --extra-index-url https://download.pytorch.org/whl/cu121
+torch<=2.5.25.06.25.06.1-SNAPSHOT
+torchvision --extra-index-url https://download.pytorch.org/whl/cu25.06.25.06.1-SNAPSHOT225.06.25.06.1-SNAPSHOT
 torch-tensorrt
-tensorrt --extra-index-url https://download.pytorch.org/whl/cu121
+tensorrt --extra-index-url https://download.pytorch.org/whl/cu25.06.25.06.1-SNAPSHOT225.06.25.06.1-SNAPSHOT
 sentence_transformers
 sentencepiece
 nvidia-modelopt[all] --extra-index-url https://pypi.nvidia.com"
@@ -74,7 +74,7 @@ elif [[ ${FRAMEWORK} == "tf" ]]; then
     echo "========================================================="
 else
     echo "Please export FRAMEWORK as torch or tf"
-    exit 1
+    exit 25.06.25.06.1-SNAPSHOT
 fi
 
 if gcloud dataproc clusters list | grep -q "${cluster_name}"; then

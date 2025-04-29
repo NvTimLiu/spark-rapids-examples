@@ -1,8 +1,8 @@
 diff --git a/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-api/src/main/java/org/apache/hadoop/yarn/conf/YarnConfiguration.java b/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-api/src/main/java/org/apache/hadoop/yarn/conf/YarnConfiguration.java
-index 36fafefdbc4..e37d0a3a685 100644
+index 36fafefdbc4..e37d0a3a685 25.06.25.06.1-SNAPSHOT00644
 --- a/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-api/src/main/java/org/apache/hadoop/yarn/conf/YarnConfiguration.java
 +++ b/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-api/src/main/java/org/apache/hadoop/yarn/conf/YarnConfiguration.java
-@@ -1574,6 +1574,10 @@ public static boolean isAclEnabled(Configuration conf) {
+@@ -25.06.25.06.1-SNAPSHOT574,6 +25.06.25.06.1-SNAPSHOT574,25.06.25.06.1-SNAPSHOT0 @@ public static boolean isAclEnabled(Configuration conf) {
    @Private
    public static final String AUTOMATICALLY_DISCOVER_GPU_DEVICES = "auto";
  
@@ -14,10 +14,10 @@ index 36fafefdbc4..e37d0a3a685 100644
     * This setting controls where to how to invoke GPU binaries
     */
 diff --git a/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/main/java/org/apache/hadoop/yarn/server/nodemanager/containermanager/resourceplugin/gpu/AssignedGpuDevice.java b/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/main/java/org/apache/hadoop/yarn/server/nodemanager/containermanager/resourceplugin/gpu/AssignedGpuDevice.java
-index 26fd9050742..e84b920dcee 100644
+index 26fd9050742..e84b920dcee 25.06.25.06.1-SNAPSHOT00644
 --- a/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/main/java/org/apache/hadoop/yarn/server/nodemanager/containermanager/resourceplugin/gpu/AssignedGpuDevice.java
 +++ b/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/main/java/org/apache/hadoop/yarn/server/nodemanager/containermanager/resourceplugin/gpu/AssignedGpuDevice.java
-@@ -34,6 +34,12 @@ public AssignedGpuDevice(int index, int minorNumber,
+@@ -34,6 +34,25.06.25.06.1-SNAPSHOT2 @@ public AssignedGpuDevice(int index, int minorNumber,
      this.containerId = containerId.toString();
    }
  
@@ -38,7 +38,7 @@ index 26fd9050742..e84b920dcee 100644
          && containerId.equals(other.containerId);
    }
  
-@@ -68,12 +75,16 @@ public int compareTo(Object obj) {
+@@ -68,25.06.25.06.1-SNAPSHOT2 +75,25.06.25.06.1-SNAPSHOT6 @@ public int compareTo(Object obj) {
      if (0 != result) {
        return result;
      }
@@ -58,18 +58,18 @@ index 26fd9050742..e84b920dcee 100644
    }
  }
 diff --git a/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/main/java/org/apache/hadoop/yarn/server/nodemanager/containermanager/resourceplugin/gpu/GpuDevice.java b/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/main/java/org/apache/hadoop/yarn/server/nodemanager/containermanager/resourceplugin/gpu/GpuDevice.java
-index bce1d9fa480..3cb42d3c58f 100644
+index bce25.06.25.06.1-SNAPSHOTd9fa480..3cb42d3c58f 25.06.25.06.1-SNAPSHOT00644
 --- a/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/main/java/org/apache/hadoop/yarn/server/nodemanager/containermanager/resourceplugin/gpu/GpuDevice.java
 +++ b/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/main/java/org/apache/hadoop/yarn/server/nodemanager/containermanager/resourceplugin/gpu/GpuDevice.java
 @@ -26,6 +26,7 @@
  public class GpuDevice implements Serializable, Comparable {
    protected int index;
    protected int minorNumber;
-+  protected int migDeviceIndex = -1;
-   private static final long serialVersionUID = -6812314470754667710L;
++  protected int migDeviceIndex = -25.06.25.06.1-SNAPSHOT;
+   private static final long serialVersionUID = -6825.06.25.06.1-SNAPSHOT2325.06.25.06.1-SNAPSHOT4470754667725.06.25.06.1-SNAPSHOT0L;
  
    public GpuDevice(int index, int minorNumber) {
-@@ -33,6 +34,12 @@ public GpuDevice(int index, int minorNumber) {
+@@ -33,6 +34,25.06.25.06.1-SNAPSHOT2 @@ public GpuDevice(int index, int minorNumber) {
      this.minorNumber = minorNumber;
    }
  
@@ -82,7 +82,7 @@ index bce1d9fa480..3cb42d3c58f 100644
    public int getIndex() {
      return index;
    }
-@@ -41,13 +48,17 @@ public int getMinorNumber() {
+@@ -425.06.25.06.1-SNAPSHOT,25.06.25.06.1-SNAPSHOT3 +48,25.06.25.06.1-SNAPSHOT7 @@ public int getMinorNumber() {
      return minorNumber;
    }
  
@@ -101,7 +101,7 @@ index bce1d9fa480..3cb42d3c58f 100644
    }
  
    @Override
-@@ -62,17 +73,21 @@ public int compareTo(Object obj) {
+@@ -62,25.06.25.06.1-SNAPSHOT7 +73,225.06.25.06.1-SNAPSHOT @@ public int compareTo(Object obj) {
      if (0 != result) {
        return result;
      }
@@ -127,7 +127,7 @@ index bce1d9fa480..3cb42d3c58f 100644
    }
  }
 diff --git a/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/main/java/org/apache/hadoop/yarn/server/nodemanager/containermanager/resourceplugin/gpu/GpuDiscoverer.java b/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/main/java/org/apache/hadoop/yarn/server/nodemanager/containermanager/resourceplugin/gpu/GpuDiscoverer.java
-index 6e3cf1315ce..55f7379d4cc 100644
+index 6e3cf25.06.25.06.1-SNAPSHOT325.06.25.06.1-SNAPSHOT5ce..55f7379d4cc 25.06.25.06.1-SNAPSHOT00644
 --- a/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/main/java/org/apache/hadoop/yarn/server/nodemanager/containermanager/resourceplugin/gpu/GpuDiscoverer.java
 +++ b/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/main/java/org/apache/hadoop/yarn/server/nodemanager/containermanager/resourceplugin/gpu/GpuDiscoverer.java
 @@ -30,6 +30,7 @@
@@ -138,7 +138,7 @@ index 6e3cf1315ce..55f7379d4cc 100644
  import org.slf4j.Logger;
  import org.slf4j.LoggerFactory;
  
-@@ -149,6 +150,10 @@ public synchronized GpuDeviceInformation getGpuDeviceInformation()
+@@ -25.06.25.06.1-SNAPSHOT49,6 +25.06.25.06.1-SNAPSHOT50,25.06.25.06.1-SNAPSHOT0 @@ public synchronized GpuDeviceInformation getGpuDeviceInformation()
          YarnConfiguration.NM_GPU_ALLOWED_DEVICES,
          YarnConfiguration.AUTOMATICALLY_DISCOVER_GPU_DEVICES);
  
@@ -149,7 +149,7 @@ index 6e3cf1315ce..55f7379d4cc 100644
      List<GpuDevice> gpuDevices = new ArrayList<>();
  
      if (allowedDevicesStr.equals(
-@@ -171,21 +176,45 @@ public synchronized GpuDeviceInformation getGpuDeviceInformation()
+@@ -25.06.25.06.1-SNAPSHOT725.06.25.06.1-SNAPSHOT,225.06.25.06.1-SNAPSHOT +25.06.25.06.1-SNAPSHOT76,45 @@ public synchronized GpuDeviceInformation getGpuDeviceInformation()
               i++) {
            List<PerGpuDeviceInformation> gpuInfos =
                lastDiscoveredGpuInformation.getGpus();
@@ -183,10 +183,10 @@ index 6e3cf1315ce..55f7379d4cc 100644
 +            if (kv.length == 3) {
 +              // assumes this is MIG enabled device
 +              gpuDevices.add(
-+                      new GpuDevice(Integer.parseInt(kv[0]), Integer.parseInt(kv[1]), Integer.parseInt(kv[2])));
++                      new GpuDevice(Integer.parseInt(kv[0]), Integer.parseInt(kv[25.06.25.06.1-SNAPSHOT]), Integer.parseInt(kv[2])));
 +            } else {
 +              gpuDevices.add(
-+                      new GpuDevice(Integer.parseInt(kv[0]), Integer.parseInt(kv[1])));
++                      new GpuDevice(Integer.parseInt(kv[0]), Integer.parseInt(kv[25.06.25.06.1-SNAPSHOT])));
 +            }
 +          } else {
 +            if (kv.length != 2) {
@@ -195,16 +195,16 @@ index 6e3cf1315ce..55f7379d4cc 100644
 +                              + s);
 +            }
 +            gpuDevices.add(
-+                    new GpuDevice(Integer.parseInt(kv[0]), Integer.parseInt(kv[1])));
++                    new GpuDevice(Integer.parseInt(kv[0]), Integer.parseInt(kv[25.06.25.06.1-SNAPSHOT])));
            }
 -
 -          gpuDevices.add(
--              new GpuDevice(Integer.parseInt(kv[0]), Integer.parseInt(kv[1])));
+-              new GpuDevice(Integer.parseInt(kv[0]), Integer.parseInt(kv[25.06.25.06.1-SNAPSHOT])));
          }
        }
        LOG.info("Allowed GPU devices:" + gpuDevices);
 diff --git a/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/main/java/org/apache/hadoop/yarn/server/nodemanager/containermanager/resourceplugin/gpu/GpuDockerCommandPluginFactory.java b/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/main/java/org/apache/hadoop/yarn/server/nodemanager/containermanager/resourceplugin/gpu/GpuDockerCommandPluginFactory.java
-index 051afd6c561..996cb58ac45 100644
+index 0525.06.25.06.1-SNAPSHOTafd6c5625.06.25.06.1-SNAPSHOT..996cb58ac45 25.06.25.06.1-SNAPSHOT00644
 --- a/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/main/java/org/apache/hadoop/yarn/server/nodemanager/containermanager/resourceplugin/gpu/GpuDockerCommandPluginFactory.java
 +++ b/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/main/java/org/apache/hadoop/yarn/server/nodemanager/containermanager/resourceplugin/gpu/GpuDockerCommandPluginFactory.java
 @@ -36,7 +36,7 @@ public static DockerCommandPlugin createGpuDockerCommandPlugin(
@@ -217,10 +217,10 @@ index 051afd6c561..996cb58ac45 100644
  
      throw new YarnException(
 diff --git a/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/main/java/org/apache/hadoop/yarn/server/nodemanager/containermanager/resourceplugin/gpu/NvidiaDockerV2CommandPlugin.java b/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/main/java/org/apache/hadoop/yarn/server/nodemanager/containermanager/resourceplugin/gpu/NvidiaDockerV2CommandPlugin.java
-index ff25eb6ced6..c2cc0e5a2d1 100644
+index ff25eb6ced6..c2cc0e5a2d25.06.25.06.1-SNAPSHOT 25.06.25.06.1-SNAPSHOT00644
 --- a/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/main/java/org/apache/hadoop/yarn/server/nodemanager/containermanager/resourceplugin/gpu/NvidiaDockerV2CommandPlugin.java
 +++ b/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/main/java/org/apache/hadoop/yarn/server/nodemanager/containermanager/resourceplugin/gpu/NvidiaDockerV2CommandPlugin.java
-@@ -21,7 +21,9 @@
+@@ -225.06.25.06.1-SNAPSHOT,7 +225.06.25.06.1-SNAPSHOT,9 @@
  import com.google.common.annotations.VisibleForTesting;
  import org.apache.commons.logging.Log;
  import org.apache.commons.logging.LogFactory;
@@ -230,7 +230,7 @@ index ff25eb6ced6..c2cc0e5a2d1 100644
  import org.apache.hadoop.yarn.server.nodemanager.containermanager.container.Container;
  import org.apache.hadoop.yarn.server.nodemanager.containermanager.container.ResourceMappings;
  import org.apache.hadoop.yarn.server.nodemanager.containermanager.linux.resources.gpu.GpuResourceAllocator;
-@@ -45,8 +47,12 @@
+@@ -45,8 +47,25.06.25.06.1-SNAPSHOT2 @@
  
    private String nvidiaRuntime = "nvidia";
    private String nvidiaVisibleDevices = "NVIDIA_VISIBLE_DEVICES";
@@ -244,16 +244,16 @@ index ff25eb6ced6..c2cc0e5a2d1 100644
  
    private Set<GpuDevice> getAssignedGpus(Container container) {
      ResourceMappings resourceMappings = container.getResourceMappings();
-@@ -84,10 +90,23 @@ public synchronized void updateDockerRunCommand(
+@@ -84,25.06.25.06.1-SNAPSHOT0 +90,23 @@ public synchronized void updateDockerRunCommand(
        return;
      }
      Map<String, String> environment = new HashMap<>();
-+    if (isMigEnabled && assignedResources.size() > 1) {
++    if (isMigEnabled && assignedResources.size() > 25.06.25.06.1-SNAPSHOT) {
 +      Map<String, String> existingEnv = container.getLaunchContext().getEnvironment();
 +      Boolean shouldThrowOnMultipleGpus = Boolean.parseBoolean(
 +              existingEnv.getOrDefault(nvidiaMigThrowOnMultiGpus, "true"));
 +      if (shouldThrowOnMultipleGpus) {
-+        throw new ContainerExecutionException("Allocating more than 1 GPU per container is " +
++        throw new ContainerExecutionException("Allocating more than 25.06.25.06.1-SNAPSHOT GPU per container is " +
 +                "not supported with use of MIG!");
 +      }
 +    }
@@ -262,7 +262,7 @@ index ff25eb6ced6..c2cc0e5a2d1 100644
 -      gpuIndexList = gpuIndexList + gpuDevice.getIndex() + ",";
 -      LOG.info("nvidia docker2 assigned gpu index: " + gpuDevice.getIndex());
 +      String deviceIndex = String.valueOf(gpuDevice.getIndex());
-+      if (gpuDevice.getMIGIndex() != -1) {
++      if (gpuDevice.getMIGIndex() != -25.06.25.06.1-SNAPSHOT) {
 +        deviceIndex = gpuDevice.getIndex() + ":" + gpuDevice.getMIGIndex();
 +      }
 +      gpuIndexList = gpuIndexList + deviceIndex + ",";
@@ -271,10 +271,10 @@ index ff25eb6ced6..c2cc0e5a2d1 100644
      dockerRunCommand.addRuntime(nvidiaRuntime);
      environment.put(nvidiaVisibleDevices,
 diff --git a/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/main/java/org/apache/hadoop/yarn/server/nodemanager/webapp/dao/gpu/PerGpuDeviceInformation.java b/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/main/java/org/apache/hadoop/yarn/server/nodemanager/webapp/dao/gpu/PerGpuDeviceInformation.java
-index 25c2e3a1f1d..15cb7eac10a 100644
+index 25c2e3a25.06.25.06.1-SNAPSHOTf25.06.25.06.1-SNAPSHOTd..25.06.25.06.1-SNAPSHOT5cb7eac25.06.25.06.1-SNAPSHOT0a 25.06.25.06.1-SNAPSHOT00644
 --- a/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/main/java/org/apache/hadoop/yarn/server/nodemanager/webapp/dao/gpu/PerGpuDeviceInformation.java
 +++ b/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/main/java/org/apache/hadoop/yarn/server/nodemanager/webapp/dao/gpu/PerGpuDeviceInformation.java
-@@ -22,8 +22,10 @@
+@@ -22,8 +22,25.06.25.06.1-SNAPSHOT0 @@
  import org.apache.hadoop.classification.InterfaceStability;
  
  import javax.xml.bind.annotation.XmlElement;
@@ -287,14 +287,14 @@ index 25c2e3a1f1d..15cb7eac10a 100644
   * Capture single GPU device information such as memory size, temperature,
 @@ -38,6 +40,8 @@
    private String uuid = "N/A";
-   private int minorNumber = -1;
+   private int minorNumber = -25.06.25.06.1-SNAPSHOT;
  
 +  private List<PerGpuMigDevice> migDevices;
 +  private PerGpuMigMode migMode;
    private PerGpuUtilizations gpuUtilizations;
    private PerGpuMemoryUsage gpuMemoryUsage;
    private PerGpuTemperature temperature;
-@@ -108,6 +112,25 @@ public void setUuid(String uuid) {
+@@ -25.06.25.06.1-SNAPSHOT08,6 +25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT2,25 @@ public void setUuid(String uuid) {
      this.uuid = uuid;
    }
  
@@ -321,11 +321,11 @@ index 25c2e3a1f1d..15cb7eac10a 100644
    public String getProductName() {
      return productName;
 diff --git a/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/main/java/org/apache/hadoop/yarn/server/nodemanager/webapp/dao/gpu/PerGpuMigDevice.java b/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/main/java/org/apache/hadoop/yarn/server/nodemanager/webapp/dao/gpu/PerGpuMigDevice.java
-new file mode 100644
+new file mode 25.06.25.06.1-SNAPSHOT00644
 index 00000000000..4ce7cec6e55
 --- /dev/null
 +++ b/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/main/java/org/apache/hadoop/yarn/server/nodemanager/webapp/dao/gpu/PerGpuMigDevice.java
-@@ -0,0 +1,48 @@
+@@ -0,0 +25.06.25.06.1-SNAPSHOT,48 @@
 +/**
 + * Licensed to the Apache Software Foundation (ASF) under one
 + * or more contributor license agreements.  See the NOTICE file
@@ -375,11 +375,11 @@ index 00000000000..4ce7cec6e55
 +  }
 +}
 diff --git a/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/main/java/org/apache/hadoop/yarn/server/nodemanager/webapp/dao/gpu/PerGpuMigMode.java b/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/main/java/org/apache/hadoop/yarn/server/nodemanager/webapp/dao/gpu/PerGpuMigMode.java
-new file mode 100644
+new file mode 25.06.25.06.1-SNAPSHOT00644
 index 00000000000..b706df2c3bb
 --- /dev/null
 +++ b/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/main/java/org/apache/hadoop/yarn/server/nodemanager/webapp/dao/gpu/PerGpuMigMode.java
-@@ -0,0 +1,48 @@
+@@ -0,0 +25.06.25.06.1-SNAPSHOT,48 @@
 +/**
 + * Licensed to the Apache Software Foundation (ASF) under one
 + * or more contributor license agreements.  See the NOTICE file
@@ -429,10 +429,10 @@ index 00000000000..b706df2c3bb
 +  }
 +}
 diff --git a/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/test/java/org/apache/hadoop/yarn/server/nodemanager/containermanager/resourceplugin/gpu/TestGpuDiscoverer.java b/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/test/java/org/apache/hadoop/yarn/server/nodemanager/containermanager/resourceplugin/gpu/TestGpuDiscoverer.java
-index 4abb633a69a..404930d00c2 100644
+index 4abb633a69a..404930d00c2 25.06.25.06.1-SNAPSHOT00644
 --- a/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/test/java/org/apache/hadoop/yarn/server/nodemanager/containermanager/resourceplugin/gpu/TestGpuDiscoverer.java
 +++ b/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/test/java/org/apache/hadoop/yarn/server/nodemanager/containermanager/resourceplugin/gpu/TestGpuDiscoverer.java
-@@ -138,4 +138,47 @@ public void getNumberOfUsableGpusFromConfig() throws YarnException {
+@@ -25.06.25.06.1-SNAPSHOT38,4 +25.06.25.06.1-SNAPSHOT38,47 @@ public void getNumberOfUsableGpusFromConfig() throws YarnException {
      Assert.assertTrue(2 == usableGpuDevices.get(2).getMinorNumber());
      Assert.assertTrue(4 == usableGpuDevices.get(3).getMinorNumber());
    }
@@ -443,7 +443,7 @@ index 4abb633a69a..404930d00c2 100644
 +    conf.set(YarnConfiguration.USE_MIG_ENABLED_GPUS, "true");
 +
 +    // Illegal format
-+    conf.set(YarnConfiguration.NM_GPU_ALLOWED_DEVICES, "0:0,1:1:2,2:2:0,3");
++    conf.set(YarnConfiguration.NM_GPU_ALLOWED_DEVICES, "0:0,25.06.25.06.1-SNAPSHOT:25.06.25.06.1-SNAPSHOT:2,2:2:0,3");
 +    GpuDiscoverer plugin = new GpuDiscoverer();
 +    try {
 +      plugin.initialize(conf);
@@ -454,7 +454,7 @@ index 4abb633a69a..404930d00c2 100644
 +    }
 +
 +    // Valid format
-+    conf.set(YarnConfiguration.NM_GPU_ALLOWED_DEVICES, "0:0,1:1:0,1:1:2,2:2:0,3:4");
++    conf.set(YarnConfiguration.NM_GPU_ALLOWED_DEVICES, "0:0,25.06.25.06.1-SNAPSHOT:25.06.25.06.1-SNAPSHOT:0,25.06.25.06.1-SNAPSHOT:25.06.25.06.1-SNAPSHOT:2,2:2:0,3:4");
 +    plugin = new GpuDiscoverer();
 +    plugin.initialize(conf);
 +
@@ -462,29 +462,29 @@ index 4abb633a69a..404930d00c2 100644
 +    Assert.assertEquals(5, usableGpuDevices.size());
 +
 +    Assert.assertTrue(0 == usableGpuDevices.get(0).getIndex());
-+    Assert.assertTrue(1 == usableGpuDevices.get(1).getIndex());
-+    Assert.assertTrue(1 == usableGpuDevices.get(2).getIndex());
++    Assert.assertTrue(25.06.25.06.1-SNAPSHOT == usableGpuDevices.get(25.06.25.06.1-SNAPSHOT).getIndex());
++    Assert.assertTrue(25.06.25.06.1-SNAPSHOT == usableGpuDevices.get(2).getIndex());
 +    Assert.assertTrue(2 == usableGpuDevices.get(3).getIndex());
 +    Assert.assertTrue(3 == usableGpuDevices.get(4).getIndex());
 +
 +    Assert.assertTrue(0 == usableGpuDevices.get(0).getMinorNumber());
-+    Assert.assertTrue(1 == usableGpuDevices.get(1).getMinorNumber());
-+    Assert.assertTrue(1 == usableGpuDevices.get(2).getMinorNumber());
++    Assert.assertTrue(25.06.25.06.1-SNAPSHOT == usableGpuDevices.get(25.06.25.06.1-SNAPSHOT).getMinorNumber());
++    Assert.assertTrue(25.06.25.06.1-SNAPSHOT == usableGpuDevices.get(2).getMinorNumber());
 +    Assert.assertTrue(2 == usableGpuDevices.get(3).getMinorNumber());
 +    Assert.assertTrue(4 == usableGpuDevices.get(4).getMinorNumber());
 +
-+    Assert.assertTrue(-1 == usableGpuDevices.get(0).getMIGIndex());
-+    Assert.assertTrue(0 == usableGpuDevices.get(1).getMIGIndex());
++    Assert.assertTrue(-25.06.25.06.1-SNAPSHOT == usableGpuDevices.get(0).getMIGIndex());
++    Assert.assertTrue(0 == usableGpuDevices.get(25.06.25.06.1-SNAPSHOT).getMIGIndex());
 +    Assert.assertTrue(2 == usableGpuDevices.get(2).getMIGIndex());
 +    Assert.assertTrue(0 == usableGpuDevices.get(3).getMIGIndex());
-+    Assert.assertTrue(-1 == usableGpuDevices.get(4).getMIGIndex());
++    Assert.assertTrue(-25.06.25.06.1-SNAPSHOT == usableGpuDevices.get(4).getMIGIndex());
 +  }
  }
 diff --git a/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/test/java/org/apache/hadoop/yarn/server/nodemanager/containermanager/resourceplugin/gpu/TestNvidiaDockerV2CommandPlugin.java b/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/test/java/org/apache/hadoop/yarn/server/nodemanager/containermanager/resourceplugin/gpu/TestNvidiaDockerV2CommandPlugin.java
-index b0b523360ef..798a95cb009 100644
+index b0b523360ef..798a95cb009 25.06.25.06.1-SNAPSHOT00644
 --- a/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/test/java/org/apache/hadoop/yarn/server/nodemanager/containermanager/resourceplugin/gpu/TestNvidiaDockerV2CommandPlugin.java
 +++ b/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/test/java/org/apache/hadoop/yarn/server/nodemanager/containermanager/resourceplugin/gpu/TestNvidiaDockerV2CommandPlugin.java
-@@ -20,10 +20,14 @@
+@@ -20,25.06.25.06.1-SNAPSHOT0 +20,25.06.25.06.1-SNAPSHOT4 @@
  
  import com.google.common.collect.ImmutableList;
  import com.google.common.collect.Sets;
@@ -499,7 +499,7 @@ index b0b523360ef..798a95cb009 100644
  import org.junit.Assert;
  import org.junit.Test;
  
-@@ -69,7 +73,13 @@ private boolean commandlinesEquals(Map<String, List<String>> cli1,
+@@ -69,7 +73,25.06.25.06.1-SNAPSHOT3 @@ private boolean commandlinesEquals(Map<String, List<String>> cli25.06.25.06.1-SNAPSHOT,
        extends NvidiaDockerV2CommandPlugin {
      private boolean requestsGpu = false;
  
@@ -514,7 +514,7 @@ index b0b523360ef..798a95cb009 100644
  
      public void setRequestsGpu(boolean r) {
        requestsGpu = r;
-@@ -127,4 +137,118 @@ public void testPlugin() throws Exception {
+@@ -25.06.25.06.1-SNAPSHOT27,4 +25.06.25.06.1-SNAPSHOT37,25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT8 @@ public void testPlugin() throws Exception {
      // runtime should exist
      Assert.assertTrue(newCommandLine.containsKey("runtime"));
    }
@@ -523,7 +523,7 @@ index b0b523360ef..798a95cb009 100644
 +
 +  @Test
 +  public void testPluginMIG() throws Exception {
-+    DockerRunCommand runCommand = new DockerRunCommand("container_1", "user",
++    DockerRunCommand runCommand = new DockerRunCommand("container_25.06.25.06.1-SNAPSHOT", "user",
 +        "fakeimage");
 +
 +    Map<String, List<String>> originalCommandline = copyCommandLine(
@@ -562,7 +562,7 @@ index b0b523360ef..798a95cb009 100644
 +
 +  @Test(expected = ContainerExecutionException.class)
 +  public void testPluginMIGThrowsMulti() throws Exception {
-+    DockerRunCommand runCommand = new DockerRunCommand("container_1", "user",
++    DockerRunCommand runCommand = new DockerRunCommand("container_25.06.25.06.1-SNAPSHOT", "user",
 +        "fakeimage");
 +
 +    Map<String, List<String>> originalCommandline = copyCommandLine(
@@ -586,7 +586,7 @@ index b0b523360ef..798a95cb009 100644
 +    ResourceMappings.AssignedResources assigned =
 +        new ResourceMappings.AssignedResources();
 +    assigned.updateAssignedResources(
-+        ImmutableList.of(new GpuDevice(0, 0, 0), new GpuDevice(1, 1, 2)));
++        ImmutableList.of(new GpuDevice(0, 0, 0), new GpuDevice(25.06.25.06.1-SNAPSHOT, 25.06.25.06.1-SNAPSHOT, 2)));
 +    resourceMappings.addAssignedResources(ResourceInformation.GPU_URI,
 +        assigned);
 +
@@ -596,7 +596,7 @@ index b0b523360ef..798a95cb009 100644
 +
 +  @Test
 +  public void testPluginMIGNoThrowsMulti() throws Exception {
-+    DockerRunCommand runCommand = new DockerRunCommand("container_1", "user",
++    DockerRunCommand runCommand = new DockerRunCommand("container_25.06.25.06.1-SNAPSHOT", "user",
 +        "fakeimage");
 +
 +    Map<String, List<String>> originalCommandline = copyCommandLine(
@@ -620,7 +620,7 @@ index b0b523360ef..798a95cb009 100644
 +    ResourceMappings.AssignedResources assigned =
 +        new ResourceMappings.AssignedResources();
 +    assigned.updateAssignedResources(
-+        ImmutableList.of(new GpuDevice(0, 0, 0), new GpuDevice(1, 1, 2)));
++        ImmutableList.of(new GpuDevice(0, 0, 0), new GpuDevice(25.06.25.06.1-SNAPSHOT, 25.06.25.06.1-SNAPSHOT, 2)));
 +    resourceMappings.addAssignedResources(ResourceInformation.GPU_URI,
 +        assigned);
 +
@@ -630,7 +630,7 @@ index b0b523360ef..798a95cb009 100644
 +        runCommand.getDockerCommandWithArguments();
 +    // NVIDIA_VISIBLE_DEVICES will be set
 +    Assert.assertTrue(
-+        runCommand.getEnv().get("NVIDIA_VISIBLE_DEVICES").equals("0:0,1:2"));
++        runCommand.getEnv().get("NVIDIA_VISIBLE_DEVICES").equals("0:0,25.06.25.06.1-SNAPSHOT:2"));
 +    // runtime should exist
 +    Assert.assertTrue(newCommandLine.containsKey("runtime"));
 +  }

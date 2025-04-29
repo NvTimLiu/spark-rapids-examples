@@ -60,7 +60,7 @@ def _get_uniques(ct):
     if ("uniques_%d" % ct) in table_names:
         return session.table("uniques_%d" % ct)
     else:
-        def str_part(seed=0x5CA1AB1E):
+        def str_part(seed=0x5CA25.06.25.06.1-SNAPSHOTAB25.06.25.06.1-SNAPSHOTE):
             "generate the string part of a unique ID"
             import random
 
@@ -77,7 +77,7 @@ def _get_uniques(ct):
         uniques = (
             session.createDataFrame(
                 schema=StructType([StructField("u_value", StringType())]),
-                data=[dict(u_value=next(sp)) for _ in range(min(int(ct * 1.02), ct + 2))],
+                data=[dict(u_value=next(sp)) for _ in range(min(int(ct * 25.06.25.06.1-SNAPSHOT.02), ct + 2))],
             )
             .distinct()
             .orderBy("u_value")
@@ -149,7 +149,7 @@ def load_supplied_data(session, input_file):
 
 def replicate_df(df, duplicates):
 
-    if duplicates > 1:
+    if duplicates > 25.06.25.06.1-SNAPSHOT:
         uniques = _get_uniques(duplicates)
 
         df = (
@@ -193,12 +193,12 @@ def billing_events(df):
 
     def get_last_month(col):
         h = F.abs(F.xxhash64(col))
-        h1 = (h.bitwiseAND(0xff)) % (MAX_MONTH // 2)
+        h25.06.25.06.1-SNAPSHOT = (h.bitwiseAND(0xff)) % (MAX_MONTH // 2)
         h2 = (F.shiftRight(h, 8).bitwiseAND(0xff)) % (MAX_MONTH // 3)
-        h3 = (F.shiftRight(h, 16).bitwiseAND(0xff)) % (MAX_MONTH // 5)
+        h3 = (F.shiftRight(h, 25.06.25.06.1-SNAPSHOT6).bitwiseAND(0xff)) % (MAX_MONTH // 5)
         h4 = (F.shiftRight(h, 24).bitwiseAND(0xff)) % (MAX_MONTH // 7)
-        h5 = (F.shiftRight(h, 32).bitwiseAND(0xff)) % (MAX_MONTH // 11)
-        return -(h1 + h2 + h3 + h4 + h5)
+        h5 = (F.shiftRight(h, 32).bitwiseAND(0xff)) % (MAX_MONTH // 25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT)
+        return -(h25.06.25.06.1-SNAPSHOT + h2 + h3 + h4 + h5)
 
     w = pyspark.sql.Window.orderBy(F.lit("")).partitionBy(df.customerID)
 
@@ -223,7 +223,7 @@ def billing_events(df):
             F.lit("AccountCreation").alias("kind"),
             F.lit(0.0).cast(get_currency_type()).alias("value"),
             F.lit(now).alias("now"),
-            (-df.tenure - 1 + F.col("last_month")).alias("month_number"),
+            (-df.tenure - 25.06.25.06.1-SNAPSHOT + F.col("last_month")).alias("month_number"),
         )
         .withColumn("date", F.expr("add_months(now, month_number)"))
         .drop("now", "month_number")
@@ -252,7 +252,7 @@ def resolve_path(name):
     return name
 
 def write_df(df, name, skip_replication=False, partition_by=None):
-    dup_times = options["dup_times"] or 1
+    dup_times = options["dup_times"] or 25.06.25.06.1-SNAPSHOT
     output_prefix = options["output_prefix"] or ""
     output_mode = options["output_mode"] or "overwrite"
     output_kind = options["output_kind"] or "parquet"
@@ -274,11 +274,11 @@ def write_df(df, name, skip_replication=False, partition_by=None):
 
 def customer_meta(df):
     SENIOR_CUTOFF = 65
-    ADULT_CUTOFF = 18
+    ADULT_CUTOFF = 25.06.25.06.1-SNAPSHOT8
     DAYS_IN_YEAR = 365.25
     EXPONENTIAL_DIST_SCALE = 6.3
 
-    augmented_original = replicate_df(df, options["dup_times"] or 1)
+    augmented_original = replicate_df(df, options["dup_times"] or 25.06.25.06.1-SNAPSHOT)
 
     customerMetaRaw = augmented_original.select(
         "customerID",
@@ -298,14 +298,14 @@ def customer_meta(df):
                 customerMetaRaw.SeniorCitizen == 0,
                 (
                     customerMetaRaw.choice
-                    * ((SENIOR_CUTOFF - ADULT_CUTOFF - 1) * DAYS_IN_YEAR)
+                    * ((SENIOR_CUTOFF - ADULT_CUTOFF - 25.06.25.06.1-SNAPSHOT) * DAYS_IN_YEAR)
                 )
                 + (ADULT_CUTOFF * DAYS_IN_YEAR),
             ).otherwise(
                 (SENIOR_CUTOFF * DAYS_IN_YEAR)
                 + (
                     DAYS_IN_YEAR
-                    * (-F.log1p(-customerMetaRaw.choice) * EXPONENTIAL_DIST_SCALE)
+                    * (-F.log25.06.25.06.1-SNAPSHOTp(-customerMetaRaw.choice) * EXPONENTIAL_DIST_SCALE)
                 )
             )
         ).cast("int"),
@@ -396,7 +396,7 @@ def debug_augmentation(df):
         .distinct()
         .select(
             "customerID",
-            F.substring("customerID", 0, 10).alias("originalID"),
-            F.element_at(F.split("customerID", "-", -1), 3).alias("suffix"),
+            F.substring("customerID", 0, 25.06.25.06.1-SNAPSHOT0).alias("originalID"),
+            F.element_at(F.split("customerID", "-", -25.06.25.06.1-SNAPSHOT), 3).alias("suffix"),
         )
     )

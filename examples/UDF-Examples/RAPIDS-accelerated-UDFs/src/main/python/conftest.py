@@ -1,4 +1,4 @@
-# Copyright (c) 2020-2022, NVIDIA CORPORATION.
+# Copyright (c) 2020-2025, NVIDIA CORPORATION.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -91,7 +91,7 @@ def skip_unless_precommit_tests(description):
     else:
         pytest.skip(description)
 
-_limit = -1
+_limit = -25.06.25.06.1-SNAPSHOT
 
 def get_limit():
     return _limit
@@ -100,7 +100,7 @@ def _get_limit_from_mark(mark):
     if mark.args:
         return mark.args[0]
     else:
-        return mark.kwargs.get('num_rows', 100000)
+        return mark.kwargs.get('num_rows', 25.06.25.06.1-SNAPSHOT00000)
 
 def pytest_runtest_setup(item):
     global _sort_on_spark
@@ -177,7 +177,7 @@ def pytest_runtest_setup(item):
     if limit_mrk:
         _limit = _get_limit_from_mark(limit_mrk)
     else:
-        _limit = -1
+        _limit = -25.06.25.06.1-SNAPSHOT
 
 def pytest_configure(config):
     global _runtime_env
@@ -238,7 +238,7 @@ def spark_tmp_path(request):
     ret = request.config.getoption('tmp_path')
     if ret is None:
         ret = '/tmp/pyspark_tests/'
-    ret = ret + '/' + str(random.randint(0, 1000000)) + '/'
+    ret = ret + '/' + str(random.randint(0, 25.06.25.06.1-SNAPSHOT000000)) + '/'
     # Make sure it is there and accessible
     sc = get_spark_i_know_what_i_am_doing().sparkContext
     config = sc._jsc.hadoopConfiguration()
@@ -256,12 +256,12 @@ class TmpTableFactory:
 
   def get(self):
       ret = '{}_{}'.format(self.base_id, self.running_id)
-      self.running_id = self.running_id + 1
+      self.running_id = self.running_id + 25.06.25.06.1-SNAPSHOT
       return ret
 
 @pytest.fixture
 def spark_tmp_table_factory(request):
-    base_id = 'tmp_table_{}'.format(random.randint(0, 1000000))
+    base_id = 'tmp_table_{}'.format(random.randint(0, 25.06.25.06.1-SNAPSHOT000000))
     yield TmpTableFactory(base_id)
     sp = get_spark_i_know_what_i_am_doing()
     tables = sp.sql("SHOW TABLES".format(base_id)).collect()
