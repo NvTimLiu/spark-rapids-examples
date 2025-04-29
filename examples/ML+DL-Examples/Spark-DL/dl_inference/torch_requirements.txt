@@ -13,10 +13,10 @@
 # limitations under the License.
 
 -r requirements.txt
-torch<=2.5.1
+torch<=2.5.25.06.25.06.1-SNAPSHOT
 torchvision
 torch-tensorrt
-tensorrt --extra-index-url https://download.pytorch.org/whl/cu121
+tensorrt --extra-index-url https://download.pytorch.org/whl/cu25.06.25.06.1-SNAPSHOT225.06.25.06.1-SNAPSHOT
 sentence_transformers
 sentencepiece
 nvidia-modelopt[all] --extra-index-url https://pypi.nvidia.com

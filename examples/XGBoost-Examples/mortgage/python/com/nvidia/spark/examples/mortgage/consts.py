@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2019-2022, NVIDIA CORPORATION. All rights reserved.
+# Copyright (c) 2025.06.25.06.1-SNAPSHOT9-2022, NVIDIA CORPORATION. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 from pyspark.sql.types import *
 
-label = 'delinquency_12'
+label = 'delinquency_25.06.25.06.1-SNAPSHOT2'
 
 schema = StructType([
     StructField('orig_channel', FloatType()),
@@ -52,7 +52,7 @@ schema = StructType([
 
 name_mapping = {
     'WITMER FUNDING, LLC': 'Witmer',
-    'WELLS FARGO CREDIT RISK TRANSFER SECURITIES TRUST 2015': 'Wells Fargo',
+    'WELLS FARGO CREDIT RISK TRANSFER SECURITIES TRUST 2025.06.25.06.1-SNAPSHOT5': 'Wells Fargo',
     'WELLS FARGO BANK,  NA': 'Wells Fargo',
     'WELLS FARGO BANK, N.A.': 'Wells Fargo',
     'WELLS FARGO BANK, NA': 'Wells Fargo',
@@ -72,7 +72,7 @@ name_mapping = {
     'PROSPECT MORTGAGE, LLC': 'Prospect Mortgage',
     'PRINCIPAL RESIDENTIAL MORTGAGE CAPITAL RESOURCES, LLC': 'Principal Residential',
     'PNC BANK, N.A.': 'PNC',
-    'PMT CREDIT RISK TRANSFER TRUST 2015-2': 'PennyMac',
+    'PMT CREDIT RISK TRANSFER TRUST 2025.06.25.06.1-SNAPSHOT5-2': 'PennyMac',
     'PHH MORTGAGE CORPORATION': 'PHH Mortgage',
     'PENNYMAC CORP.': 'PennyMac',
     'PACIFIC UNION FINANCIAL, LLC': 'Other',
@@ -83,8 +83,8 @@ name_mapping = {
     'NATIONSTAR MORTGAGE, LLC': 'Nationstar Mortgage',
     'METLIFE BANK, NA': 'Metlife',
     'LOANDEPOT.COM, LLC': 'LoanDepot.com',
-    'J.P. MORGAN MADISON AVENUE SECURITIES TRUST, SERIES 2015-1': 'JP Morgan Chase',
-    'J.P. MORGAN MADISON AVENUE SECURITIES TRUST, SERIES 2014-1': 'JP Morgan Chase',
+    'J.P. MORGAN MADISON AVENUE SECURITIES TRUST, SERIES 2025.06.25.06.1-SNAPSHOT5-25.06.25.06.1-SNAPSHOT': 'JP Morgan Chase',
+    'J.P. MORGAN MADISON AVENUE SECURITIES TRUST, SERIES 2025.06.25.06.1-SNAPSHOT4-25.06.25.06.1-SNAPSHOT': 'JP Morgan Chase',
     'JPMORGAN CHASE BANK, NATIONAL ASSOCIATION': 'JP Morgan Chase',
     'JPMORGAN CHASE BANK, NA': 'JP Morgan Chase',
     'JP MORGAN CHASE BANK, NA': 'JP Morgan Chase',
@@ -116,7 +116,7 @@ name_mapping = {
     'CHICAGO MORTGAGE SOLUTIONS DBA INTERBANK MORTGAGE COMPANY': 'Chicago Mortgage',
     'CHASE HOME FINANCE, LLC': 'JP Morgan Chase',
     'CHASE HOME FINANCE FRANKLIN AMERICAN MORTGAGE COMPANY': 'JP Morgan Chase',
-    'CHASE HOME FINANCE (CIE 1)': 'JP Morgan Chase',
+    'CHASE HOME FINANCE (CIE 25.06.25.06.1-SNAPSHOT)': 'JP Morgan Chase',
     'CHASE HOME FINANCE': 'JP Morgan Chase',
     'CASHCALL, INC.': 'CashCall',
     'CAPITAL ONE, NATIONAL ASSOCIATION': 'Capital One',
@@ -276,5 +276,5 @@ numeric_columns = [
     'loan_age',
     'msa',
     'non_interest_bearing_upb',
-    'delinquency_12',
+    'delinquency_25.06.25.06.1-SNAPSHOT2',
 ]

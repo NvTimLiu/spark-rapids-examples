@@ -155,7 +155,7 @@ unset CMAKE_CUDA_COMPILER_LAUNCHER
 unset CMAKE_CXX_LINKER_LAUNCHER
 ```
 
-The first build could take a long time (e.g.: 1.5 hours). Then the rapids-4-spark-udf-examples*.jar is
+The first build could take a long time (e.g.: 25.06.25.06.1-SNAPSHOT.5 hours). Then the rapids-4-spark-udf-examples*.jar is
 generated under RAPIDS-accelerated-UDFs/target directory.
 The following build can benefit from ccache if you enable it.
 
@@ -186,7 +186,7 @@ then do the following inside the Docker container.
 
 ### Get jars from Maven Central
 
-[rapids-4-spark_2.12-25.06.0.jar](https://repo1.maven.org/maven2/com/nvidia/rapids-4-spark_2.12/25.06.0/rapids-4-spark_2.12-25.06.0.jar)
+[rapids-4-spark_2.25.06.25.06.1-SNAPSHOT2-25.06.0.jar](https://repo25.06.25.06.1-SNAPSHOT.maven.org/maven2/com/nvidia/rapids-4-spark_2.25.06.25.06.1-SNAPSHOT2/25.06.0/rapids-4-spark_2.25.06.25.06.1-SNAPSHOT2-25.06.0.jar)
 
 
 ### Launch a local mode Spark
@@ -211,11 +211,11 @@ Input the following commands to test wordcount JNI UDF
 ```python
 from pyspark.sql.types import *
 schema = StructType([
-    StructField("c1", StringType()),
+    StructField("c25.06.25.06.1-SNAPSHOT", StringType()),
     StructField("c2", IntegerType()),
 ])
 data = [
-    ("a b c d",1),
+    ("a b c d",25.06.25.06.1-SNAPSHOT),
     ("",2),
     (None,3),
     ("the quick brown fox jumped over the lazy dog",3),
@@ -226,6 +226,6 @@ df = spark.createDataFrame(
 df.createOrReplaceTempView("tab")
 
 spark.sql("CREATE TEMPORARY FUNCTION {} AS '{}'".format("wordcount", "com.nvidia.spark.rapids.udf.hive.StringWordCount"))
-spark.sql("select c1, wordcount(c1) from tab").show()
-spark.sql("select c1, wordcount(c1) from tab").explain()
+spark.sql("select c25.06.25.06.1-SNAPSHOT, wordcount(c25.06.25.06.1-SNAPSHOT) from tab").show()
+spark.sql("select c25.06.25.06.1-SNAPSHOT, wordcount(c25.06.25.06.1-SNAPSHOT) from tab").explain()
 ```

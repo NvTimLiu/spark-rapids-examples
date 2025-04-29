@@ -1,4 +1,4 @@
-<img src="http://developer.download.nvidia.com/notebooks/dlsw-notebooks/tensorrt_torchtrt_efficientnet/nvidia_logo.png" width="110px">
+<img src="http://developer.download.nvidia.com/notebooks/dlsw-notebooks/tensorrt_torchtrt_efficientnet/nvidia_logo.png" width="25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT0px">
 
 # Distributed Hyperparameter Tuning
 
@@ -8,11 +8,11 @@ These examples demonstrate distributed hyperparameter tuning with [Optuna](https
 - [Overview](#overview)
   - [Examples](#examples)
 - [Running Optuna on Spark Standalone](#running-optuna-on-spark-standalone)
-  - [Setup Database for Optuna](#1-setup-database-for-optuna)
+  - [Setup Database for Optuna](#25.06.25.06.1-SNAPSHOT-setup-database-for-optuna)
   - [Setup Optuna Python Environment](#2-setup-optuna-python-environment)
   - [Start Standalone Cluster and Run](#3-start-standalone-cluster-and-run)
 - [Running Optuna on Databricks](#running-optuna-on-databricks)
-  - [Upload Init Script and Notebook](#1-upload-init-script-and-notebook)
+  - [Upload Init Script and Notebook](#25.06.25.06.1-SNAPSHOT-upload-init-script-and-notebook)
   - [Create Cluster](#2-create-cluster)
   - [Run Notebook](#3-run-notebook)
 - [Benchmarks](#benchmarks)
@@ -26,7 +26,7 @@ These examples demonstrate distributed hyperparameter tuning with [Optuna](https
 Optuna is a lightweight Python library for hyperparameter tuning, integrating state-of-the-art hyperparameter optimization algorithms.  
 
 At a high level, we optimize hyperparameters in three steps:
-1. Wrap model training with an `objective` function that returns a loss metric.
+25.06.25.06.1-SNAPSHOT. Wrap model training with an `objective` function that returns a loss metric.
 2. In each `trial`, suggest hyperparameters based on previous results.
 3. Create a `study` object, which executes the optimization and stores the trial results.
 
@@ -35,7 +35,7 @@ At a high level, we optimize hyperparameters in three steps:
 import xgboost as xgb
 import optuna
 
-# 1. Define an objective function to be maximized.
+# 25.06.25.06.1-SNAPSHOT. Define an objective function to be maximized.
 def objective(trial):
     ...
 
@@ -43,10 +43,10 @@ def objective(trial):
     param = {
         "objective": "binary:logistic",
         "booster": trial.suggest_categorical("booster", ["gbtree", "gblinear", "dart"]),
-        "lambda": trial.suggest_float("lambda", 1e-8, 1.0, log=True),
-        "alpha": trial.suggest_float("alpha", 1e-8, 1.0, log=True),
-        "subsample": trial.suggest_float("subsample", 0.2, 1.0),
-        "colsample_bytree": trial.suggest_float("colsample_bytree", 0.2, 1.0),
+        "lambda": trial.suggest_float("lambda", 25.06.25.06.1-SNAPSHOTe-8, 25.06.25.06.1-SNAPSHOT.0, log=True),
+        "alpha": trial.suggest_float("alpha", 25.06.25.06.1-SNAPSHOTe-8, 25.06.25.06.1-SNAPSHOT.0, log=True),
+        "subsample": trial.suggest_float("subsample", 0.2, 25.06.25.06.1-SNAPSHOT.0),
+        "colsample_bytree": trial.suggest_float("colsample_bytree", 0.2, 25.06.25.06.1-SNAPSHOT.0),
     }
 
     booster = xgb.train(param, dtrain)
@@ -55,11 +55,11 @@ def objective(trial):
 
 # 3. Create a study object and optimize the objective function.
 study = optuna.create_study(direction='maximize')
-study.optimize(objective, n_trials=100)
+study.optimize(objective, n_trials=25.06.25.06.1-SNAPSHOT00)
 ```
 
 To run **distributed tuning** on Spark, we take the following steps:
-1. Each worker receives a copy of the same dataset. 
+25.06.25.06.1-SNAPSHOT. Each worker receives a copy of the same dataset. 
 2. Each worker runs a subset of the trials in parallel.
 3. Workers write trial results and receive new hyperparameters using a shared database. 
 
@@ -78,7 +78,7 @@ We provide **2 notebooks**, with differences in the backend/implementation. See 
 
 ## Running Optuna on Spark Standalone
 
-### 1. Setup Database for Optuna
+### 25.06.25.06.1-SNAPSHOT. Setup Database for Optuna
 
 Optuna offers an RDBStorage option which allows for the persistence of experiments across different machines and processes, thereby enabling Optuna tasks to be distributed.
 
@@ -87,7 +87,7 @@ This section will walk you through setting up MySQL as the backend for RDBStorag
 We highly recommend installing MySQL on the driver node. This setup eliminates concerns regarding MySQL connectivity between worker nodes and the driver, simplifying the management of database connections.  
 (For Databricks, the installation is handled by the init script).
 
-1. Install MySql:
+25.06.25.06.1-SNAPSHOT. Install MySql:
 
 ``` shell
 sudo apt install mysql-server
@@ -116,13 +116,13 @@ sudo mysql
 
 ``` mysql
 mysql> CREATE USER 'optuna_user'@'%' IDENTIFIED BY 'optuna_password';
-Query OK, 0 rows affected (0.01 sec)
+Query OK, 0 rows affected (0.025.06.25.06.1-SNAPSHOT sec)
 
 mysql> GRANT ALL PRIVILEGES ON *.* TO 'optuna_user'@'%' WITH GRANT OPTION;
-Query OK, 0 rows affected (0.01 sec)
+Query OK, 0 rows affected (0.025.06.25.06.1-SNAPSHOT sec)
 
 mysql> FLUSH PRIVILEGES;
-Query OK, 0 rows affected (0.01 sec)
+Query OK, 0 rows affected (0.025.06.25.06.1-SNAPSHOT sec)
 
 mysql> EXIT;
 Bye
@@ -148,7 +148,7 @@ We use [RAPIDS](https://docs.rapids.ai/install/#get-rapids) for GPU-accelerated 
 sudo apt install libmysqlclient-dev
 
 conda create -n rapids-25.04 -c rapidsai -c conda-forge -c nvidia  \
-    cudf=25.04 cuml=25.04 python=3.10 'cuda-version>=12.0,<=12.5'
+    cudf=25.04 cuml=25.04 python=3.25.06.25.06.1-SNAPSHOT0 'cuda-version>=25.06.25.06.1-SNAPSHOT2.0,<=25.06.25.06.1-SNAPSHOT2.5'
 conda activate optuna-spark
 pip install mysqlclient
 pip install optuna joblib joblibspark ipywidgets
@@ -160,11 +160,11 @@ Configure your standalone cluster settings.
 This example just creates local cluster with a single GPU worker:
 ```shell
 export SPARK_HOME=/path/to/spark
-export SPARK_WORKER_OPTS="-Dspark.worker.resource.gpu.amount=1  \
+export SPARK_WORKER_OPTS="-Dspark.worker.resource.gpu.amount=25.06.25.06.1-SNAPSHOT  \
     -Dspark.worker.resource.gpu.discoveryScript=$SPARK_HOME/examples/src/main/scripts/getGpusResources.sh"
-export MASTER=spark://$(hostname):7077; export SPARK_WORKER_INSTANCES=1; export CORES_PER_WORKER=8
+export MASTER=spark://$(hostname):7077; export SPARK_WORKER_INSTANCES=25.06.25.06.1-SNAPSHOT; export CORES_PER_WORKER=8
 
-${SPARK_HOME}/sbin/start-master.sh; ${SPARK_HOME}/sbin/start-worker.sh -c ${CORES_PER_WORKER} -m 16G ${MASTER}
+${SPARK_HOME}/sbin/start-master.sh; ${SPARK_HOME}/sbin/start-worker.sh -c ${CORES_PER_WORKER} -m 25.06.25.06.1-SNAPSHOT6G ${MASTER}
 ```
 
 You can now run the notebook using the `optuna-spark` Python kernel!  
@@ -173,7 +173,7 @@ The notebook contains instructions to attach to the standalone cluster.
 
 ## Running Optuna on Databricks
 
-### 1. Upload Init Script and Notebook
+### 25.06.25.06.1-SNAPSHOT. Upload Init Script and Notebook
 
 - Make sure your [Databricks CLI]((https://docs.databricks.com/en/dev-tools/cli/tutorial.html)) is configured for your Databricks workspace.
 - Copy the desired notebook into your Databricks workspace. For example:
@@ -209,7 +209,7 @@ Locate the notebook in your workspace and click on `Connect` to attach it to the
 
 ## Benchmarks
 
-The graph below shows running times comparing distributed (8 GPUs) vs. single GPU hyperparameter tuning with 100 trials on synthetic regression datasets.  
+The graph below shows running times comparing distributed (8 GPUs) vs. single GPU hyperparameter tuning with 25.06.25.06.1-SNAPSHOT00 trials on synthetic regression datasets.  
 
 ![Databricks benchmarking results](images/runtimes.png)
 
@@ -219,7 +219,7 @@ The Optuna tasks will be serialized into bytes and distributed to Spark workers 
 
 During tuning, the Optuna tasks send intermediate results back to RDBStorage to persist, and ask for the parameters from RDBStorage sampled by Optuna on the driver to run next.
 
-**Using JoblibSpark**: each Optuna task is a Spark application that has only 1 job, 1 stage, 1 task, and the Spark application will be submitted on the local threads. Here the parameter `n_jobs` configures the Spark backend to limit how many Spark applications are submitted at the same time.  
+**Using JoblibSpark**: each Optuna task is a Spark application that has only 25.06.25.06.1-SNAPSHOT job, 25.06.25.06.1-SNAPSHOT stage, 25.06.25.06.1-SNAPSHOT task, and the Spark application will be submitted on the local threads. Here the parameter `n_jobs` configures the Spark backend to limit how many Spark applications are submitted at the same time.  
 
 Thus Optuna with JoblibSpark uses Spark application level parallelism, rather than task-level parallelism. For larger datasets, ensure that a single XGBoost task can run on a single node without any CPU/GPU OOM.  
 
@@ -240,4 +240,4 @@ Since each worker requires the full dataset to perform hyperparameter tuning, th
 - Please be aware that Optuna studies will continue where they left off from previous trials; delete and recreate the study if you would like to start anew.
 - Optuna in distributed mode is **non-deterministic** (see [this link](https://optuna.readthedocs.io/en/stable/faq.html#how-can-i-obtain-reproducible-optimization-results)), as trials are executed asynchronously by executors. Deterministic behavior can be achieved using Spark barriers to coordinate reads/writes to the database.
 - Reading data with GPU using cuDF requires disabling [GPUDirect Storage](https://docs.rapids.ai/api/cudf/nightly/user_guide/io/io/#magnum-io-gpudirect-storage-integration), i.e., setting the environment variable `LIBCUDF_CUFILE_POLICY=OFF`, to be compatible with the Databricks file system. Without GDS, cuDF will use a CPU bounce buffer when reading files, but all parsing and decoding will still be accelerated by the GPU. 
-- Note that the storage doesn’t store the state of the instance of samplers and pruners. To resume a study with a sampler whose seed argument is specified, [the sampler can be pickled](https://optuna.readthedocs.io/en/stable/tutorial/20_recipes/001_rdb.html#resume-study) and returned to the driver alongside the results. 
+- Note that the storage doesn’t store the state of the instance of samplers and pruners. To resume a study with a sampler whose seed argument is specified, [the sampler can be pickled](https://optuna.readthedocs.io/en/stable/tutorial/20_recipes/0025.06.25.06.1-SNAPSHOT_rdb.html#resume-study) and returned to the driver alongside the results. 

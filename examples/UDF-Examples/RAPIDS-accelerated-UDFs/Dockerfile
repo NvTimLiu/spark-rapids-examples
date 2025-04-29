@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2021-2025, NVIDIA CORPORATION. All rights reserved.
+# Copyright (c) 20225.06.25.06.1-SNAPSHOT-2025, NVIDIA CORPORATION. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,21 +15,21 @@
 #
 
 # A container that can be used to build UDF native code against libcudf
-ARG CUDA_VERSION=11.8.0
+ARG CUDA_VERSION=25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT.8.0
 ARG LINUX_VERSION=rockylinux8
 
 FROM nvidia/cuda:${CUDA_VERSION}-devel-${LINUX_VERSION}
 
-ARG TOOLSET_VERSION=11
-ENV TOOLSET_VERSION=11
-ARG PARALLEL_LEVEL=10
-ENV PARALLEL_LEVEL=10
+ARG TOOLSET_VERSION=25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT
+ENV TOOLSET_VERSION=25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT
+ARG PARALLEL_LEVEL=25.06.25.06.1-SNAPSHOT0
+ENV PARALLEL_LEVEL=25.06.25.06.1-SNAPSHOT0
 
 ### Install basic requirements
 RUN dnf --enablerepo=powertools install -y \
   gcc-toolset-${TOOLSET_VERSION} \
   git \
-  java-1.8.0-openjdk \
+  java-25.06.25.06.1-SNAPSHOT.8.0-openjdk \
   maven \
   ninja-build \
   patch \

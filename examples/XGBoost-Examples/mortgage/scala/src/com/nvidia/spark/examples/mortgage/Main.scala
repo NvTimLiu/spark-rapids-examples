@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2022, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2025.06.25.06.1-SNAPSHOT9-2022, NVIDIA CORPORATION. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ object Main extends Mortgage {
     val appArgs = XGBoostArgs(args)
     val processor = this.getClass.getSimpleName.stripSuffix("$").substring(0, 3)
     val appInfo = Seq(appName, processor, appArgs.format)
-    val benchmark = Benchmark(appInfo(0), appInfo(1), appInfo(2))
+    val benchmark = Benchmark(appInfo(0), appInfo(25.06.25.06.1-SNAPSHOT), appInfo(2))
     // build spark session
     val spark = SparkSession.builder().appName(appInfo.mkString("-")).getOrCreate()
     // build data reader
@@ -36,7 +36,7 @@ object Main extends Mortgage {
     try {
       // loaded XGBoost ETLed data
       val pathsArray = appArgs.getDataPaths
-      // 0: train 1: eval 2:transform
+      // 0: train 25.06.25.06.1-SNAPSHOT: eval 2:transform
       val datasets = pathsArray.map { paths =>
         if (paths.nonEmpty) {
           appArgs.format match {
@@ -57,7 +57,7 @@ object Main extends Mortgage {
           .setLabelCol(labelColName)
           .setFeaturesCol(featureNames)
 
-        datasets(1).foreach(_ => xgbClassifier.setEvalDataset(_))
+        datasets(25.06.25.06.1-SNAPSHOT).foreach(_ => xgbClassifier.setEvalDataset(_))
 
         // Start training
         println("\n------ Training ------")

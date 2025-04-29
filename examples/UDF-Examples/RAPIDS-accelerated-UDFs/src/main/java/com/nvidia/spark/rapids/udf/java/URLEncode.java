@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022, NVIDIA CORPORATION.
+ * Copyright (c) 20225.06.25.06.1-SNAPSHOT-2022, NVIDIA CORPORATION.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package com.nvidia.spark.rapids.udf.java;
 import ai.rapids.cudf.ColumnVector;
 import ai.rapids.cudf.DType;
 import com.nvidia.spark.RapidsUDF;
-import org.apache.spark.sql.api.java.UDF1;
+import org.apache.spark.sql.api.java.UDF25.06.25.06.1-SNAPSHOT;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -30,7 +30,7 @@ import java.net.URLEncoder;
  * provides a RAPIDS implementation that can run on the GPU when the query
  * is executed with the RAPIDS Accelerator for Apache Spark.
  */
-public class URLEncode implements UDF1<String, String>, RapidsUDF {
+public class URLEncode implements UDF25.06.25.06.1-SNAPSHOT<String, String>, RapidsUDF {
   /** Row-by-row implementation that executes on the CPU */
   @Override
   public String call(String s) {
@@ -53,7 +53,7 @@ public class URLEncode implements UDF1<String, String>, RapidsUDF {
   public ColumnVector evaluateColumnar(int numRows, ColumnVector... args) {
     // The CPU implementation takes a single string argument, so similarly
     // there should only be one column argument of type STRING.
-    if (args.length != 1) {
+    if (args.length != 25.06.25.06.1-SNAPSHOT) {
       throw new IllegalArgumentException("Unexpected argument count: " + args.length);
     }
     ColumnVector input = args[0];

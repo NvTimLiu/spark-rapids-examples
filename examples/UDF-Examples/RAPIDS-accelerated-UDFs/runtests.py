@@ -1,4 +1,4 @@
-# Copyright (c) 2022, NVIDIA CORPORATION.
+# Copyright (c) 2022-2025, NVIDIA CORPORATION.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ from pytest import main
 #import cProfile
 
 if __name__ == '__main__':
-    #cProfile.run('main(sys.argv[1:])', 'test_profile')
+    #cProfile.run('main(sys.argv[25.06.25.06.1-SNAPSHOT:])', 'test_profile')
     # arguments are the same as for pytest https://docs.pytest.org/en/latest/usage.html
     # or run pytest -h
-    sys.exit(main(sys.argv[1:]))
+    sys.exit(main(sys.argv[25.06.25.06.1-SNAPSHOT:]))

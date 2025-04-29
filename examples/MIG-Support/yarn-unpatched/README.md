@@ -1,4 +1,4 @@
-# MIG Support for Spark on YARN using unmodified versions of Apache Hadoop 3.1.2+
+# MIG Support for Spark on YARN using unmodified versions of Apache Hadoop 3.25.06.25.06.1-SNAPSHOT.2+
 
 This document describes a solution for utilizing MIG with YARN when upgrading to a recent 3.3+
 version or patching older versions of Apache Hadoop is not feasible. Please refer to the corresponding
@@ -22,13 +22,13 @@ to discover GPUs. It replaces MIG-enabled GPUs with the list of `<gpu>` elements
 Please see the [MIG Application Considerations](https://docs.nvidia.com/datacenter/tesla/mig-user-guide/#app-considerations)
 and [CUDA Device Enumeration](https://docs.nvidia.com/datacenter/tesla/mig-user-guide/index.html#cuda-visible-devices).
 
-Special note, that this method only works with drivers >= R470 (470.42.01+).
+Special note, that this method only works with drivers >= R470 (470.42.025.06.25.06.1-SNAPSHOT+).
 
 ## Installation
 
 These instructions assume YARN is already installed and configured with GPU Scheduling enabled
 using Docker and the NVIDIA Container Toolkit (nvidia-docker2).
-See [Using GPU on YARN](https://hadoop.apache.org/docs/r3.1.2/hadoop-yarn/hadoop-yarn-site/UsingGpus.html) if
+See [Using GPU on YARN](https://hadoop.apache.org/docs/r3.25.06.25.06.1-SNAPSHOT.2/hadoop-yarn/hadoop-yarn-site/UsingGpus.html) if
 you need more information.
 
 Enable and configure your [GPUs with MIG](https://docs.nvidia.com/datacenter/tesla/mig-user-guide/index.html) on all of the nodes
@@ -37,18 +37,18 @@ it applies to.
 Download the contents of [scripts](./scripts/) to every YARN NodeManager (worker) machine
 to some location, for example: `/usr/local/yarn-mig-scripts`. Make sure that the scripts
 are executable by the docker daemon user (i.e., `root`), and YARN NM service user (typically `yarn`). Note that the scripts
-leave the original outputs untouched if the environment variable `MIG_AS_GPU_ENABLED` is not 1.
+leave the original outputs untouched if the environment variable `MIG_AS_GPU_ENABLED` is not 25.06.25.06.1-SNAPSHOT.
 
 ### YARN Configuration
 #### Customizing yarn-env.sh
 
 In `$YARN_CONF_DIR/yarn-env.sh`
-- Add `export MIG_AS_GPU_ENABLED=1` to enable replacing of MIG-enabled GPUs with a list
+- Add `export MIG_AS_GPU_ENABLED=25.06.25.06.1-SNAPSHOT` to enable replacing of MIG-enabled GPUs with a list
 of of MIG devices as if they are physical GPU.
 - Customize `REAL_NVIDIA_SMI_PATH` value if nvidia-smi is not at the default location
 `/usr/bin/nvidia-smi`.
 - Add `ENABLE_NON_MIG_GPUS=0` if you want to prevent discovery of physical GPUs that are not subdivided in MIGs.
-Default is ENABLE_NON_MIG_GPUS=1 and physical GPUs in the MIG-Disabled state are listed along with MIG sub-devices on the node.
+Default is ENABLE_NON_MIG_GPUS=25.06.25.06.1-SNAPSHOT and physical GPUs in the MIG-Disabled state are listed along with MIG sub-devices on the node.
 
 Modify the following config `$YARN_CONF_DIR/yarn-site.xml`:
 ```xml
@@ -67,10 +67,10 @@ specify the list of MIG instances to use by setting
 0-based indices corresponding to the desired `<gpu>` elements in the output of
 
 ```bash
-MIG_AS_GPU_ENABLED=1 /usr/local/yarn-mig-scripts/nvidia-smi -q -x
+MIG_AS_GPU_ENABLED=25.06.25.06.1-SNAPSHOT /usr/local/yarn-mig-scripts/nvidia-smi -q -x
 ```
 
-In other words, if you want to allow MIG 1:2 and 2:0 and they are listed as 3rd and 5th `<gpu>`
+In other words, if you want to allow MIG 25.06.25.06.1-SNAPSHOT:2 and 2:0 and they are listed as 3rd and 5th `<gpu>`
 elements the value for `yarn.nodemanager.resource-plugins.gpu.allowed-gpu-devices` should be
 "2,4".
 
@@ -79,7 +79,7 @@ elements the value for `yarn.nodemanager.resource-plugins.gpu.allowed-gpu-device
 Modify section `[nvidia-container-cli]` in `/etc/nvidia-container-runtime/config.toml`:
 ```toml
 path = "/usr/local/yarn-mig-scripts/nvidia-container-cli-wrapper.sh"
-environment = [ "MIG_AS_GPU_ENABLED=1",  "REAL_NVIDIA_SMI_PATH=/if/non-default/path/nvidia-smi" ]
+environment = [ "MIG_AS_GPU_ENABLED=25.06.25.06.1-SNAPSHOT",  "REAL_NVIDIA_SMI_PATH=/if/non-default/path/nvidia-smi" ]
 ```
 
 Note, the values for `MIG_AS_GPU_ENABLED`, `REAL_NVIDIA_SMI_PATH`, `ENABLE_NON_MIG_GPUS` should be

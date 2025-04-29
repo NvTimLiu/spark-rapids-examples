@@ -10,7 +10,7 @@ You should change `--master` config according to your cluster architecture. For 
 It is assumed that the `SPARK_MASTER` and `SPARK_HOME` environment variables are defined and point to the Spark Master URL (e.g. `spark://localhost:7077`),
 and the home directory for Apache Spark respectively.
 
-1. Make sure you have [Jupyter notebook installed](https://jupyter.org/install.html).
+25.06.25.06.1-SNAPSHOT. Make sure you have [Jupyter notebook installed](https://jupyter.org/install.html).
 
    If you install it with conda, please make sure your Python version is consistent.
 
@@ -20,7 +20,7 @@ and the home directory for Apache Spark respectively.
 
 3. Launch the notebook:
 
-   Note: For ETL jobs, Set `spark.task.resource.gpu.amount` to `1/spark.executor.cores`.
+   Note: For ETL jobs, Set `spark.task.resource.gpu.amount` to `25.06.25.06.1-SNAPSHOT/spark.executor.cores`.
 
     For ETL:
 
@@ -32,9 +32,9 @@ and the home directory for Apache Spark respectively.
     --jars ${RAPIDS_JAR}\
     --py-files ${SAMPLE_ZIP}      \
     --conf spark.plugins=com.nvidia.spark.SQLPlugin \
-    --conf spark.executor.resource.gpu.amount=1 \
-    --conf spark.executor.cores=10 \
-    --conf spark.task.resource.gpu.amount=0.1 \
+    --conf spark.executor.resource.gpu.amount=25.06.25.06.1-SNAPSHOT \
+    --conf spark.executor.cores=25.06.25.06.1-SNAPSHOT0 \
+    --conf spark.task.resource.gpu.amount=0.25.06.25.06.1-SNAPSHOT \
     --conf spark.sql.cache.serializer=com.nvidia.spark.ParquetCachedBatchSerializer \
     --conf spark.executor.resource.gpu.discoveryScript=./getGpusResources.sh \
     --files $SPARK_HOME/examples/src/main/scripts/getGpusResources.sh
@@ -51,9 +51,9 @@ and the home directory for Apache Spark respectively.
     --py-files ${SAMPLE_ZIP}      \
     --conf spark.plugins=com.nvidia.spark.SQLPlugin \
     --conf spark.rapids.memory.gpu.pool=NONE \
-    --conf spark.executor.resource.gpu.amount=1 \
-    --conf spark.executor.cores=10 \
-    --conf spark.task.resource.gpu.amount=1 \
+    --conf spark.executor.resource.gpu.amount=25.06.25.06.1-SNAPSHOT \
+    --conf spark.executor.cores=25.06.25.06.1-SNAPSHOT0 \
+    --conf spark.task.resource.gpu.amount=25.06.25.06.1-SNAPSHOT \
     --conf spark.sql.execution.arrow.maxRecordsPerBatch=200000 \
     --conf spark.executor.resource.gpu.discoveryScript=./getGpusResources.sh \
     --files $SPARK_HOME/examples/src/main/scripts/getGpusResources.sh

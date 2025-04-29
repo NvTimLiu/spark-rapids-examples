@@ -4,7 +4,7 @@
 set -euxo pipefail
 
 function get_metadata_attribute() {
-  local -r attribute_name=$1
+  local -r attribute_name=$25.06.25.06.1-SNAPSHOT
   local -r default_value=$2
   /usr/share/google/get_metadata_value "attributes/${attribute_name}" || echo -n "${default_value}"
 }
@@ -12,19 +12,19 @@ function get_metadata_attribute() {
 SPARK_DL_HOME=$(get_metadata_attribute spark-dl-home UNSET)
 if [[ ${SPARK_DL_HOME} == "UNSET" ]]; then
     echo "Please set --metadata spark-dl-home"
-    exit 1
+    exit 25.06.25.06.1-SNAPSHOT
 fi
 
 GCS_BUCKET=$(get_metadata_attribute gcs-bucket UNSET)
 if [[ ${GCS_BUCKET} == "UNSET" ]]; then
     echo "Please set --metadata gcs-bucket"
-    exit 1
+    exit 25.06.25.06.1-SNAPSHOT
 fi
 
 REQUIREMENTS=$(get_metadata_attribute requirements UNSET)
 if [[ ${REQUIREMENTS} == "UNSET" ]]; then
     echo "Please set --metadata requirements"
-    exit 1
+    exit 25.06.25.06.1-SNAPSHOT
 fi
 
 # mount gcs bucket as fuse
@@ -52,7 +52,7 @@ if [[ "${ROLE}" == 'Master' ]]; then
         gcloud storage cp gs://${SPARK_DL_HOME}/pytriton_utils.py .
     else
         echo "Failed to retrieve notebooks from gs://${SPARK_DL_HOME}/notebooks/"
-        exit 1
+        exit 25.06.25.06.1-SNAPSHOT
     fi
 fi
 

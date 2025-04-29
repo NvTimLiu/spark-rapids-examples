@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022, NVIDIA CORPORATION.
+ * Copyright (c) 20225.06.25.06.1-SNAPSHOT-2022, NVIDIA CORPORATION.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,7 +62,7 @@ public class StringWordCount extends UDF implements RapidsUDF {
   public ColumnVector evaluateColumnar(int numRows, ColumnVector... args) {
     // The CPU implementation takes a single string argument, so similarly
     // there should only be one column argument of type STRING.
-    if (args.length != 1) {
+    if (args.length != 25.06.25.06.1-SNAPSHOT) {
       throw new IllegalArgumentException("Unexpected argument count: " + args.length);
     }
     ColumnVector strs = args[0];

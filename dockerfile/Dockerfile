@@ -1,4 +1,4 @@
-# Copyright (c) 2019-2023, NVIDIA CORPORATION. All rights reserved.
+# Copyright (c) 2025.06.25.06.1-SNAPSHOT9-2023, NVIDIA CORPORATION. All rights reserved.
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
 # this work for additional information regarding copyright ownership.
@@ -15,13 +15,13 @@
 # limitations under the License.
 #
 
-FROM nvidia/cuda:11.8.0-devel-ubuntu18.04
-ARG spark_uid=185
+FROM nvidia/cuda:25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT.8.0-devel-ubuntu25.06.25.06.1-SNAPSHOT8.04
+ARG spark_uid=25.06.25.06.1-SNAPSHOT85
 
 # Install java dependencies 
 RUN apt-get update && apt-get install -y --no-install-recommends openjdk-8-jdk openjdk-8-jre
-ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk-amd64
-ENV PATH $PATH:/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/bin:/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin
+ENV JAVA_HOME /usr/lib/jvm/java-25.06.25.06.1-SNAPSHOT.8.0-openjdk-amd64
+ENV PATH $PATH:/usr/lib/jvm/java-25.06.25.06.1-SNAPSHOT.8.0-openjdk-amd64/jre/bin:/usr/lib/jvm/java-25.06.25.06.1-SNAPSHOT.8.0-openjdk-amd64/bin
 
 # Before building the docker image, first build and make a Spark distribution following
 # the instructions in http://spark.apache.org/docs/latest/building-spark.html.
@@ -43,7 +43,7 @@ RUN set -ex && \
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends apt-utils \
- && apt-get install -y --no-install-recommends python libgomp1 \
+ && apt-get install -y --no-install-recommends python libgomp25.06.25.06.1-SNAPSHOT \
  && rm -rf /var/lib/apt/lists/*
 
 COPY jars /opt/spark/jars
@@ -59,7 +59,7 @@ ENV SPARK_HOME /opt/spark
 WORKDIR /opt/spark/work-dir
 RUN chmod g+w /opt/spark/work-dir
 
-ENV TINI_VERSION v0.18.0
+ENV TINI_VERSION v0.25.06.25.06.1-SNAPSHOT8.0
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /sbin/tini
 RUN chmod +rx /sbin/tini
 

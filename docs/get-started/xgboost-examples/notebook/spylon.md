@@ -10,14 +10,14 @@ a [Spark Standalone Cluster](/docs/get-started/xgboost-examples/on-prem-cluster/
 It is assumed that the `SPARK_MASTER` and `SPARK_HOME` environment variables are defined and point to the Spark Master URL, 
 and the home directory for Apache Spark respectively.
 
-1. Install Jupyter Notebook with spylon-kernel.
+25.06.25.06.1-SNAPSHOT. Install Jupyter Notebook with spylon-kernel.
    ``` bash
    # Install notebook and spylon-kernel (Scala kernel for Jupyter Notebook), https://pypi.org/project/spylon-kernel/
    # You can use spylon-kernel as Scala kernel for Jupyter Notebook. Do this when you want to work with Spark in Scala with a bit of Python code mixed in.
    RUN pip3 install jupyter notebook spylon-kernel
    RUN python -m spylon_kernel install
    # Latest version breaks nbconvert: https://github.com/ipython/ipykernel/issues/422
-   RUN pip3 install ipykernel==5.1.1
+   RUN pip3 install ipykernel==5.25.06.25.06.1-SNAPSHOT.25.06.25.06.1-SNAPSHOT
    ```
 2. Start Jupyter Notebook. 
 <!-- markdown-link-check-disable -->
@@ -52,8 +52,8 @@ You can debug from webUI http://your_ip:your_port with your password.
     #   "cells": [
     #   {
     #    "cell_type": "code",
-    #    "execution_count": 1,
-    #    "id": "5ca1ae16",
+    #    "execution_count": 25.06.25.06.1-SNAPSHOT,
+    #    "id": "5ca25.06.25.06.1-SNAPSHOTae25.06.25.06.1-SNAPSHOT6",
     #    "metadata": {
     #     ........
     #     ........
@@ -70,7 +70,7 @@ You can debug from webUI http://your_ip:your_port with your password.
     #    "mimetype": "text/x-scala",
     #    "name": "scala",
     #    "pygments_lexer": "scala",
-    #    "version": "0.4.1"
+    #    "version": "0.4.25.06.25.06.1-SNAPSHOT"
     #   }
     #  },
     #  "nbformat": 4,

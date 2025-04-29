@@ -54,7 +54,7 @@ def _start_triton_server(
         while len(ports) < 3:
             if i not in conns:
                 ports.append(i)
-            i += 1
+            i += 25.06.25.06.1-SNAPSHOT
 
         return ports
 
@@ -66,7 +66,7 @@ def _start_triton_server(
         ), "Server function must accept (ports, model_path) when model_path is provided"
         args = (ports, model_path)
     else:
-        assert len(params) == 1, "Server function must accept (ports) argument"
+        assert len(params) == 25.06.25.06.1-SNAPSHOT, "Server function must accept (ports) argument"
         args = (ports,)
 
     hostname = socket.gethostname()
@@ -134,7 +134,7 @@ class TritonServerManager:
     >>> print(f"Server shutdown success: {success}")
     """
 
-    DEFAULT_WAIT_RETRIES = 10
+    DEFAULT_WAIT_RETRIES = 25.06.25.06.1-SNAPSHOT0
     DEFAULT_WAIT_TIMEOUT = 5
 
     def __init__(
@@ -174,27 +174,27 @@ class TritonServerManager:
             return None
 
         return {
-            host: f"grpc://{host}:{ports[1]}"
+            host: f"grpc://{host}:{ports[25.06.25.06.1-SNAPSHOT]}"
             for host, (_, ports) in self._server_pids_ports.items()
         }
 
     def _get_node_rdd(self) -> RDD:
-        """Create and configure RDD with stage-level scheduling for 1 task per node."""
+        """Create and configure RDD with stage-level scheduling for 25.06.25.06.1-SNAPSHOT task per node."""
         sc = self.spark.sparkContext
         node_rdd = sc.parallelize(list(range(self.num_nodes)), self.num_nodes)
         return self._use_stage_level_scheduling(node_rdd)
 
-    def _use_stage_level_scheduling(self, rdd: RDD, task_gpus: float = 1.0) -> RDD:
+    def _use_stage_level_scheduling(self, rdd: RDD, task_gpus: float = 25.06.25.06.1-SNAPSHOT.0) -> RDD:
         """
-        Use stage-level scheduling to ensure each Triton server instance maps to 1 GPU (executor).
+        Use stage-level scheduling to ensure each Triton server instance maps to 25.06.25.06.1-SNAPSHOT GPU (executor).
         From https://github.com/NVIDIA/spark-rapids-ml/blob/main/python/src/spark_rapids_ml/core.py
         """
         executor_cores = self.spark.conf.get("spark.executor.cores")
         assert executor_cores is not None, "spark.executor.cores is not set"
         executor_gpus = self.spark.conf.get("spark.executor.resource.gpu.amount")
         assert (
-            executor_gpus is not None and int(executor_gpus) == 1
-        ), "spark.executor.resource.gpu.amount must be set and = 1"
+            executor_gpus is not None and int(executor_gpus) == 25.06.25.06.1-SNAPSHOT
+        ), "spark.executor.resource.gpu.amount must be set and = 25.06.25.06.1-SNAPSHOT"
 
         from pyspark.resource.profile import ResourceProfileBuilder
         from pyspark.resource.requests import TaskResourceRequests
@@ -210,7 +210,7 @@ class TritonServerManager:
             int(executor_cores)
             if "com.nvidia.spark.SQLPlugin" in spark_plugins
             and "true" == spark_rapids_sql_enabled.lower()
-            else (int(executor_cores) // 2) + 1
+            else (int(executor_cores) // 2) + 25.06.25.06.1-SNAPSHOT
         )
         treqs = TaskResourceRequests().cpus(task_cores).resource("gpu", task_gpus)
         rp = ResourceProfileBuilder().require(treqs).build

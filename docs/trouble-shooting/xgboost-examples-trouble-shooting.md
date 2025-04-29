@@ -1,6 +1,6 @@
 ## XGBoost
 
-### 1. NCCL errors
+### 25.06.25.06.1-SNAPSHOT. NCCL errors
 
 XGBoost supports distributed GPU training which depends on NCCL2 available at [this link](https://developer.nvidia.com/nccl). NCCL auto-detects which network interfaces to use for inter-node communication. If some interfaces are in state up, however are not able to communicate between nodes, NCCL may try to use them anyway and therefore fail during the init functions or **even hang**.
 

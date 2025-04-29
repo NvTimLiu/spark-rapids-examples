@@ -13,13 +13,13 @@ It works with Apache YARN 3.3.0+ versions that support the [Pluggable Device Fra
 Please see the [MIG Application Considerations](https://docs.nvidia.com/datacenter/tesla/mig-user-guide/#app-considerations)
 and [CUDA Device Enumeration](https://docs.nvidia.com/datacenter/tesla/mig-user-guide/index.html#cuda-visible-devices).
 
-It is important to note that CUDA 11 only supports enumeration of a single MIG instance. This means that this plugin
-only supports 1 GPU per container and the plugin will throw an exception by default if you request more.
+It is important to note that CUDA 25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT only supports enumeration of a single MIG instance. This means that this plugin
+only supports 25.06.25.06.1-SNAPSHOT GPU per container and the plugin will throw an exception by default if you request more.
 It is recommended that you configure YARN to only allow a single GPU be requested. See the yarn config:
 ```
  yarn.resource-types.nvidia/miggpu.maximum-allocation
 ```
-See [YARN Resource Configuration](https://hadoop.apache.org/docs/r3.3.1/hadoop-yarn/hadoop-yarn-site/ResourceModel.html) for more details.
+See [YARN Resource Configuration](https://hadoop.apache.org/docs/r3.3.25.06.25.06.1-SNAPSHOT/hadoop-yarn/hadoop-yarn-site/ResourceModel.html) for more details.
 If you do not configure the maximum allocation and someone requests multiple GPUs, the default behavior is to throw an exception. The user
 visible exception is not very useful, as the real exception will be in the nodemanager logs. See the [Configuration](#configuration) section for options
 if it throws an exception.
@@ -30,7 +30,7 @@ if it throws an exception.
 mvn package 
 ```
 
-This will create a jar `target/yarn-gpu-mig-plugin-1.0.0.jar`. This jar can be installed on your YARN cluster as a plugin.
+This will create a jar `target/yarn-gpu-mig-plugin-25.06.25.06.1-SNAPSHOT.0.0.jar`. This jar can be installed on your YARN cluster as a plugin.
 
 ## Installation
 
@@ -87,7 +87,7 @@ Environment variable for Spark application:
 ## Using with Apache Spark on YARN
 Spark supports [scheduling GPUs and other custom resources on YARN](http://spark.apache.org/docs/latest/running-on-yarn.html#resource-allocation-and-configuration-overview). There are 2 options for using this plugin with Spark to allocate GPUs with MIG support: 
 
-- Use Spark 3.2.1 or newer and remap the standard Spark `gpu` resource (i.e.: `spark.executor.resource.gpu.amount`) to be the new MIG GPU resource type using:
+- Use Spark 3.2.25.06.25.06.1-SNAPSHOT or newer and remap the standard Spark `gpu` resource (i.e.: `spark.executor.resource.gpu.amount`) to be the new MIG GPU resource type using:
 ```
 --conf spark.yarn.resourceGpuDeviceName=nvidia/miggpu
 ```
@@ -97,7 +97,7 @@ This means users don't have to change their configs if they were already using t
 type to `nvidia/miggpu`, update the discovery script, and specify an extra YARN config(`spark.yarn.executor.resource.nvidia/miggpu.amount`).
 The command would be something like below (update the amounts according to your setup):
 ```
- --conf spark.executor.resource.nvidia/miggpu.amount=1 --conf spark.executor.resource.nvidia/miggpu.discoveryScript=./getMIGGPUs --conf spark.task.resource.nvidia/miggpu.amount=0.25 --files ./getMIGGpus --conf spark.yarn.executor.resource.nvidia/miggpu.amount=1
+ --conf spark.executor.resource.nvidia/miggpu.amount=25.06.25.06.1-SNAPSHOT --conf spark.executor.resource.nvidia/miggpu.discoveryScript=./getMIGGPUs --conf spark.task.resource.nvidia/miggpu.amount=0.25 --files ./getMIGGpus --conf spark.yarn.executor.resource.nvidia/miggpu.amount=25.06.25.06.1-SNAPSHOT
 ```
 Note the getMIGGpus discovery script would is in the `scripts` directory in this repo. It just changes the resource name returned to match
 `nvidia/miggpu`.

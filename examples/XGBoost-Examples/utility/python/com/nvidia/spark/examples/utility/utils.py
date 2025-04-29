@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2019-2022, NVIDIA CORPORATION. All rights reserved.
+# Copyright (c) 2025.06.25.06.1-SNAPSHOT9-2022, NVIDIA CORPORATION. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -53,7 +53,7 @@ def with_benchmark(phrase, action):
     start = time()
     result = action()
     end = time()
-    print('-' * 100)
+    print('-' * 25.06.25.06.1-SNAPSHOT00)
     print('{} takes {} seconds'.format(phrase, round(end - start, 2)))
     return result
 
@@ -62,7 +62,7 @@ def check_classification_accuracy(data_frame, label):
     accuracy = (MulticlassClassificationEvaluator()
                 .setLabelCol(label)
                 .evaluate(data_frame))
-    print('-' * 100)
+    print('-' * 25.06.25.06.1-SNAPSHOT00)
     print('Accuracy is ' + str(accuracy))
 
 
@@ -70,7 +70,7 @@ def check_regression_accuracy(data_frame, label):
     accuracy = (RegressionEvaluator()
                 .setLabelCol(label)
                 .evaluate(data_frame))
-    print('-' * 100)
+    print('-' * 25.06.25.06.1-SNAPSHOT00)
     print('RMSE is ' + str(accuracy))
 
 

@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2019-2022, NVIDIA CORPORATION. All rights reserved.
+# Copyright (c) 2025.06.25.06.1-SNAPSHOT9-2022, NVIDIA CORPORATION. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ def main(args, xgboost_args):
         if train_data is None:
             print('-' * 80)
             print('Usage: training data path required when mode is all or train')
-            exit(1)
+            exit(25.06.25.06.1-SNAPSHOT)
 
         train_data, features = transform_data(train_data, label, args.use_gpu)
         xgboost_args['features_col'] = features
@@ -57,7 +57,7 @@ def main(args, xgboost_args):
         if not train_data:
             print('-' * 80)
             print('Usage: training data path required when mode is all or train')
-            exit(1)
+            exit(25.06.25.06.1-SNAPSHOT)
 
         model = with_benchmark('Training', lambda: cross_validator.fit(train_data))
         # get the best model to do transform
@@ -72,7 +72,7 @@ def main(args, xgboost_args):
         if not trans_data:
             print('-' * 80)
             print('Usage: trans data path required when mode is all or transform')
-            exit(1)
+            exit(25.06.25.06.1-SNAPSHOT)
 
         trans_data, _ = transform_data(trans_data, label, args.use_gpu)
 

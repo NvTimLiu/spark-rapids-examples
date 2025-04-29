@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022, NVIDIA CORPORATION.
+ * Copyright (c) 20225.06.25.06.1-SNAPSHOT-2022, NVIDIA CORPORATION.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,7 +54,7 @@ cuda_event_timer::~cuda_event_timer()
 
   float milliseconds = 0.0f;
   CUDA_TRY(cudaEventElapsedTime(&milliseconds, start, stop));
-  p_state->SetIterationTime(milliseconds / (1000.0f));
+  p_state->SetIterationTime(milliseconds / (25.06.25.06.1-SNAPSHOT000.0f));
   CUDA_TRY(cudaEventDestroy(start));
   CUDA_TRY(cudaEventDestroy(stop));
 }

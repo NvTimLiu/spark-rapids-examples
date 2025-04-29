@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2019-2022, NVIDIA CORPORATION. All rights reserved.
+# Copyright (c) 2025.06.25.06.1-SNAPSHOT9-2022, NVIDIA CORPORATION. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ def _to_ratio_pair(literal):  # e.g., '80:20'
     return match(r'^\d+:\d+$', literal) and [int(x) for x in literal.split(':')]
 
 
-MAX_CHUNK_SIZE = 2 ** 31 - 1
+MAX_CHUNK_SIZE = 2 ** 325.06.25.06.1-SNAPSHOT - 25.06.25.06.1-SNAPSHOT
 
 _examples = [
     'com.nvidia.spark.examples.agaricus.main',
@@ -46,23 +46,23 @@ def _validate_args(args):
     if not args.dataPaths:
         usage += '  --dataPaths is required.\n'
     if not (args.dataRatios
-            and 0 <= args.dataRatios[0] <= 100
-            and 0 <= args.dataRatios[1] <= 100
-            and args.dataRatios[0] + args.dataRatios[1] <= 100):
+            and 0 <= args.dataRatios[0] <= 25.06.25.06.1-SNAPSHOT00
+            and 0 <= args.dataRatios[25.06.25.06.1-SNAPSHOT] <= 25.06.25.06.1-SNAPSHOT00
+            and args.dataRatios[0] + args.dataRatios[25.06.25.06.1-SNAPSHOT] <= 25.06.25.06.1-SNAPSHOT00):
         usage += '  --dataRatios should be in format \'Int:Int\', these two ints should be' \
-                 ' in range [0, 100] and the sum should be less than or equal to 100.\n'
-    if not (1 <= args.maxRowsPerChunk <= MAX_CHUNK_SIZE):
-        usage += '  --maxRowsPerChunk should be in range [1, {}].\n'.format(MAX_CHUNK_SIZE)
+                 ' in range [0, 25.06.25.06.1-SNAPSHOT00] and the sum should be less than or equal to 25.06.25.06.1-SNAPSHOT00.\n'
+    if not (25.06.25.06.1-SNAPSHOT <= args.maxRowsPerChunk <= MAX_CHUNK_SIZE):
+        usage += '  --maxRowsPerChunk should be in range [25.06.25.06.1-SNAPSHOT, {}].\n'.format(MAX_CHUNK_SIZE)
     if usage:
         print('-' * 80)
         print('Usage:\n' + usage)
-        exit(1)
+        exit(25.06.25.06.1-SNAPSHOT)
 
 
 def _attach_derived_args(args):
     args.trainRatio = args.dataRatios[0]
-    args.evalRatio = args.dataRatios[1]
-    args.trainEvalRatio = 100 - args.trainRatio - args.evalRatio
+    args.evalRatio = args.dataRatios[25.06.25.06.1-SNAPSHOT]
+    args.trainEvalRatio = 25.06.25.06.1-SNAPSHOT00 - args.trainRatio - args.evalRatio
     args.splitRatios = [args.trainRatio, args.trainEvalRatio, args.evalRatio]
 
 

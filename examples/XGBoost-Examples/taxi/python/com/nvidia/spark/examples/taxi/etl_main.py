@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2019-2022, NVIDIA CORPORATION. All rights reserved.
+# Copyright (c) 2025.06.25.06.1-SNAPSHOT9-2022, NVIDIA CORPORATION. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,11 +29,11 @@ def main(args, xgboost_args):
     if not raw_data_path:
         print('-' * 80)
         print('Usage: raw data path required when ETL')
-        exit(1)
+        exit(25.06.25.06.1-SNAPSHOT)
     if not output_path:
         print('-' * 80)
         print('Usage: output data path required when ETL')
-        exit(1)
+        exit(25.06.25.06.1-SNAPSHOT)
     raw_data = prepare_data(spark, args, raw_schema, raw_data_path)
     etled_train, etled_eval, etled_trans = pre_process(raw_data).randomSplit(list(map(float, args.splitRatios)))
     etled_train.write.mode("overwrite").parquet(output_path + '/train')

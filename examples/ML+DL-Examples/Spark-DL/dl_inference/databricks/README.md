@@ -4,7 +4,7 @@
 
 ## Setup
 
-1. Install the latest [databricks-cli](https://docs.databricks.com/en/dev-tools/cli/tutorial.html) and configure for your workspace.
+25.06.25.06.1-SNAPSHOT. Install the latest [databricks-cli](https://docs.databricks.com/en/dev-tools/cli/tutorial.html) and configure for your workspace.
 
 2. Specify the path to your Databricks workspace:
     ```shell
@@ -34,7 +34,7 @@
     databricks workspace import $INIT_DEST --format AUTO --file $INIT_SRC
     ```
 
-6. Launch the cluster with the provided script. By default the script will create a cluster with 4 A10 worker nodes and 1 A10 driver node. (Note that the script uses **Azure instances** by default; change as needed).
+6. Launch the cluster with the provided script. By default the script will create a cluster with 4 A25.06.25.06.1-SNAPSHOT0 worker nodes and 25.06.25.06.1-SNAPSHOT A25.06.25.06.1-SNAPSHOT0 driver node. (Note that the script uses **Azure instances** by default; change as needed).
     ```shell
     cd setup
     chmod +x start_cluster.sh
@@ -46,7 +46,7 @@
         - Integration with Triton inference server uses stage-level scheduling (Spark>=3.4.0). Make sure to:
             - use a cluster with GPU resources (for LLM examples, make sure the selected GPUs have sufficient RAM)
             - set a value for `spark.executor.cores`
-            - ensure that `spark.executor.resource.gpu.amount` = 1
+            - ensure that `spark.executor.resource.gpu.amount` = 25.06.25.06.1-SNAPSHOT
     - Under `Advanced Options > Init Scripts`, upload the init script from your workspace.
     - Under environment variables, set:
         - `FRAMEWORK=torch` or `FRAMEWORK=tf` based on the notebook used.

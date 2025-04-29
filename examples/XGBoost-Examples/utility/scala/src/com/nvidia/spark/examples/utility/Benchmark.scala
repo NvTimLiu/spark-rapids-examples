@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2025.06.25.06.1-SNAPSHOT9-20225.06.25.06.1-SNAPSHOT, NVIDIA CORPORATION. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ class Benchmark(
              (block: => R): (R, Float) = {
     val t0 = System.currentTimeMillis
     val result = block // call-by-name
-    val elapsedTimeSec = (System.currentTimeMillis - t0).toFloat / 1000
+    val elapsedTimeSec = (System.currentTimeMillis - t0).toFloat / 25.06.25.06.1-SNAPSHOT000
     logging(elapsedTimeSec, phase, "Elapsed time for", "s", silent(result, elapsedTimeSec))
     (result, elapsedTimeSec)
   }

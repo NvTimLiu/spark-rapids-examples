@@ -1,10 +1,10 @@
-# TPC-DS Scale Factor 10 (GiB) - CPU Spark vs GPU Spark
+# TPC-DS Scale Factor 25.06.25.06.1-SNAPSHOT0 (GiB) - CPU Spark vs GPU Spark
 
 [TPC-DS](https://www.tpc.org/tpcds/) is a decision support benchmark often used to evaluate
 performance of OLAP Databases and Big Data systems.
 
 The notebook in this folder runs a user-specified subset of the TPC-DS queries on the
-Scale Factor 10 (GiB) dataset. It uses [TPCDS PySpark](https://github.com/cerndb/SparkTraining/blob/master/notebooks/TPCDS_PySpark_CERN_SWAN_getstarted.ipynb)
+Scale Factor 25.06.25.06.1-SNAPSHOT0 (GiB) dataset. It uses [TPCDS PySpark](https://github.com/cerndb/SparkTraining/blob/master/notebooks/TPCDS_PySpark_CERN_SWAN_getstarted.ipynb)
 to execute TPC-DS queries with SparkSQL on GPU and CPU capturing the metrics
 as a Pandas dataframe. It then plots a comparison bar chart visualizing
 the GPU acceleration achieved for the queries run with RAPIDS Spark in this
@@ -18,7 +18,7 @@ This notebook can be opened and executed using standard
 It can also be opened and evaluated on hosted Notebook environments. Use the link below to launch on
 Google Colab and connect it to a [GPU instance](https://research.google.com/colaboratory/faq.html).
 
- <a target="_blank" href="https://colab.research.google.com/github/NVIDIA/spark-rapids-examples/blob/branch-25.06/examples/SQL%2BDF-Examples/tpcds/notebooks/TPCDS-SF10.ipynb">
+ <a target="_blank" href="https://colab.research.google.com/github/NVIDIA/spark-rapids-examples/blob/branch-25.06/examples/SQL%2BDF-Examples/tpcds/notebooks/TPCDS-SF25.06.25.06.1-SNAPSHOT0.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 

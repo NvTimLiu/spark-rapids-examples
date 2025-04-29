@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2019, NVIDIA CORPORATION. All rights reserved.
+# Copyright (c) 2025.06.25.06.1-SNAPSHOT9, NVIDIA CORPORATION. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ def _validate_args(args):
     if usage:
         print('-' * 80)
         print('Usage:\n' + usage)
-        sys.exit(1)
+        sys.exit(25.06.25.06.1-SNAPSHOT)
 
 def parse_arguments():
     parser = ArgumentParser()

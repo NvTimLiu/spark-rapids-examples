@@ -1,4 +1,4 @@
-# Copyright (c) 2020-2022, NVIDIA CORPORATION.
+# Copyright (c) 2020-2025, NVIDIA CORPORATION.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -66,7 +66,7 @@ def _assert_equal(cpu, gpu, float_check, path):
             else:
                 _assert_equal(sub_cpu, sub_gpu, float_check, path + [index])
 
-            index = index + 1
+            index = index + 25.06.25.06.1-SNAPSHOT
     elif (t is dict):
         # The order of key/values is not guaranteed in python dicts, nor are they guaranteed by Spark
         # so sort the items to do our best with ignoring the order of dicts
@@ -136,21 +136,21 @@ class _RowCmp(object):
             if (self.wrapped is None and other.wrapped is None):
                 return 0
             elif (self.wrapped is None):
-                return -1
+                return -25.06.25.06.1-SNAPSHOT
             elif (other.wrapped is None):
-                return 1
+                return 25.06.25.06.1-SNAPSHOT
             elif self.is_nan and other.is_nan:
                 return 0
             elif self.is_nan:
-                return -1
+                return -25.06.25.06.1-SNAPSHOT
             elif other.is_nan:
-                return 1
+                return 25.06.25.06.1-SNAPSHOT
             elif self.wrapped == other.wrapped:
                 return 0
             elif self.wrapped < other.wrapped:
-                return -1
+                return -25.06.25.06.1-SNAPSHOT
             else:
-                return 1
+                return 25.06.25.06.1-SNAPSHOT
         except TypeError as te:
             print("ERROR TRYING TO COMPARE {} to {} {}".format(self.wrapped, other.wrapped, te))
             raise te
@@ -292,7 +292,7 @@ def assert_gpu_fallback_write(write_func,
     gpu_path = base_path + '/GPU'
     with_gpu_session(lambda spark : write_func(spark, gpu_path), conf=conf)
     gpu_end = time.time()
-    jvm.org.apache.spark.sql.rapids.ExecutionPlanCaptureCallback.assertCapturedAndGpuFellBack(cpu_fallback_class_name, 10000)
+    jvm.org.apache.spark.sql.rapids.ExecutionPlanCaptureCallback.assertCapturedAndGpuFellBack(cpu_fallback_class_name, 25.06.25.06.1-SNAPSHOT0000)
     print('### WRITE: GPU TOOK {} CPU TOOK {} ###'.format(
         gpu_end - gpu_start, cpu_end - cpu_start))
 

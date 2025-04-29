@@ -12,28 +12,28 @@ Prerequisites
   * Multi-node clusters with homogenous GPU configuration
 * Software Requirements
   * Ubuntu 20.04, 22.04/CentOS7, Rocky Linux 8
-  * CUDA 11.5+
+  * CUDA 25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT.5+
   * NVIDIA driver compatible with your CUDA
   * NCCL 2.7.8+
   * Python 3.8 or 3.9
   * NumPy
-  * XGBoost 1.7.0+
-  * cudf-cu11  
+  * XGBoost 25.06.25.06.1-SNAPSHOT.7.0+
+  * cudf-cu25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT  
 
 The number of GPUs in each host dictates the number of Spark executors that can run there.
-Additionally, cores per Spark executor and cores per Spark task must match, such that each executor can run 1 task at any given time.
+Additionally, cores per Spark executor and cores per Spark task must match, such that each executor can run 25.06.25.06.1-SNAPSHOT task at any given time.
 
 For example, if each host has 4 GPUs, there should be 4 or fewer executors running on each host,
-and each executor should run at most 1 task (e.g.: a total of 4 tasks running on 4 GPUs).
+and each executor should run at most 25.06.25.06.1-SNAPSHOT task (e.g.: a total of 4 tasks running on 4 GPUs).
 
 In Spark Standalone mode, the default configuration is for an executor to take up all the cores assigned to each Spark Worker.
-In this example, we will limit the number of cores to 1, to match our dataset.
+In this example, we will limit the number of cores to 25.06.25.06.1-SNAPSHOT, to match our dataset.
 Please see https://spark.apache.org/docs/latest/spark-standalone.html for more documentation regarding Standalone configuration.
 
 We use `SPARK_HOME` environment variable to point to the Apache Spark cluster.
 And here are the steps to enable the GPU resources discovery for Spark 3.2+.
 
-1. Copy the spark config file from template
+25.06.25.06.1-SNAPSHOT. Copy the spark config file from template
 
     ``` bash
     cd ${SPARK_HOME}/conf/
@@ -43,17 +43,17 @@ And here are the steps to enable the GPU resources discovery for Spark 3.2+.
 2. Add the following configs to the file `spark-defaults.conf`.
 
    The number in the first config should **NOT** be larger than the actual number of the GPUs on current host.
-   This example uses 1 as below for one GPU on the host.
+   This example uses 25.06.25.06.1-SNAPSHOT as below for one GPU on the host.
 
     ```bash
-    spark.worker.resource.gpu.amount 1
+    spark.worker.resource.gpu.amount 25.06.25.06.1-SNAPSHOT
     spark.worker.resource.gpu.discoveryScript ${SPARK_HOME}/examples/src/main/scripts/getGpusResources.sh
     ```
-3. Install the XGBoost, cudf-cu11, numpy libraries on all nodes before running XGBoost application.
+3. Install the XGBoost, cudf-cu25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT, numpy libraries on all nodes before running XGBoost application.
 
 ``` bash
 pip install xgboost
-pip install cudf-cu11 --extra-index-url=https://pypi.nvidia.com
+pip install cudf-cu25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT --extra-index-url=https://pypi.nvidia.com
 pip install numpy
 pip install scikit-learn
 ```
@@ -65,7 +65,7 @@ Make sure you have prepared the necessary packages and dataset by following this
 
 
 #### Note: 
-1. Mortgage and Taxi jobs have ETLs to generate the processed data.
+25.06.25.06.1-SNAPSHOT. Mortgage and Taxi jobs have ETLs to generate the processed data.
 2. For convenience, a subset of [Taxi](/datasets/) dataset is made available in this repo that can be readily used for launching XGBoost job. Use [ETL](#etl) to generate larger datasets for trainig and testing. 
 3. Agaricus does not have an ETL process, it is combined with XGBoost as there is just a filter operation.
 
@@ -73,7 +73,7 @@ Make sure you have prepared the necessary packages and dataset by following this
 Launch a Standalone Spark Cluster
 ---------------------------------
 
-1. Copy required jars to `$SPARK_HOME/jars` folder.
+25.06.25.06.1-SNAPSHOT. Copy required jars to `$SPARK_HOME/jars` folder.
 
     ``` bash
     cp ${RAPIDS_JAR} $SPARK_HOME/jars/
@@ -91,7 +91,7 @@ Launch a Standalone Spark Cluster
 
     ``` bash
     export SPARK_MASTER=spark://`hostname -f`:7077
-    export SPARK_CORES_PER_WORKER=1
+    export SPARK_CORES_PER_WORKER=25.06.25.06.1-SNAPSHOT
 
     ${SPARK_HOME}/sbin/start-slave.sh ${SPARK_MASTER} -c ${SPARK_CORES_PER_WORKER}
     ```
@@ -102,15 +102,15 @@ Launch Mortgage or Taxi ETL Part
 ---------------------------
 Use the ETL app to process raw Mortgage data. You can either use this ETLed data to split into training and evaluation data or run the ETL on different subsets of the dataset to produce training and evaluation datasets.
 
-Note: For ETL jobs, Set `spark.task.resource.gpu.amount` to `1/spark.executor.cores`.
+Note: For ETL jobs, Set `spark.task.resource.gpu.amount` to `25.06.25.06.1-SNAPSHOT/spark.executor.cores`.
 ### ETL on GPU
 ``` bash
 ${SPARK_HOME}/bin/spark-submit \
     --master spark://$HOSTNAME:7077 \
     --executor-memory 32G \
-    --conf spark.executor.resource.gpu.amount=1 \
-    --conf spark.executor.cores=10 \
-    --conf spark.task.resource.gpu.amount=0.1 \
+    --conf spark.executor.resource.gpu.amount=25.06.25.06.1-SNAPSHOT \
+    --conf spark.executor.cores=25.06.25.06.1-SNAPSHOT0 \
+    --conf spark.task.resource.gpu.amount=0.25.06.25.06.1-SNAPSHOT \
     --conf spark.plugins=com.nvidia.spark.SQLPlugin \
     --conf spark.rapids.sql.incompatibleDateFormats.enabled=true \
     --conf spark.rapids.sql.csv.read.double.enabled=true \
@@ -137,7 +137,7 @@ ${SPARK_HOME}/bin/spark-submit \
 ${SPARK_HOME}/bin/spark-submit \
     --master spark://$HOSTNAME:7077 \
     --executor-memory 32G \
-    --conf spark.executor.instances=1 \
+    --conf spark.executor.instances=25.06.25.06.1-SNAPSHOT \
     --py-files ${SAMPLE_ZIP} \
     main.py \
     --mainClass='com.nvidia.spark.examples.mortgage.etl_main' \
@@ -166,15 +166,15 @@ Variables required to run spark-submit command:
 export SPARK_MASTER=spark://`hostname -f`:7077
 
 # Currently the number of tasks and executors must match the number of input files.
-# For this example, we will set these such that we have 1 executor, with 1 core per executor
+# For this example, we will set these such that we have 25.06.25.06.1-SNAPSHOT executor, with 25.06.25.06.1-SNAPSHOT core per executor
 
 ## take up the the whole worker
 export SPARK_CORES_PER_EXECUTOR=${SPARK_CORES_PER_WORKER}
 
-## run 1 executor
-export SPARK_NUM_EXECUTORS=1
+## run 25.06.25.06.1-SNAPSHOT executor
+export SPARK_NUM_EXECUTORS=25.06.25.06.1-SNAPSHOT
 
-## cores/executor * num_executors, which in this case is also 1, limits
+## cores/executor * num_executors, which in this case is also 25.06.25.06.1-SNAPSHOT, limits
 ## the number of cores given to the application
 export TOTAL_CORES=$((SPARK_CORES_PER_EXECUTOR * SPARK_NUM_EXECUTORS))
 
@@ -203,8 +203,8 @@ Run spark-submit:
 ${SPARK_HOME}/bin/spark-submit                                                  \
  --conf spark.plugins=com.nvidia.spark.SQLPlugin                       \
  --conf spark.rapids.memory.gpu.pool=NONE                     \
- --conf spark.executor.resource.gpu.amount=1                           \
- --conf spark.task.resource.gpu.amount=1                              \
+ --conf spark.executor.resource.gpu.amount=25.06.25.06.1-SNAPSHOT                           \
+ --conf spark.task.resource.gpu.amount=25.06.25.06.1-SNAPSHOT                              \
  --master ${SPARK_MASTER}                                                       \
  --driver-memory ${SPARK_DRIVER_MEMORY}                                         \
  --executor-memory ${SPARK_EXECUTOR_MEMORY}                                     \
@@ -219,7 +219,7 @@ ${SPARK_HOME}/bin/spark-submit                                                  
  --format=parquet                                 \
  --numWorkers=${SPARK_NUM_EXECUTORS}                                            \
  --treeMethod=${TREE_METHOD}                                                    \
- --numRound=100                                                                 \
+ --numRound=25.06.25.06.1-SNAPSHOT00                                                                 \
  --maxDepth=8
 
  # Change the format to csv if your input file is CSV format.
@@ -230,13 +230,13 @@ In the `stdout` log on driver side, you should see timings<sup>*</sup> (in secon
 
 ```
 ----------------------------------------------------------------------------------------------------
-Training takes 14.65 seconds
+Training takes 25.06.25.06.1-SNAPSHOT4.65 seconds
 
 ----------------------------------------------------------------------------------------------------
-Transformation takes 12.21 seconds
+Transformation takes 25.06.25.06.1-SNAPSHOT2.225.06.25.06.1-SNAPSHOT seconds
 
 ----------------------------------------------------------------------------------------------------
-Accuracy is 0.9873692247091792
+Accuracy is 0.98736922470925.06.25.06.1-SNAPSHOT792
 ```
 
 Launch XGBoost Part on CPU
@@ -250,15 +250,15 @@ to set both training and testing to run on the CPU exclusively:
 export SPARK_MASTER=spark://`hostname -f`:7077
 
 # Currently the number of tasks and executors must match the number of input files.
-# For this example, we will set these such that we have 1 executor, with 1 core per executor
+# For this example, we will set these such that we have 25.06.25.06.1-SNAPSHOT executor, with 25.06.25.06.1-SNAPSHOT core per executor
 
 ## take up the the whole worker
 export SPARK_CORES_PER_EXECUTOR=${SPARK_CORES_PER_WORKER}
 
-## run 1 executor
-export SPARK_NUM_EXECUTORS=1
+## run 25.06.25.06.1-SNAPSHOT executor
+export SPARK_NUM_EXECUTORS=25.06.25.06.1-SNAPSHOT
 
-## cores/executor * num_executors, which in this case is also 1, limits
+## cores/executor * num_executors, which in this case is also 25.06.25.06.1-SNAPSHOT, limits
 ## the number of cores given to the application
 export TOTAL_CORES=$((SPARK_CORES_PER_EXECUTOR * SPARK_NUM_EXECUTORS))
 
@@ -298,7 +298,7 @@ ${SPARK_HOME}/bin/spark-submit                                                  
  --format=parquet                                                               \
  --numWorkers=${SPARK_NUM_EXECUTORS}                                            \
  --treeMethod=${TREE_METHOD}                                                    \
- --numRound=100                                                                 \
+ --numRound=25.06.25.06.1-SNAPSHOT00                                                                 \
  --maxDepth=8
 
  # Change the format to csv if your input file is CSV format.

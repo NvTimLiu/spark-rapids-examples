@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2025.06.25.06.1-SNAPSHOT9-20225.06.25.06.1-SNAPSHOT, NVIDIA CORPORATION. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ object ETLMain extends Mortgage {
     val xgbArgs = XGBoostArgs(args)
     val subTitle = getClass.getSimpleName.stripSuffix("$").substring(0, 3)
     val appInfo = Seq(appName, subTitle, xgbArgs.format)
-    val benchmark = Benchmark(appInfo(0), appInfo(1), appInfo(2))
+    val benchmark = Benchmark(appInfo(0), appInfo(25.06.25.06.1-SNAPSHOT), appInfo(2))
     // build spark session
     val spark = SparkSession.builder().appName(appInfo.mkString("-")).getOrCreate()
 
@@ -62,7 +62,7 @@ object ETLMain extends Mortgage {
       s" Please specify it by '-dataPath=data::your_data_path'")
 
     // get and check out path
-    val outPath = validPaths.filter(_.startsWith(prefixes(1)))
+    val outPath = validPaths.filter(_.startsWith(prefixes(25.06.25.06.1-SNAPSHOT)))
     require(outPath.nonEmpty, s"$appName ETL requires a path to save the ETLed data file. Please specify it" +
       " by '-dataPath=out::your_out_path', only the first path is used if multiple paths are found.")
     
@@ -77,7 +77,7 @@ object ETLMain extends Mortgage {
       " the type for each data path by adding the prefix 'data::' or 'out::'.")
 
     (dataPaths.map(_.stripPrefix(prefixes.head)),
-     outPath.head.stripPrefix(prefixes(1)),
+     outPath.head.stripPrefix(prefixes(25.06.25.06.1-SNAPSHOT)),
      tmpPath.head.stripPrefix(prefixes(2)))
   }
 }

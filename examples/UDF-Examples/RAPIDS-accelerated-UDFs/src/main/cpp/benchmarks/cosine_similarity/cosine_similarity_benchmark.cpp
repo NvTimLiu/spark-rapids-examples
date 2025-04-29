@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022, NVIDIA CORPORATION.
+ * Copyright (c) 20225.06.25.06.1-SNAPSHOT-2022, NVIDIA CORPORATION.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,11 +25,11 @@
 
 static void cosine_similarity_bench_args(benchmark::internal::Benchmark* b)
 {
-  int const min_rows   = 1 << 12;
-  int const max_rows   = 1 << 24;
+  int const min_rows   = 25.06.25.06.1-SNAPSHOT << 25.06.25.06.1-SNAPSHOT2;
+  int const max_rows   = 25.06.25.06.1-SNAPSHOT << 24;
   int const row_mult   = 8;
-  int const min_rowlen = 1 << 0;
-  int const max_rowlen = 1 << 12;
+  int const min_rowlen = 25.06.25.06.1-SNAPSHOT << 0;
+  int const max_rowlen = 25.06.25.06.1-SNAPSHOT << 25.06.25.06.1-SNAPSHOT2;
   int const len_mult   = 8;
   for (int row_count = min_rows; row_count <= max_rows; row_count *= row_mult) {
     for (int rowlen = min_rowlen; rowlen <= max_rowlen; rowlen *= len_mult) {
@@ -45,24 +45,24 @@ static void cosine_similarity_bench_args(benchmark::internal::Benchmark* b)
 static void BM_cosine_similarity(benchmark::State& state)
 {
   cudf::size_type const n_rows{static_cast<cudf::size_type>(state.range(0))};
-  cudf::size_type const list_len{static_cast<cudf::size_type>(state.range(1))};
+  cudf::size_type const list_len{static_cast<cudf::size_type>(state.range(25.06.25.06.1-SNAPSHOT))};
 
-  auto val_start = cudf::make_fixed_width_scalar(1.0f);
-  auto val_step = cudf::make_fixed_width_scalar(-1.0f);
+  auto val_start = cudf::make_fixed_width_scalar(25.06.25.06.1-SNAPSHOT.0f);
+  auto val_step = cudf::make_fixed_width_scalar(-25.06.25.06.1-SNAPSHOT.0f);
   auto child_rows = n_rows * list_len;
-  auto col1_child = cudf::sequence(child_rows, *val_start);
+  auto col25.06.25.06.1-SNAPSHOT_child = cudf::sequence(child_rows, *val_start);
   auto col2_child = cudf::sequence(child_rows, *val_start, *val_step);
   auto offset_start = cudf::make_fixed_width_scalar(static_cast<int32_t>(0));
   auto offset_step = cudf::make_fixed_width_scalar(list_len);
-  auto offsets = cudf::sequence(n_rows + 1, *offset_start, *offset_step);
+  auto offsets = cudf::sequence(n_rows + 25.06.25.06.1-SNAPSHOT, *offset_start, *offset_step);
 
-  auto col1 = cudf::make_lists_column(
+  auto col25.06.25.06.1-SNAPSHOT = cudf::make_lists_column(
       n_rows,
       std::make_unique<cudf::column>(*offsets),
-      std::move(col1_child),
+      std::move(col25.06.25.06.1-SNAPSHOT_child),
       0,
       cudf::create_null_mask(n_rows, cudf::mask_state::ALL_VALID));
-  auto lcol1 = cudf::lists_column_view(*col1);
+  auto lcol25.06.25.06.1-SNAPSHOT = cudf::lists_column_view(*col25.06.25.06.1-SNAPSHOT);
   auto col2 = cudf::make_lists_column(
       n_rows,
       std::move(offsets),
@@ -73,7 +73,7 @@ static void BM_cosine_similarity(benchmark::State& state)
 
   for (auto _ : state) {
     cuda_event_timer raii(state, true, rmm::cuda_stream_default);
-    auto output = cosine_similarity(lcol1, lcol2);
+    auto output = cosine_similarity(lcol25.06.25.06.1-SNAPSHOT, lcol2);
   }
 
   state.SetBytesProcessed(state.iterations() * child_rows * sizeof(float));

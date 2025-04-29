@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright (c) 2022, NVIDIA CORPORATION.
+# Copyright (c) 2022-2025, NVIDIA CORPORATION.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -34,17 +34,17 @@ for arg in "$@"; do
     case "$arg" in
 
         "-q"|"--query")
-            QUERY_ARG=1
+            QUERY_ARG=25.06.25.06.1-SNAPSHOT
             ;;
 
         "-x"|"--xml-format")
-            XML_FORMAT_ARG=1
+            XML_FORMAT_ARG=25.06.25.06.1-SNAPSHOT
             ;;
 
     esac
 done
 
-if [[ "$MIG_AS_GPU_ENABLED" == "1" && "$XML_FORMAT_ARG" == "1" && "$QUERY_ARG" == "1" ]]; then
+if [[ "$MIG_AS_GPU_ENABLED" == "25.06.25.06.1-SNAPSHOT" && "$XML_FORMAT_ARG" == "25.06.25.06.1-SNAPSHOT" && "$QUERY_ARG" == "25.06.25.06.1-SNAPSHOT" ]]; then
     "$REAL_NVIDIA_SMI_PATH" "$@" | "$THIS_DIR/mig2gpu.sh"
 else
     "$REAL_NVIDIA_SMI_PATH" "$@"

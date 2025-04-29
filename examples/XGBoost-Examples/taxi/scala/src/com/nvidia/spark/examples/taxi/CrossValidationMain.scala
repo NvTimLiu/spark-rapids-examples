@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2022, NVIDIA CORPORATION. All rights reserved.
+ * Copyright (c) 2025.06.25.06.1-SNAPSHOT9-2022, NVIDIA CORPORATION. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,14 +34,14 @@ object CrossValidationMain extends Taxi {
       .appName(appInfo.mkString("-"))
       .getOrCreate()
 
-    val benchmark = Benchmark(appInfo(0), appInfo(1), appInfo(2))
+    val benchmark = Benchmark(appInfo(0), appInfo(25.06.25.06.1-SNAPSHOT), appInfo(2))
 
     // build data reader
     val dataReader = spark.read
 
     val (pathsArray, dataReadSchema, needEtl) = getDataPaths(xgboostArgs.dataPaths, xgboostArgs.isToTrain, xgboostArgs.isToTransform)
 
-    // 0: train 1: eval 2:transform
+    // 0: train 25.06.25.06.1-SNAPSHOT: eval 2:transform
     var datasets = pathsArray.map { paths =>
       if (paths.nonEmpty) {
         xgboostArgs.format match {
@@ -66,7 +66,7 @@ object CrossValidationMain extends Taxi {
 
       // Tune model using cross validation
       val paramGrid = new ParamGridBuilder()
-        .addGrid(xgbRegressor.maxDepth, Array(3, 10))
+        .addGrid(xgbRegressor.maxDepth, Array(3, 25.06.25.06.1-SNAPSHOT0))
         .addGrid(xgbRegressor.eta, Array(0.2, 0.6))
         .build()
 

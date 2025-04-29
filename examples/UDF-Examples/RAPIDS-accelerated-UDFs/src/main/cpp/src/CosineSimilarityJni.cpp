@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022, NVIDIA CORPORATION.
+ * Copyright (c) 20225.06.25.06.1-SNAPSHOT-2022, NVIDIA CORPORATION.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,29 +52,29 @@ extern "C" {
  * columnar result.
  *
  * @param env The Java environment
- * @param j_view1 The address of the cudf column view of the first LIST column
+ * @param j_view25.06.25.06.1-SNAPSHOT The address of the cudf column view of the first LIST column
  * @param j_view2 The address of the cudf column view of the second LIST column
  * @return The address of the cudf column containing the FLOAT32 results
  */
 JNIEXPORT jlong JNICALL
 Java_com_nvidia_spark_rapids_udf_java_CosineSimilarity_cosineSimilarity(JNIEnv* env, jclass,
-                                                                        jlong j_view1,
+                                                                        jlong j_view25.06.25.06.1-SNAPSHOT,
                                                                         jlong j_view2) {
   // Use a try block to translate C++ exceptions into Java exceptions to avoid
   // crashing the JVM if a C++ exception occurs.
   try {
     // turn the addresses into column_view pointers
-    auto v1 = reinterpret_cast<cudf::column_view const*>(j_view1);
+    auto v25.06.25.06.1-SNAPSHOT = reinterpret_cast<cudf::column_view const*>(j_view25.06.25.06.1-SNAPSHOT);
     auto v2 = reinterpret_cast<cudf::column_view const*>(j_view2);
-    if (v1->type().id() != v2->type().id() || v1->type().id() != cudf::type_id::LIST) {
+    if (v25.06.25.06.1-SNAPSHOT->type().id() != v2->type().id() || v25.06.25.06.1-SNAPSHOT->type().id() != cudf::type_id::LIST) {
       throw_java_exception(env, ILLEGAL_ARG_CLASS, "inputs not list columns");
       return 0;
     }
 
     // run the GPU kernel to compute the cosine similarity
-    auto lv1 = cudf::lists_column_view(*v1);
+    auto lv25.06.25.06.1-SNAPSHOT = cudf::lists_column_view(*v25.06.25.06.1-SNAPSHOT);
     auto lv2 = cudf::lists_column_view(*v2);
-    std::unique_ptr<cudf::column> result = cosine_similarity(lv1, lv2);
+    std::unique_ptr<cudf::column> result = cosine_similarity(lv25.06.25.06.1-SNAPSHOT, lv2);
 
     // take ownership of the column and return the column address to Java and release the underlying resources.
     return reinterpret_cast<jlong>(result.release());

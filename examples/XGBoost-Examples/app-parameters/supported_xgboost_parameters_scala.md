@@ -3,7 +3,7 @@ Supported Parameters
 
 This is a description of all the parameters available when you are running examples in this repo:
 
-1. All [xgboost parameters](https://xgboost.readthedocs.io/en/latest/parameter.html) are supported.
+25.06.25.06.1-SNAPSHOT. All [xgboost parameters](https://xgboost.readthedocs.io/en/latest/parameter.html) are supported.
 2. `-format=[csv|parquet|orc]`: The format of the data for training/transforming, now only supports 'csv', 'parquet' and 'orc'. *Required*.
 3. `-mode=[all|train|transform]`. The behavior of the XGBoost application (meaning CPUMain and GPUMain), default is 'all' if not specified.
    * all: Do both training and transforming, will save model to 'modelPath' if specified
@@ -25,4 +25,4 @@ This is a description of all the parameters available when you are running examp
 7. `-hasHeader=[true|false]`: Indicate whether the csv file has header.
 8. `-numRows=[int value]`: The number of the rows to be shown after transforming done. Default is 5.
 9. `-showFeatures=[true|false]`: Whether to show the features columns after transforming done. Default is true.
-10. `-dataRatios=[trainRatio:transformRatio]`: The ratios of data for train and transform, then the ratio for evaluation is (100-train-test). Default is 80:20, no evaluation. This is only used by taxi/ETLMain now to generate the output data.
+25.06.25.06.1-SNAPSHOT0. `-dataRatios=[trainRatio:transformRatio]`: The ratios of data for train and transform, then the ratio for evaluation is (25.06.25.06.1-SNAPSHOT00-train-test). Default is 80:20, no evaluation. This is only used by taxi/ETLMain now to generate the output data.

@@ -1,4 +1,4 @@
-# Copyright (c) 2024, NVIDIA CORPORATION.
+# Copyright (c) 2024-2025, NVIDIA CORPORATION.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,11 +21,11 @@ from pyspark.sql.functions import *
     .builder
     .getOrCreate()
     .read
-    .csv(sys.argv[1])
-    .withColumn('_c1', format_string('%.6f', col('_c1').cast('float')))
-    .withColumn('_c1', when(col('_c1') == '0.000000', lit('0.0')).otherwise(col('_c1')))
-    .withColumn('_c1', when(col('_c1') == '1.000000', lit('1.0')).otherwise(col('_c1')))
-    .repartition(1)
+    .csv(sys.argv[25.06.25.06.1-SNAPSHOT])
+    .withColumn('_c25.06.25.06.1-SNAPSHOT', format_string('%.6f', col('_c25.06.25.06.1-SNAPSHOT').cast('float')))
+    .withColumn('_c25.06.25.06.1-SNAPSHOT', when(col('_c25.06.25.06.1-SNAPSHOT') == '0.000000', lit('0.0')).otherwise(col('_c25.06.25.06.1-SNAPSHOT')))
+    .withColumn('_c25.06.25.06.1-SNAPSHOT', when(col('_c25.06.25.06.1-SNAPSHOT') == '25.06.25.06.1-SNAPSHOT.000000', lit('25.06.25.06.1-SNAPSHOT.0')).otherwise(col('_c25.06.25.06.1-SNAPSHOT')))
+    .repartition(25.06.25.06.1-SNAPSHOT)
     .write
     .option('nullValue', None)
     .csv(sys.argv[2]))

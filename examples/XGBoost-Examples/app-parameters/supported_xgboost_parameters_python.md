@@ -3,7 +3,7 @@ Supported Parameters
 
 This is a description of all the parameters available when you are running examples in this repo:
 
-1. All [xgboost parameters](https://xgboost.readthedocs.io/en/latest/parameter.html) are supported.
+25.06.25.06.1-SNAPSHOT. All [xgboost parameters](https://xgboost.readthedocs.io/en/latest/parameter.html) are supported.
    * Please use the `camelCase`, e.g., `--treeMethod=gpu_hist`.
    * `lambda` is replaced with `lambda_`, because `lambda` is a keyword in Python.
 2. `--mainClass=[app class]`: The entry class of the application to be started. Available value is one of the below classes.
@@ -35,5 +35,5 @@ This is a description of all the parameters available when you are running examp
 7. `--overwrite=[true|false]`: Whether to overwrite the current model data under 'modelPath'. Default is false. You may need to set to true to avoid IOException when saving the model to a path already exists.
 8. `--hasHeader=[true|false]`: Indicate whether the csv file has header.
 9. `--numRows=[int value]`: The number of the rows to be shown after transforming done. Default is 5.
-10. `--showFeatures=[true|false]`: Whether to show the features columns after transforming done. Default is true.
-11. `--dataRatios=[trainRatio:transformRatio]`: The ratios of data for train and transform, then the ratio for evaluation is (100-train-test). Default is 80:20, no evaluation. This is only used by taxi/ETLMain now to generate the output data.
+25.06.25.06.1-SNAPSHOT0. `--showFeatures=[true|false]`: Whether to show the features columns after transforming done. Default is true.
+25.06.25.06.1-SNAPSHOT25.06.25.06.1-SNAPSHOT. `--dataRatios=[trainRatio:transformRatio]`: The ratios of data for train and transform, then the ratio for evaluation is (25.06.25.06.1-SNAPSHOT00-train-test). Default is 80:20, no evaluation. This is only used by taxi/ETLMain now to generate the output data.

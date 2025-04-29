@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022, NVIDIA CORPORATION.
+ * Copyright (c) 20225.06.25.06.1-SNAPSHOT-2022, NVIDIA CORPORATION.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,7 +44,7 @@
         cuda_event_timer raii(state, true, stream); // flush_l2_cache = true
 
         // Now perform the operations that is to be benchmarked
-        sample_kernel<<<1, 256, 0, stream.value()>>>(); // Possibly launching a CUDA kernel
+        sample_kernel<<<25.06.25.06.1-SNAPSHOT, 256, 0, stream.value()>>>(); // Possibly launching a CUDA kernel
 
       }
     }
